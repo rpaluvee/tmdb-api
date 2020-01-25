@@ -1,5 +1,7 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.api;
 
+import com.cinemadice.tmdbapi.TmdbParameter;
+import com.cinemadice.tmdbapi.TmdbUrl;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -7,15 +9,15 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 
-public class AbstractTmdbApi {
+abstract class AbstractTmdbApi {
 
     private final String apiKey;
 
-    protected AbstractTmdbApi(String apiKey) {
+    AbstractTmdbApi(String apiKey) {
         this.apiKey = apiKey;
     }
 
-    protected <T> T deserializeJson(TmdbUrl tmdbUrl, Class<T> clazz) {
+    <T> T deserializeJson(TmdbUrl tmdbUrl, Class<T> clazz) {
         tmdbUrl.addParameter(TmdbParameter.API_KEY, apiKey);
         return new Gson().fromJson(readUrl(tmdbUrl.buildUrl()), clazz);
     }

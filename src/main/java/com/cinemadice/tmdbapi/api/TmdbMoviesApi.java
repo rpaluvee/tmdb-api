@@ -1,4 +1,4 @@
-package com.cinemadice.tmdbapi.methods;
+package com.cinemadice.tmdbapi.api;
 
 import com.cinemadice.tmdbapi.*;
 import com.cinemadice.tmdbapi.model.Discover;
@@ -7,12 +7,12 @@ import com.cinemadice.tmdbapi.model.Movie;
 
 import java.util.ArrayList;
 
-public class TmdbMovies extends AbstractTmdbApi {
+public class TmdbMoviesApi extends AbstractTmdbApi {
 
     private static final int TOTAL_PAGES = 500;
     private static final int FIRST_PAGE_NR = 1;
 
-    public TmdbMovies(String apiKey) {
+    TmdbMoviesApi(String apiKey) {
         super(apiKey);
     }
 
