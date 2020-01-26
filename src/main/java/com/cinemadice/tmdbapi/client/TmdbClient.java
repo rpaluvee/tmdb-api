@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.client;
 
 public class TmdbClient {
 
+    private TmdbMoviesClient tmdbMoviesClient;
     private final String apiKey;
 
     public TmdbClient(String apiKey) {
@@ -9,7 +10,10 @@ public class TmdbClient {
     }
 
     public TmdbMoviesClient movies() {
-        return new TmdbMoviesClient(apiKey);
+        if (tmdbMoviesClient == null) {
+            tmdbMoviesClient = new TmdbMoviesClient(apiKey);
+        }
+        return tmdbMoviesClient;
     }
 
 }

@@ -3,7 +3,6 @@ package com.cinemadice.tmdbapi.client;
 import com.cinemadice.tmdbapi.model.Discover;
 import com.cinemadice.tmdbapi.model.Movie;
 
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class TmdbMoviesClient extends AbstractTmdbClient {
