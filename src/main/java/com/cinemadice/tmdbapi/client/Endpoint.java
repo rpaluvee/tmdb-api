@@ -9,7 +9,7 @@ enum Endpoint {
         this.endpointUrl = endpointUrl;
     }
 
-    public String getEndpointUrl() {
+    String getEndpointUrl() {
         return endpointUrl;
     }
 

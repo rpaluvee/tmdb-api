@@ -6,7 +6,7 @@ final class Utils {
 
     private Utils() {}
 
-    public static int generateRandomNr(int lowerbound, int upperbound) {
+    static int generateRandomNr(int lowerbound, int upperbound) {
         return new Random().nextInt(upperbound - lowerbound) + lowerbound;
     }
 

@@ -37,7 +37,7 @@ enum TmdbParameter {
 
     private final String value;
 
-    public String getValue() {
+    String getValue() {
         return value;
     }
 

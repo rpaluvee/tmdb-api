@@ -34,12 +34,12 @@ class TmdbUrl {
         return this;
     }
 
-    public TmdbUrl addParameters(Map<TmdbParameter, String> tmdbParameters) {
+    TmdbUrl addParameters(Map<TmdbParameter, String> tmdbParameters) {
         this.tmdbParameters = tmdbParameters;
         return this;
     }
 
-    public Map<TmdbParameter, String> getTmdbParameters() {
+    Map<TmdbParameter, String> getTmdbParameters() {
         return tmdbParameters;
     }
 
