@@ -1,8 +1,10 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.client;
 
 import java.util.Random;
 
-public class Utils {
+final class Utils {
+
+    private Utils() {}
 
     public static int generateRandomNr(int lowerbound, int upperbound) {
         return new Random().nextInt(upperbound - lowerbound) + lowerbound;
