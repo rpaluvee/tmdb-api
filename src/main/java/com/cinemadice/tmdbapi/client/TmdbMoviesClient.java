@@ -1,22 +1,21 @@
-package com.cinemadice.tmdbapi.api;
+package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.*;
 import com.cinemadice.tmdbapi.model.Discover;
-import com.cinemadice.tmdbapi.Endpoint;
 import com.cinemadice.tmdbapi.model.Movie;
 
 import java.util.ArrayList;
 
-public class TmdbMoviesApi extends AbstractTmdbApi {
+public class TmdbMoviesClient extends AbstractTmdbClient {
 
     private static final int TOTAL_PAGES = 500;
     private static final int FIRST_PAGE_NR = 1;
 
-    TmdbMoviesApi(String apiKey) {
+    TmdbMoviesClient(String apiKey) {
         super(apiKey);
     }
 
-    public Movie fetchRandomMovie() {
+    public Movie fetchRandom() {
         TmdbUrl tmdbUrl = new TmdbUrl(Endpoint.DISCOVER_MOVIE)
                 .addParameter(TmdbParameter.PAGE, Integer.toString(Utils.generateRandomNr(FIRST_PAGE_NR, TOTAL_PAGES)));
         Discover discover = deserializeJson(tmdbUrl, Discover.class);
@@ -27,7 +26,7 @@ public class TmdbMoviesApi extends AbstractTmdbApi {
     }
 
     // TODO: currently fetches all movies in page 1 of response
-    public ArrayList<Movie> fetchAllMovies() {
+    public ArrayList<Movie> fetchAll() {
         TmdbUrl tmdbUrl = new TmdbUrl(Endpoint.DISCOVER_MOVIE);
         Discover discover = deserializeJson(tmdbUrl, Discover.class);
         return discover.getResults();

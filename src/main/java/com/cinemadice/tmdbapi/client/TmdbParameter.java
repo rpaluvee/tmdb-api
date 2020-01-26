@@ -1,6 +1,6 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.client;
 
-public enum TmdbParameter {
+enum TmdbParameter {
     PAGE("page="),
     API_KEY("api_key=");
 

@@ -1,22 +1,22 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.client;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TmdbUrl {
+class TmdbUrl {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3";
 
     private final Endpoint endpoint;
     private Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
 
-    public TmdbUrl(Endpoint endpoint) {
+    TmdbUrl(Endpoint endpoint) {
         this.endpoint = endpoint;
     }
 
-    public URL buildUrl() {
+    URL buildUrl() {
         URL url = null;
         try {
             url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + concatParameters(tmdbParameters));
@@ -27,7 +27,7 @@ public class TmdbUrl {
         return url;
     }
 
-    public TmdbUrl addParameter(TmdbParameter tmdbParameter, String value) {
+    TmdbUrl addParameter(TmdbParameter tmdbParameter, String value) {
         tmdbParameters.put(tmdbParameter, value);
         return this;
     }

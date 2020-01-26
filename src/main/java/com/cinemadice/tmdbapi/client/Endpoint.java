@@ -1,6 +1,6 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.client;
 
-public enum Endpoint {
+enum Endpoint {
     DISCOVER_MOVIE("/discover/movie");
 
     private String endpointUrl;

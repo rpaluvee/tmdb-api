@@ -1,7 +1,5 @@
-package com.cinemadice.tmdbapi.api;
+package com.cinemadice.tmdbapi.client;
 
-import com.cinemadice.tmdbapi.TmdbParameter;
-import com.cinemadice.tmdbapi.TmdbUrl;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -9,11 +7,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 
-abstract class AbstractTmdbApi {
+abstract class AbstractTmdbClient {
 
     private final String apiKey;
 
-    AbstractTmdbApi(String apiKey) {
+    AbstractTmdbClient(String apiKey) {
         this.apiKey = apiKey;
     }
 
