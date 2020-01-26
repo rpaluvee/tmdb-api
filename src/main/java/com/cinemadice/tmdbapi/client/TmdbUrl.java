@@ -43,9 +43,9 @@ class TmdbUrl {
         return tmdbParameters;
     }
 
-    private static String buildQueryComponent(Map<TmdbParameter, String> tmdbParameter) {
+    private static String buildQueryComponent(Map<TmdbParameter, String> tmdbParameters) {
         StringBuilder result = new StringBuilder();
-        tmdbParameter.forEach((k, v) -> {
+        tmdbParameters.forEach((k, v) -> {
             try {
                 String encodedValue = URLEncoder.encode(v, "UTF-8");
                 result.append(k.getValue()).append(encodedValue).append("&");
