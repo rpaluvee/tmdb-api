@@ -19,8 +19,7 @@ public class TmdbMoviesClient extends AbstractTmdbClient {
         TmdbUrl tmdbUrl = new TmdbUrl(Endpoint.DISCOVER_MOVIE)
                 .addParameter(TmdbParameter.PAGE, Integer.toString(Utils.generateRandomNr(FIRST_PAGE_NR, TOTAL_PAGES)));
 
-        InputStreamReader reader = readUrl(tmdbUrl);
-        Discover discover = deserializeJson(reader, Discover.class);
+        Discover discover = deserializeJson(readUrl(tmdbUrl), Discover.class);
 
         int randomIndex = Utils.generateRandomNr(0, discover.getResults().size() - 1);
         return discover.getResults().get(randomIndex);
@@ -29,8 +28,7 @@ public class TmdbMoviesClient extends AbstractTmdbClient {
     // TODO: currently fetches all movies in page 1 of response
     public ArrayList<Movie> fetchAll() {
         TmdbUrl tmdbUrl = new TmdbUrl(Endpoint.DISCOVER_MOVIE);
-        InputStreamReader reader = readUrl(tmdbUrl);
-        Discover discover = deserializeJson(reader, Discover.class);
+        Discover discover = deserializeJson(readUrl(tmdbUrl), Discover.class);
         return discover.getResults();
     }
 
