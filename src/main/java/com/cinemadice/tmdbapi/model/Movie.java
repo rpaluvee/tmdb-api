@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.List;
@@ -8,18 +9,26 @@ import java.util.List;
 public class Movie {
 
     private int id;
-    private double vote_count;
-    private double vote_average;
+    @SerializedName("vote_count")
+    private double voteCount;
+    @SerializedName("vote_average")
+    private double voteAverage;
     private float popularity;
     private String title;
-    private String release_date;
-    private String original_language;
-    private String original_title;
+    @SerializedName("release_date")
+    private String releaseDate;
+    @SerializedName("original_language")
+    private String originalLanguage;
+    @SerializedName("original_title")
+    private String originalTitle;
     private String overview;
-    private String poster_path;
-    private String backdrop_path;
+    @SerializedName("poster_path")
+    private String posterPath;
+    @SerializedName("backdrop_path")
+    private String backdropPath;
     private boolean video;
     private boolean adult;
-    private List<Double> genre_ids;
+    @SerializedName("genre_ids")
+    private List<Double> genreIds;
 
 }

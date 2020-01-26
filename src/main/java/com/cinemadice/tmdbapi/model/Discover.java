@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -8,8 +9,10 @@ import java.util.ArrayList;
 public class Discover {
 
     private int page;
-    private int total_results;
-    private int total_pages;
+    @SerializedName("total_results")
+    private int totalResults;
+    @SerializedName("total_pages")
+    private int totalPages;
     private ArrayList<Movie> results;
 
 }
