@@ -1,7 +1,9 @@
 package com.cinemadice.tmdbapi.client;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +21,7 @@ class TmdbUrl {
     URL buildUrl() {
         URL url = null;
         try {
-            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + concatParameters(tmdbParameters));
+            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent(tmdbParameters));
         } catch (MalformedURLException e) {
             // TODO: always use Logger instead of stacktrace
             e.printStackTrace();
@@ -41,9 +43,16 @@ class TmdbUrl {
         return tmdbParameters;
     }
 
-    private static String concatParameters(Map<TmdbParameter, String> tmdbParameter) {
+    private static String buildQueryComponent(Map<TmdbParameter, String> tmdbParameter) {
         StringBuilder result = new StringBuilder();
-        tmdbParameter.forEach((k, v) -> result.append(k.getValue()).append(v).append("&"));
+        tmdbParameter.forEach((k, v) -> {
+            try {
+                String encodedValue = URLEncoder.encode(v, "UTF-8");
+                result.append(k.getValue()).append(encodedValue).append("&");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
         return result.toString().substring(0, result.length() - 1); // removes the last "&"
     }
 
