@@ -1,4 +1,4 @@
-package com.cinemadice.tmdbapi.client;
+package com.cinemadice.tmdbapi.filter;
 
 import com.google.gson.Gson;
 
@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-abstract class AbstractTmdbClient {
+// TODO: Have to think about this class name
+abstract class AbstractTmdbFilter {
 
     <T> T deserializeJson(InputStreamReader reader, Class<T> clazz) {
         return new Gson().fromJson(reader, clazz);
