@@ -10,37 +10,21 @@ import java.util.Map;
 class TmdbUrl {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3";
+    private static final Map<TmdbParameter, String> TMDB_PARAMETERS = new HashMap<>();
 
-    private final Endpoint endpoint;
-    private Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
-
-    TmdbUrl(Endpoint endpoint) {
-        this.endpoint = endpoint;
+    TmdbUrl(String apiKey) {
+        TMDB_PARAMETERS.put(TmdbParameter.API_KEY, apiKey);
     }
 
-    URL buildUrl() {
+    URL buildUrl(Endpoint endpoint) {
         URL url = null;
         try {
-            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent(tmdbParameters));
+            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent(TMDB_PARAMETERS));
         } catch (MalformedURLException e) {
             // TODO: always use Logger instead of stacktrace
             e.printStackTrace();
         }
         return url;
-    }
-
-    TmdbUrl addParameter(TmdbParameter tmdbParameter, String value) {
-        tmdbParameters.put(tmdbParameter, value);
-        return this;
-    }
-
-    TmdbUrl addParameters(Map<TmdbParameter, String> tmdbParameters) {
-        this.tmdbParameters = tmdbParameters;
-        return this;
-    }
-
-    Map<TmdbParameter, String> getTmdbParameters() {
-        return tmdbParameters;
     }
 
     private static String buildQueryComponent(Map<TmdbParameter, String> tmdbParameters) {
@@ -54,6 +38,15 @@ class TmdbUrl {
             }
         });
         return result.toString().substring(0, result.length() - 1); // removes the last "&"
+    }
+
+    TmdbUrl addParameter(TmdbParameter tmdbParameter, String value) {
+        TMDB_PARAMETERS.put(tmdbParameter, value);
+        return this;
+    }
+
+    DiscoverMoviesUrl discoverMovies() {
+        return new DiscoverMoviesUrl(this);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.cinemadice.tmdbapi.client;
 
+import lombok.Getter;
+
 enum TmdbParameter {
     API_KEY("api_key="),
     LANGUAGE("language="),
@@ -18,7 +20,6 @@ enum TmdbParameter {
     RELEASE_DATE_GTE("release_date.gte="),
     RELEASE_DATE_LTE("release_date.lte="),
     WITH_RELEASE_TYPE("with_release_type="),
-    YEAR("year="),
     VOTE_COUNT_GTE("vote_count.gte="),
     VOTE_COUNT_LTE("vote_count.lte="),
     VOTE_AVERAGE_GTE("vote_average.gte="),
@@ -35,11 +36,8 @@ enum TmdbParameter {
     WITH_RUNTIME_LTE("with_runtime.lte="),
     WITH_ORIGINAL_LANGUAGE("with_original_language=");
 
+    @Getter
     private final String value;
-
-    String getValue() {
-        return value;
-    }
 
     TmdbParameter(String value) {
         this.value = value;

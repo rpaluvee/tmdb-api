@@ -3,7 +3,7 @@ package com.cinemadice.tmdbapi.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class Discover {
@@ -13,6 +13,6 @@ public class Discover {
     private int totalResults;
     @SerializedName("total_pages")
     private int totalPages;
-    private ArrayList<Movie> results;
+    private List<Movie> results;
 
 }
