@@ -33,6 +33,7 @@ public class TmdbMoviesFilter extends AbstractTmdbFilter {
     }
 
     public Movie fetchRandom() {
+        // TODO: Should also check if any filters have been added - if not we don't have to make this extra request
         Discover discover = deserializeJson(readUrl(tmdbUrl.buildUrl()), Discover.class);
         tmdbUrl.addPage(Utils.generateRandomNr(FIRST_PAGE_NR, discover.getTotalPages()));
 
