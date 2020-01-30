@@ -9,7 +9,6 @@ import java.util.List;
 
 public class TmdbMoviesFilter extends AbstractTmdbFilter {
 
-    private static final int TOTAL_PAGES = 500;
     private static final int FIRST_PAGE_NR = 1;
 
     private final DiscoverMoviesUrl tmdbUrl;
@@ -34,9 +33,11 @@ public class TmdbMoviesFilter extends AbstractTmdbFilter {
     }
 
     public Movie fetchRandom() {
-        tmdbUrl.addPage(Utils.generateRandomNr(FIRST_PAGE_NR, TOTAL_PAGES)).buildUrl();
         Discover discover = deserializeJson(readUrl(tmdbUrl.buildUrl()), Discover.class);
-        int randomIndex = Utils.generateRandomNr(0, discover.getResults().size() - 1);
+        tmdbUrl.addPage(Utils.generateRandomNr(FIRST_PAGE_NR, discover.getTotalPages()));
+
+        Discover randomPageDiscover = deserializeJson(readUrl(tmdbUrl.buildUrl()), Discover.class);
+        int randomIndex = Utils.generateRandomNr(0, randomPageDiscover.getResults().size() - 1);
         return discover.getResults().get(randomIndex);
     }
 
