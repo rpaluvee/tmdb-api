@@ -4,24 +4,22 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class TmdbUrl {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3";
 
-    private final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
+    private final Map<TmdbParameter, String> tmdbParameters;
+    private final Endpoint endpoint;
 
-    public TmdbUrl(String apiKey) {
-        tmdbParameters.put(TmdbParameter.API_KEY, apiKey);
+    TmdbUrl(Map<TmdbParameter, String> tmdbParameters, Endpoint endpoint) {
+        this.tmdbParameters = Objects.requireNonNull(tmdbParameters);
+        this.endpoint = Objects.requireNonNull(endpoint);
     }
 
-    public DiscoverMoviesUrl discoverMovies() {
-        return new DiscoverMoviesUrl(this);
-    }
-
-    URL buildUrl(Endpoint endpoint) {
+    URL buildUrl() {
         URL url = null;
         try {
             url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent(tmdbParameters));
@@ -30,10 +28,6 @@ public class TmdbUrl {
             e.printStackTrace();
         }
         return url;
-    }
-
-    void addParameter(TmdbParameter tmdbParameter, String value) {
-        tmdbParameters.put(tmdbParameter, value);
     }
 
     private static String buildQueryComponent(Map<TmdbParameter, String> tmdbParameters) {
@@ -47,6 +41,10 @@ public class TmdbUrl {
             }
         });
         return result.toString().substring(0, result.length() - 1); // removes the last "&"
+    }
+
+    public static DiscoverMoviesUrlBuilder discoverMovies() {
+        return new DiscoverMoviesUrlBuilder();
     }
 
 }
