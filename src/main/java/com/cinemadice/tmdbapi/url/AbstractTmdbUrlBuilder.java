@@ -4,22 +4,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-public class TmdbUrl {
+abstract class AbstractTmdbUrlBuilder {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3";
 
-    private final Map<TmdbParameter, String> tmdbParameters;
-    private final Endpoint endpoint;
+    protected final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
+    protected Endpoint endpoint;
+    protected String apiKey;
 
-    TmdbUrl(Map<TmdbParameter, String> tmdbParameters, Endpoint endpoint) {
-        this.tmdbParameters = Objects.requireNonNull(tmdbParameters);
-        this.endpoint = Objects.requireNonNull(endpoint);
-    }
-
-    URL buildUrl() {
+    public URL build() {
+        tmdbParameters.put(TmdbParameter.API_KEY, apiKey);
         URL url = null;
         try {
             url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent(tmdbParameters));
@@ -41,10 +38,6 @@ public class TmdbUrl {
             }
         });
         return result.toString().substring(0, result.length() - 1); // removes the last "&"
-    }
-
-    public static DiscoverMoviesUrlBuilder discoverMovies() {
-        return new DiscoverMoviesUrlBuilder();
     }
 
 }

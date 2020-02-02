@@ -3,7 +3,6 @@ package com.cinemadice.tmdbapi.filter;
 import com.cinemadice.tmdbapi.model.Discover;
 import com.cinemadice.tmdbapi.model.Movie;
 import com.cinemadice.tmdbapi.url.DiscoverMoviesUrlBuilder;
-import com.cinemadice.tmdbapi.url.TmdbUrl;
 
 import java.io.Reader;
 import java.net.URL;
@@ -16,7 +15,7 @@ public class TmdbMoviesFilter extends AbstractTmdbFilter {
     private final DiscoverMoviesUrlBuilder urlBuilder;
 
     public TmdbMoviesFilter(String apiKey) {
-        this.urlBuilder = TmdbUrl.discoverMovies().addApiKey(apiKey);
+        this.urlBuilder = new DiscoverMoviesUrlBuilder(apiKey);
     }
 
     public TmdbMoviesFilter withPage(int pageNr) {

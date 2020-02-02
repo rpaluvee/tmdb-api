@@ -1,18 +1,10 @@
 package com.cinemadice.tmdbapi.url;
 
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+public class DiscoverMoviesUrlBuilder extends AbstractTmdbUrlBuilder {
 
-public class DiscoverMoviesUrlBuilder {
-
-    private Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
-
-    DiscoverMoviesUrlBuilder() {}
-
-    public DiscoverMoviesUrlBuilder addApiKey(String apiKey) {
-        tmdbParameters.put(TmdbParameter.API_KEY, apiKey);
-        return this;
+    public DiscoverMoviesUrlBuilder(String apikey) {
+        super.endpoint = Endpoint.DISCOVER_MOVIE;
+        super.apiKey = apikey;
     }
 
     public DiscoverMoviesUrlBuilder addPage(int page) {
@@ -23,10 +15,6 @@ public class DiscoverMoviesUrlBuilder {
     public DiscoverMoviesUrlBuilder addPrimaryReleaseYear(int year) {
         tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_YEAR, String.valueOf(year));
         return this;
-    }
-
-    public URL build() {
-        return new TmdbUrl(tmdbParameters, Endpoint.DISCOVER_MOVIE).buildUrl();
     }
 
 }
