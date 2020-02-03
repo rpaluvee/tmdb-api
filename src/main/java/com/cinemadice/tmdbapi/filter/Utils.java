@@ -1,4 +1,4 @@
-package com.cinemadice.tmdbapi.client;
+package com.cinemadice.tmdbapi.filter;
 
 import java.util.Random;
 

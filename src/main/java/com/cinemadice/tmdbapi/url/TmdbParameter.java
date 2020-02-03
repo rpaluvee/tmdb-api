@@ -1,7 +1,9 @@
-package com.cinemadice.tmdbapi.client;
+package com.cinemadice.tmdbapi.url;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 enum TmdbParameter {
     API_KEY("api_key="),
     LANGUAGE("language="),
@@ -38,9 +40,5 @@ enum TmdbParameter {
 
     @Getter
     private final String value;
-
-    TmdbParameter(String value) {
-        this.value = value;
-    }
 
 }
