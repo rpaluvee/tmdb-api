@@ -106,4 +106,4 @@ List<Movie> movies = tmdbClient.movies()
 ```
 
 ## License
-TODO: Add MIT license
+This project is released under the MIT license, see [LICENSE](LICENSE) file.
