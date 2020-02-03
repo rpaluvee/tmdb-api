@@ -19,19 +19,6 @@ public class Main {
                 .fetch();
 
         movies.forEach(s -> System.out.println(s.getTitle() + " (year: " + s.getReleaseDate() + ")"));
-
-        // gimme 5 random movies
-        for (int i = 0; i < 5; i++) {
-            Movie randomMovie = tmdbClient.movies().fetchRandom();
-            System.out.println("Random movie: " + randomMovie.getTitle() + " (year: " + randomMovie.getReleaseDate() + ")");
-        }
-
-        // gimme a random movie released in 2008
-        int year = 2008;
-        Movie randomMovieOfYear = tmdbClient.movies().filter()
-                .withPrimaryReleaseYear(year)
-                .fetchRandom();
-        System.out.println("Random movie released in " + year + ": " + randomMovieOfYear.getTitle() + " (year: " + randomMovieOfYear.getReleaseDate() + ")");
     }
 
 }

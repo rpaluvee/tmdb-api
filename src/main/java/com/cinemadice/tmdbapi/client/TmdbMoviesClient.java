@@ -15,8 +15,4 @@ public class TmdbMoviesClient {
         return new TmdbMoviesFilter(apiKey);
     }
 
-    public Movie fetchRandom() {
-        return new TmdbMoviesFilter(apiKey).fetchRandom();
-    }
-
 }

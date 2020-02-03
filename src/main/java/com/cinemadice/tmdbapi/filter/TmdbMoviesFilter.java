@@ -35,14 +35,4 @@ public class TmdbMoviesFilter extends AbstractTmdbFilter {
         return discover.getResults();
     }
 
-    public Movie fetchRandom() {
-        // TODO: Should also check if any filters have been added - if not we don't have to make this extra request
-        Discover discover = fromJson(readUrl(urlBuilder.build()), Discover.class);
-        urlBuilder.addPage(Utils.generateRandomNr(FIRST_PAGE_NR, discover.getTotalPages()));
-
-        Discover randomPageDiscover = fromJson(readUrl(urlBuilder.build()), Discover.class);
-        int randomIndex = Utils.generateRandomNr(0, randomPageDiscover.getResults().size() - 1);
-        return discover.getResults().get(randomIndex);
-    }
-
 }

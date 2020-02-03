@@ -31,10 +31,6 @@ release dates and genres.
   * Adult
   * Genre 
 
-#### Custom library features
-
-* Fetch a random movie/show from filtered/unfiltered `/discover` request.
-
 ### To do:
 
 #### Movie Features
