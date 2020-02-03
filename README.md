@@ -18,7 +18,7 @@ Database API. To view all the methods available, you should head over to
 #### Discover features
 
 * Search for movies `GET /discover/movie` and TV shows `GET /discover/tv` based 
-on filter. Movies are queryable by fields like average rating, certifications, 
+on data. Movies are queryable by fields like average rating, certifications, 
 release dates and genres.
 * Get movie details:  
   * Average rating
@@ -63,7 +63,7 @@ release dates and genres.
   
 #### Custom library features
 
-* Filter movies and TV shows by result page range
+* Filter movies and TV shows result by page range
 
 ## Technologies
 
@@ -100,7 +100,7 @@ To use the library you have to instantiate the TMDb API Client class
 With this client you can specify whether to discover movies or TV shows. 
 For example if you want to fetch all movies released in 2008:  
 ```
-List<Movie> movies = tmdbClient.movies().filter()
+List<Movie> movies = tmdbClient.movies()
         .withPrimaryReleaseYear(2008)
         .fetch();
 ```

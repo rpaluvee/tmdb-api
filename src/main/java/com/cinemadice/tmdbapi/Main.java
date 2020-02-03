@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         TmdbClient tmdbClient = new TmdbClient(API_KEY);
 
-        List<Movie> movies = tmdbClient.movies().filter()
+        List<Movie> movies = tmdbClient.movies()
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
                 .fetch();
