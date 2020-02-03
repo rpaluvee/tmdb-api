@@ -4,7 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 abstract class AbstractTmdbUrlBuilder {
@@ -19,7 +22,7 @@ abstract class AbstractTmdbUrlBuilder {
         tmdbParameters.put(TmdbParameter.API_KEY, apiKey);
         URL url = null;
         try {
-            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent(tmdbParameters));
+            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent());
         } catch (MalformedURLException e) {
             // TODO: always use Logger instead of stacktrace
             e.printStackTrace();
@@ -27,17 +30,18 @@ abstract class AbstractTmdbUrlBuilder {
         return url;
     }
 
-    private static String buildQueryComponent(Map<TmdbParameter, String> tmdbParameters) {
-        StringBuilder result = new StringBuilder();
+    private String buildQueryComponent() {
+        List<String> params = new ArrayList<>();
         tmdbParameters.forEach((k, v) -> {
             try {
-                String encodedValue = URLEncoder.encode(v, "UTF-8");
-                result.append(k.getValue()).append(encodedValue).append("&");
+                String encodedValue = URLEncoder.encode(v, StandardCharsets.UTF_8.name());
+                params.add(k.getValue() + encodedValue);
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                // should not happen
+                throw new RuntimeException(e);
             }
         });
-        return result.toString().substring(0, result.length() - 1); // removes the last "&"
+        return String.join("&", params);
     }
 
 }
