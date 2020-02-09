@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-abstract class AbstractTmdbUrlBuilder {
+abstract class AbstractTmdbUrl {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3";
 
