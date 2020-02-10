@@ -12,6 +12,10 @@ public class FailedTmdbRequestException extends RuntimeException {
         super(message);
     }
 
+    public FailedTmdbRequestException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     public FailedTmdbRequestException(int code, String message, String detailedMessage) {
         super(String.format("TMDb API responded with %s: %s - %s", code, message, detailedMessage));
     }

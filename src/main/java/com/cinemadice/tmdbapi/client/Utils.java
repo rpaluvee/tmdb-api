@@ -13,8 +13,7 @@ final class Utils {
             return new Gson().fromJson(response, clazz);
         } catch (JsonSyntaxException e) {
             throw new FailedTmdbRequestException(
-                    "Response body received from TMDb API contains JSON syntax errors and can't be deserialized to JSON - "
-                    + e.getMessage());
+                    "Response body received from TMDb API contains JSON syntax errors and can't be deserialized to JSON", e);
         }
     }
 

@@ -19,6 +19,10 @@ class TmdbHttpRequest {
                 .url(url)
                 .build();
 
+        return readResponse(url, request);
+    }
+
+    private String readResponse(URL url, Request request) {
         try (Response response = client.newCall(request).execute()) {
             String responseBody = Objects.requireNonNull(response.body()).string();
             if (response.isSuccessful()) {
@@ -28,7 +32,7 @@ class TmdbHttpRequest {
                 throw new FailedTmdbRequestException(response.code(), response.message(), errorResponse.getStatusMessage());
             }
         } catch (IOException e) {
-            throw new FailedTmdbRequestException("Connection could not be established with URL: " + url);
+            throw new FailedTmdbRequestException("Connection could not be established with URL: " + url, e);
         }
     }
 
