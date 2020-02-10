@@ -28,7 +28,7 @@ public class TmdbMoviesRequest {
 
     public List<Movie> fetch() {
         URL url = urlBuilder.build();
-        String response = new TmdbHttpRequest().fetch(url);
+        String response = new TmdbHttpClient().fetch(url);
         Discover discover = Utils.fromJson(response, Discover.class);
         return discover.getResults();
     }

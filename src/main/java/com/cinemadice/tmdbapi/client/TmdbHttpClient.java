@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
-class TmdbHttpRequest {
+class TmdbHttpClient {
 
     private final OkHttpClient client = new OkHttpClient();
 
