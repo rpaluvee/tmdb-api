@@ -35,7 +35,7 @@ abstract class AbstractTmdbUrl {
         tmdbParameters.forEach((k, v) -> {
             try {
                 String encodedValue = URLEncoder.encode(v, StandardCharsets.UTF_8.name());
-                params.add(k.getValue() + encodedValue);
+                params.add(k.getValue() + "=" + encodedValue);
             } catch (UnsupportedEncodingException e) {
                 // should not happen
                 throw new RuntimeException(e);
