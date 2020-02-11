@@ -9,24 +9,24 @@ import java.util.Optional;
 
 public class TmdbMoviesRequest {
 
-    private final DiscoverMoviesUrl urlBuilder;
+    private final DiscoverMoviesUrl discoverMoviesUrl;
 
     TmdbMoviesRequest(String apiKey) {
-        this.urlBuilder = new DiscoverMoviesUrl(apiKey);
+        this.discoverMoviesUrl = new DiscoverMoviesUrl(apiKey);
     }
 
     public TmdbMoviesRequest withPage(int page) {
-        urlBuilder.addPage(page);
+        discoverMoviesUrl.addPage(page);
         return this;
     }
 
     public TmdbMoviesRequest withPrimaryReleaseYear(int year) {
-        urlBuilder.addPrimaryReleaseYear(year);
+        discoverMoviesUrl.addPrimaryReleaseYear(year);
         return this;
     }
 
     public List<Movie> fetch() {
-        URL url = urlBuilder.build();
+        URL url = discoverMoviesUrl.build();
         String response = new TmdbHttpClient().fetch(url);
         Discover discover = Utils.fromJson(response, Discover.class);
         return discover.getResults();
