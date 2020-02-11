@@ -1,9 +1,8 @@
 package com.cinemadice.tmdbapi.model;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class Movie {
