@@ -20,28 +20,25 @@ abstract class AbstractTmdbUrl {
 
     public URL build() {
         tmdbParameters.put(TmdbParameter.API_KEY, apiKey);
-        URL url = null;
         try {
-            url = new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent());
+            return new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent());
         } catch (MalformedURLException e) {
-            // TODO: always use Logger instead of stacktrace
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return url;
     }
 
     private String buildQueryComponent() {
         List<String> params = new ArrayList<>();
-        tmdbParameters.forEach((k, v) -> {
-            try {
-                String encodedValue = URLEncoder.encode(v, StandardCharsets.UTF_8.name());
-                params.add(k.getValue() + "=" + encodedValue);
-            } catch (UnsupportedEncodingException e) {
-                // should not happen
-                throw new RuntimeException(e);
-            }
-        });
+        tmdbParameters.forEach((k, v) -> params.add(urlEncode(k.getValue()) + "=" + urlEncode(v)));
         return String.join("&", params);
+    }
+
+    private static String urlEncode(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
