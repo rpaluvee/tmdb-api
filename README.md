@@ -5,6 +5,37 @@ resource for developers to integrate movie, TV show and cast data along with
 posters or movie fan art. [themoviedb.org](https://www.themoviedb.org/) is a 
 free and community edited database.
 
+## Usage
+TMDb [API Read Access Token](https://developers.themoviedb.org/4/getting-started/authorization) 
+is required to use this library. This Access Token can be obtained by registering for 
+a TMDb API key. Steps to do so are described in the *Getting started* section of the 
+[TMDb API documentation](https://developers.themoviedb.org/3/getting-started/introduction).
+
+To use the library you have to instantiate the TMDb API Client class
+`com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:  
+
+`TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");`  
+
+With this client you can specify whether to discover movies or TV shows. 
+For example if you want to fetch all movies released in 2008:  
+```
+List<Movie> movies = tmdbClient.movies()
+        .withPrimaryReleaseYear(2008)
+        .fetch();
+```
+
+## Setup
+Add the library as a dependency to your project with Maven  
+```
+<dependency>
+    <groupId>com.cinemadice</groupId>
+    <artifactId>tmdb-api</artifactId>
+    <version>0.1.0</version>
+</dependency>
+```
+
+TODO: Gradle
+
 ## Scope
 
 The purpose of this library is to provide its user with the ability to easily 
@@ -74,36 +105,6 @@ Project is created with:
 #### Libraries
   * Lombok 1.18.10
   * Gson 2.8.6
-
-## Setup
-Add the library as a dependency to your project with Maven  
-```
-<dependency>
-    <groupId>com.cinemadice</groupId>
-    <artifactId>tmdb-api</artifactId>
-    <version>1.0</version>
-</dependency>
-```
-
-TODO: Gradle
-
-## Usage
-TMDb API key is required to use this library. Steps to register for an API key 
-are described in the *Getting started* section of the 
-[TMDb API documentation](https://developers.themoviedb.org/3/getting-started/introduction).
-
-To use the library you have to instantiate the TMDb API Client class
-`com.cinemadice.tmdbapi.TmdbClient` with the API key:  
-
-`TmdbClient tmdbClient = new TmdbClient("<API_KEY>");`  
-
-With this client you can specify whether to discover movies or TV shows. 
-For example if you want to fetch all movies released in 2008:  
-```
-List<Movie> movies = tmdbClient.movies()
-        .withPrimaryReleaseYear(2008)
-        .fetch();
-```
 
 ## License
 This project is released under the MIT license, see [LICENSE](LICENSE) file.

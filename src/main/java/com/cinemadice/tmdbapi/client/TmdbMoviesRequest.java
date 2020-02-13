@@ -5,14 +5,15 @@ import com.cinemadice.tmdbapi.model.Movie;
 import com.cinemadice.tmdbapi.url.DiscoverMoviesUrl;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 
 public class TmdbMoviesRequest {
 
     private final DiscoverMoviesUrl discoverMoviesUrl;
+    private final TmdbHttpClient tmdbHttpClient;
 
-    TmdbMoviesRequest(String apiKey) {
-        this.discoverMoviesUrl = new DiscoverMoviesUrl(apiKey);
+    TmdbMoviesRequest(TmdbHttpClient tmdbHttpClient) {
+        this.discoverMoviesUrl = new DiscoverMoviesUrl();
+        this.tmdbHttpClient = tmdbHttpClient;
     }
 
     public TmdbMoviesRequest withPage(int page) {
@@ -27,7 +28,7 @@ public class TmdbMoviesRequest {
 
     public List<Movie> fetch() {
         URL url = discoverMoviesUrl.build();
-        String response = new TmdbHttpClient().fetch(url);
+        String response = tmdbHttpClient.fetch(url);
         Discover discover = Utils.fromJson(response, Discover.class);
         return discover.getResults();
     }
