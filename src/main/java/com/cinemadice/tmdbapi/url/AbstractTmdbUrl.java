@@ -5,10 +5,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 abstract class AbstractTmdbUrl {
 
@@ -23,21 +22,25 @@ abstract class AbstractTmdbUrl {
         try {
             return new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent());
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new AssertionError(e);
         }
     }
 
     private String buildQueryComponent() {
-        List<String> params = new ArrayList<>();
-        tmdbParameters.forEach((k, v) -> params.add(urlEncode(k.getValue()) + "=" + urlEncode(v)));
-        return String.join("&", params);
+        return tmdbParameters.entrySet().stream()
+                .map(this::buildPair)
+                .collect(Collectors.joining("&"));
+    }
+
+    private String buildPair(Map.Entry<TmdbParameter, String> entry) {
+        return urlEncode(entry.getKey().getValue()) + "=" + urlEncode(entry.getValue());
     }
 
     private static String urlEncode(String value) {
         try {
             return URLEncoder.encode(value, StandardCharsets.UTF_8.name());
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new AssertionError("UTF-8 not supported", e);
         }
     }
 
