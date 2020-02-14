@@ -11,14 +11,13 @@ import java.util.stream.Collectors;
 
 abstract class AbstractTmdbUrl {
 
-    private static final String BASE_URL = "https://api.themoviedb.org/3";
+    private static final String API_VERSION = "4";
+    private static final String BASE_URL = "https://api.themoviedb.org/" + API_VERSION;
 
     protected final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
     protected Endpoint endpoint;
-    protected String apiKey;
 
     public URL build() {
-        tmdbParameters.put(TmdbParameter.API_KEY, apiKey);
         try {
             return new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent());
         } catch (MalformedURLException e) {

@@ -2,17 +2,17 @@ package com.cinemadice.tmdbapi.client;
 
 public class TmdbClient {
 
-    private final String apiKey;
+    private final TmdbHttpClient tmdbHttpClient;
 
-    public TmdbClient(String apiKey) {
-        if (apiKey == null || apiKey.isEmpty()) {
-            throw new IllegalArgumentException("Provided API key is invalid");
+    public TmdbClient(String accessToken) {
+        if (accessToken == null || accessToken.isEmpty()) {
+            throw new IllegalArgumentException("Provided API Access Token is invalid");
         }
-        this.apiKey = apiKey;
+        this.tmdbHttpClient = new TmdbHttpClient(accessToken);
     }
 
     public TmdbMoviesRequest movies() {
-        return new TmdbMoviesRequest(apiKey);
+        return new TmdbMoviesRequest(tmdbHttpClient);
     }
 
 }

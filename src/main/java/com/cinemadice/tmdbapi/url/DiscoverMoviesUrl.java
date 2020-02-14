@@ -2,9 +2,8 @@ package com.cinemadice.tmdbapi.url;
 
 public class DiscoverMoviesUrl extends AbstractTmdbUrl {
 
-    public DiscoverMoviesUrl(String apikey) {
+    public DiscoverMoviesUrl() {
         super.endpoint = Endpoint.DISCOVER_MOVIE;
-        super.apiKey = apikey;
     }
 
     public void addLanguage(String language) {

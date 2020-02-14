@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 enum TmdbParameter {
-    API_KEY("api_key"),
     LANGUAGE("language"),
     REGION("region"),
     SORT_BY("sort_by"),
