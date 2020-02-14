@@ -4,8 +4,6 @@ import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
 import com.cinemadice.tmdbapi.model.ErrorResponse;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
@@ -19,7 +17,10 @@ class TmdbHttpClient {
     private final Headers headers;
 
     TmdbHttpClient(String accessToken) {
-        headers = Headers.of(constructHeaders(accessToken));
+        headers = new Headers.Builder()
+                .add("Authorization", "Bearer " + accessToken)
+                .add("Content-Type", "application/json;charset=utf-8")
+                .build();
     }
 
     String fetch(URL url) {
@@ -44,13 +45,6 @@ class TmdbHttpClient {
         } catch (IOException e) {
             throw new FailedTmdbRequestException("Connection could not be established with URL: " + url, e);
         }
-    }
-
-    private Map<String, String> constructHeaders(String accessToken) {
-        Map<String, String> headersMap = new HashMap<>();
-        headersMap.put("Authorization", "Bearer " + accessToken);
-        headersMap.put("Content-Type", "application/json;charset=utf-8");
-        return headersMap;
     }
 
 }
