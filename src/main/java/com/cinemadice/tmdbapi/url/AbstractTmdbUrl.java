@@ -27,11 +27,11 @@ abstract class AbstractTmdbUrl {
 
     private String buildQueryComponent() {
         return tmdbParameters.entrySet().stream()
-                .map(this::buildPair)
+                .map(AbstractTmdbUrl::buildPair)
                 .collect(Collectors.joining("&"));
     }
 
-    private String buildPair(Map.Entry<TmdbParameter, String> entry) {
+    private static String buildPair(Map.Entry<TmdbParameter, String> entry) {
         return urlEncode(entry.getKey().getValue()) + "=" + urlEncode(entry.getValue());
     }
 
