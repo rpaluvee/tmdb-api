@@ -1,8 +1,8 @@
 package com.cinemadice.tmdbapi.url;
 
-class TmdbUrl extends AbstractTmdbUrl {
+public class TmdbUrl extends AbstractTmdbUrl {
 
-    TmdbUrl (Endpoint endpoint) {
+    TmdbUrl(Endpoint endpoint) {
         super.endpoint = endpoint;
     }
 

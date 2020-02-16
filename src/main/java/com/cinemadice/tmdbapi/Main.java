@@ -15,6 +15,7 @@ public class Main {
         TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
 
         List<Movie> movies = tmdbClient.movies()
+                .withLanguage("en")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
                 .fetch();

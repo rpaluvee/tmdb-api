@@ -15,4 +15,8 @@ public class TmdbClient {
         return new TmdbMoviesRequest(tmdbHttpClient);
     }
 
+    public TmdbTvRequest tv() {
+        return new TmdbTvRequest(tmdbHttpClient);
+    }
+
 }

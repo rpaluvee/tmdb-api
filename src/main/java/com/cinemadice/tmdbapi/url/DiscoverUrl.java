@@ -1,6 +1,6 @@
 package com.cinemadice.tmdbapi.url;
 
-class DiscoverUrl extends TmdbUrl {
+public class DiscoverUrl extends TmdbUrl {
 
     DiscoverUrl(Endpoint endpoint) {
         super(endpoint);
