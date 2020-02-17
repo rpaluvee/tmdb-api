@@ -6,15 +6,14 @@ import com.cinemadice.tmdbapi.url.DiscoverTvUrl;
 import java.net.URL;
 import java.util.List;
 
-public class TmdbTvRequest extends AbstractTmdbDiscoverRequest<TmdbTvRequest> {
+public class TmdbTvRequest extends AbstractTmdbDiscoverRequest<TmdbTvRequest, DiscoverTvUrl> {
 
     TmdbTvRequest(TmdbHttpClient tmdbHttpClient) {
-        super.tmdbUrl = new DiscoverTvUrl();
-        super.tmdbHttpClient = tmdbHttpClient;
+        super(new DiscoverTvUrl(), tmdbHttpClient);
     }
 
     public TmdbTvRequest withTimezone(String timezone) {
-        ((DiscoverTvUrl) tmdbUrl).addTimezone(timezone);
+        tmdbUrl.addTimezone(timezone);
         return this;
     }
 
@@ -27,7 +26,7 @@ public class TmdbTvRequest extends AbstractTmdbDiscoverRequest<TmdbTvRequest> {
     }
 
     @Override
-    protected TmdbTvRequest getThis() {
+    protected TmdbTvRequest thisInstance() {
         return this;
     }
 
