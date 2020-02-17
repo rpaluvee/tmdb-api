@@ -9,13 +9,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-abstract class AbstractTmdbUrl {
+public abstract class AbstractTmdbUrl {
 
     private static final String API_VERSION = "4";
     private static final String BASE_URL = "https://api.themoviedb.org/" + API_VERSION;
 
-    protected final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
-    protected Endpoint endpoint;
+    protected final Map<TmdbParameter, String> tmdbParameters;
+    protected final Endpoint endpoint;
+
+    protected AbstractTmdbUrl(Endpoint endpoint) {
+        this.tmdbParameters = new HashMap<>();
+        this.endpoint = endpoint;
+    }
+
+    public void addLanguage(String language) {
+        tmdbParameters.put(TmdbParameter.LANGUAGE, String.valueOf(language));
+    }
 
     public URL build() {
         try {

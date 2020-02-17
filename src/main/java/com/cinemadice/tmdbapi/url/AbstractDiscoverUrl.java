@@ -1,8 +1,8 @@
 package com.cinemadice.tmdbapi.url;
 
-public class DiscoverUrl extends TmdbUrl {
+public abstract class AbstractDiscoverUrl extends AbstractTmdbUrl {
 
-    DiscoverUrl(Endpoint endpoint) {
+    protected AbstractDiscoverUrl(Endpoint endpoint) {
         super(endpoint);
     }
 
