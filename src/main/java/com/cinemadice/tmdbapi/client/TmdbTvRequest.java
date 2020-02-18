@@ -21,7 +21,7 @@ public class TmdbTvRequest extends AbstractTmdbDiscoverRequest<TmdbTvRequest, Di
     public List<TvSeries> fetch() {
         URL url = tmdbUrl.build();
         String response = tmdbHttpClient.fetch(url);
-        DiscoverTv discoverTv = Utils.fromJson(response, DiscoverTv.class);
+        DiscoverTv discoverTv = TmdbHttpClient.fromJson(response, DiscoverTv.class);
         return discoverTv.getResults();
     }
 

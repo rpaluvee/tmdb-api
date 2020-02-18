@@ -2,6 +2,8 @@ package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
 import com.cinemadice.tmdbapi.model.ErrorResponse;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -38,12 +40,22 @@ class TmdbHttpClient {
             if (response.isSuccessful()) {
                 return responseBody;
             } else {
-                ErrorResponse errorResponse = Utils.fromJson(responseBody, ErrorResponse.class);
+                ErrorResponse errorResponse = fromJson(responseBody, ErrorResponse.class);
                 throw new FailedTmdbRequestException(response.code(), response.message(),
                         errorResponse.getStatusMessage());
             }
         } catch (IOException e) {
             throw new FailedTmdbRequestException("Connection could not be established with URL: " + url, e);
+        }
+    }
+
+    static <T> T fromJson(String response, Class<T> clazz) {
+        try {
+            return new Gson().fromJson(response, clazz);
+        } catch (JsonSyntaxException e) {
+            throw new FailedTmdbRequestException(
+                    "Response body received from TMDb API contains "
+                            + "JSON syntax errors and can't be deserialized to JSON", e);
         }
     }
 

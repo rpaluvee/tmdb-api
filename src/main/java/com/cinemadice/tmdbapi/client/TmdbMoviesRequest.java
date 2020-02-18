@@ -26,7 +26,7 @@ public class TmdbMoviesRequest extends AbstractTmdbDiscoverRequest<TmdbMoviesReq
     public List<Movie> fetch() {
         URL url = tmdbUrl.build();
         String response = tmdbHttpClient.fetch(url);
-        DiscoverMovies discoverMovies = Utils.fromJson(response, DiscoverMovies.class);
+        DiscoverMovies discoverMovies = TmdbHttpClient.fromJson(response, DiscoverMovies.class);
         return discoverMovies.getResults();
     }
 
