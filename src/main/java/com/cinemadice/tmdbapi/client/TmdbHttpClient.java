@@ -25,20 +25,20 @@ class TmdbHttpClient {
                 .build();
     }
 
-    String fetch(URL url) {
+    <T> T fetch(URL url, Class<T> clazz) {
         Request request = new Request.Builder()
                 .url(url)
                 .headers(headers)
                 .build();
 
-        return readResponse(url, request);
+        return readResponse(url, request, clazz);
     }
 
-    private String readResponse(URL url, Request request) {
+    private <T> T readResponse(URL url, Request request, Class<T> clazz) {
         try (Response response = OK_HTTP_CLIENT.newCall(request).execute()) {
             String responseBody = Objects.requireNonNull(response.body()).string();
             if (response.isSuccessful()) {
-                return responseBody;
+                return fromJson(responseBody, clazz);
             } else {
                 ErrorResponse errorResponse = fromJson(responseBody, ErrorResponse.class);
                 throw new FailedTmdbRequestException(response.code(), response.message(),
@@ -49,7 +49,7 @@ class TmdbHttpClient {
         }
     }
 
-    static <T> T fromJson(String response, Class<T> clazz) {
+    private <T> T fromJson(String response, Class<T> clazz) {
         try {
             return new Gson().fromJson(response, clazz);
         } catch (JsonSyntaxException e) {
