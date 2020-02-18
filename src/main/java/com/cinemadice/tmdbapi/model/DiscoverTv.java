@@ -5,13 +5,13 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class Discover {
+public class DiscoverTv {
 
     private int page;
     @SerializedName("total_results")
     private int totalResults;
     @SerializedName("total_pages")
     private int totalPages;
-    private List<Movie> results;
+    private List<TvSeries> results;
 
 }

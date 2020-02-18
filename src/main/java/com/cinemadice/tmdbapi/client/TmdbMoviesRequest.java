@@ -1,36 +1,38 @@
 package com.cinemadice.tmdbapi.client;
 
-import com.cinemadice.tmdbapi.model.Discover;
+import com.cinemadice.tmdbapi.model.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.Movie;
 import com.cinemadice.tmdbapi.url.DiscoverMoviesUrl;
 import java.net.URL;
 import java.util.List;
 
-public class TmdbMoviesRequest {
-
-    private final DiscoverMoviesUrl discoverMoviesUrl;
-    private final TmdbHttpClient tmdbHttpClient;
+public class TmdbMoviesRequest extends AbstractTmdbDiscoverRequest<TmdbMoviesRequest, DiscoverMoviesUrl> {
 
     TmdbMoviesRequest(TmdbHttpClient tmdbHttpClient) {
-        this.discoverMoviesUrl = new DiscoverMoviesUrl();
-        this.tmdbHttpClient = tmdbHttpClient;
+        super(new DiscoverMoviesUrl(), tmdbHttpClient);
     }
 
-    public TmdbMoviesRequest withPage(int page) {
-        discoverMoviesUrl.addPage(page);
+    public TmdbMoviesRequest withRegion(String region) {
+        tmdbUrl.addRegion(region);
         return this;
     }
 
     public TmdbMoviesRequest withPrimaryReleaseYear(int year) {
-        discoverMoviesUrl.addPrimaryReleaseYear(year);
+        tmdbUrl.addPrimaryReleaseYear(year);
         return this;
     }
 
+    @Override
     public List<Movie> fetch() {
-        URL url = discoverMoviesUrl.build();
+        URL url = tmdbUrl.build();
         String response = tmdbHttpClient.fetch(url);
-        Discover discover = Utils.fromJson(response, Discover.class);
-        return discover.getResults();
+        DiscoverMovies discoverMovies = Utils.fromJson(response, DiscoverMovies.class);
+        return discoverMovies.getResults();
+    }
+
+    @Override
+    protected TmdbMoviesRequest thisInstance() {
+        return this;
     }
 
 }
