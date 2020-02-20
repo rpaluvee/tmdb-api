@@ -19,7 +19,7 @@ To use the library you have to instantiate the TMDb API Client class
 With this client you can specify whether to discover movies or TV shows. 
 For example if you want to fetch all movies released in 2008:  
 ```
-List<Movie> movies = tmdbClient.movies()
+List<Movie> movies = tmdbClient.discover().movies()
         .withPrimaryReleaseYear(2008)
         .fetch();
 ```

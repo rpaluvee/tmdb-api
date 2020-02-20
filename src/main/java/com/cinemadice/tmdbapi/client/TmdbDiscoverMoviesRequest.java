@@ -6,18 +6,19 @@ import com.cinemadice.tmdbapi.url.DiscoverMoviesUrl;
 import java.net.URL;
 import java.util.List;
 
-public class TmdbMoviesRequest extends AbstractTmdbDiscoverRequest<TmdbMoviesRequest, DiscoverMoviesUrl> {
+public class TmdbDiscoverMoviesRequest extends
+        AbstractTmdbDiscoverRequest<TmdbDiscoverMoviesRequest, DiscoverMoviesUrl> {
 
-    TmdbMoviesRequest(TmdbHttpClient tmdbHttpClient) {
+    TmdbDiscoverMoviesRequest(TmdbHttpClient tmdbHttpClient) {
         super(new DiscoverMoviesUrl(), tmdbHttpClient);
     }
 
-    public TmdbMoviesRequest withRegion(String region) {
+    public TmdbDiscoverMoviesRequest withRegion(String region) {
         tmdbUrl.addRegion(region);
         return this;
     }
 
-    public TmdbMoviesRequest withPrimaryReleaseYear(int year) {
+    public TmdbDiscoverMoviesRequest withPrimaryReleaseYear(int year) {
         tmdbUrl.addPrimaryReleaseYear(year);
         return this;
     }
@@ -30,7 +31,7 @@ public class TmdbMoviesRequest extends AbstractTmdbDiscoverRequest<TmdbMoviesReq
     }
 
     @Override
-    protected TmdbMoviesRequest thisInstance() {
+    protected TmdbDiscoverMoviesRequest thisInstance() {
         return this;
     }
 

@@ -14,8 +14,8 @@ public class Main {
     public static void main(String[] args) {
         TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
 
-        List<Movie> movies = tmdbClient.movies()
-                .withLanguage("en")
+        List<Movie> movies = tmdbClient.discover().movies()
+                .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
                 .fetch();

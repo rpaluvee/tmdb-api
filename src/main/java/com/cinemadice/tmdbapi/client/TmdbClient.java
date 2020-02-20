@@ -3,6 +3,7 @@ package com.cinemadice.tmdbapi.client;
 public class TmdbClient {
 
     private final TmdbHttpClient tmdbHttpClient;
+    private TmdbDiscoverClient tmdbDiscoverClient;
 
     public TmdbClient(String accessToken) {
         if (accessToken == null || accessToken.isEmpty()) {
@@ -11,8 +12,11 @@ public class TmdbClient {
         this.tmdbHttpClient = new TmdbHttpClient(accessToken);
     }
 
-    public TmdbMoviesRequest movies() {
-        return new TmdbMoviesRequest(tmdbHttpClient);
+    public TmdbDiscoverClient discover() {
+        if (tmdbDiscoverClient == null) {
+            this.tmdbDiscoverClient = new TmdbDiscoverClient(tmdbHttpClient);
+        }
+        return tmdbDiscoverClient;
     }
 
     public TmdbTvRequest tv() {
