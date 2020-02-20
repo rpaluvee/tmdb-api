@@ -12,4 +12,12 @@ public class TmdbMoviesClient {
         return new TmdbUpcomingMoviesRequest(tmdbHttpClient);
     }
 
+    /* TODO: Implement following methods:
+    details()
+    latest()
+    playingNow()
+    popular()
+    topRated()
+     */
+
 }

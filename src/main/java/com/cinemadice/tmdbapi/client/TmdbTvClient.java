@@ -8,4 +8,13 @@ public class TmdbTvClient {
         this.tmdbHttpClient = tmdbHttpClient;
     }
 
+    /* TODO: Implement following methods:
+    details()
+    latest()
+    airingToday()
+    onAir()
+    popular()
+    topRated()
+     */
+
 }
