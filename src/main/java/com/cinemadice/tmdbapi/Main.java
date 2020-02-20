@@ -21,6 +21,14 @@ public class Main {
                 .fetch();
 
         movies.forEach(movie -> System.out.println(movie.getTitle() + " (year: " + movie.getReleaseDate() + ")"));
+
+        List<Movie> upcomingMovies = tmdbClient.movies().upcomingInTheatres()
+                .withLanguage("en-US")
+                .withRegion("US")
+                .withPage(2)
+                .fetch();
+
+        upcomingMovies.forEach(um -> System.out.println(um.getTitle() + " (year: " + um.getReleaseDate() + ")"));
     }
 
 }

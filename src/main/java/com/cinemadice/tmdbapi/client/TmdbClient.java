@@ -4,6 +4,8 @@ public class TmdbClient {
 
     private final TmdbHttpClient tmdbHttpClient;
     private TmdbDiscoverClient tmdbDiscoverClient;
+    private TmdbMoviesClient tmdbMoviesClient;
+    private TmdbTvClient tmdbTvClient;
 
     public TmdbClient(String accessToken) {
         if (accessToken == null || accessToken.isEmpty()) {
@@ -19,8 +21,18 @@ public class TmdbClient {
         return tmdbDiscoverClient;
     }
 
-    public TmdbTvRequest tv() {
-        return new TmdbTvRequest(tmdbHttpClient);
+    public TmdbMoviesClient movies() {
+        if (tmdbMoviesClient == null) {
+            this.tmdbMoviesClient = new TmdbMoviesClient(tmdbHttpClient);
+        }
+        return tmdbMoviesClient;
+    }
+
+    public TmdbTvClient tv() {
+        if (tmdbTvClient == null) {
+            this.tmdbTvClient = new TmdbTvClient(tmdbHttpClient);
+        }
+        return tmdbTvClient;
     }
 
 }

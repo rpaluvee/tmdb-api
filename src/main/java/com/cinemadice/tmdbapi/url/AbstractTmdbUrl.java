@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractTmdbUrl {
 
-    private static final String API_VERSION = "4";
+    private static final String API_VERSION = "3";
     private static final String BASE_URL = "https://api.themoviedb.org/" + API_VERSION;
 
     protected final Map<TmdbParameter, String> tmdbParameters;
