@@ -3,7 +3,7 @@ package com.cinemadice.tmdbapi.client;
 import com.cinemadice.tmdbapi.url.AbstractTmdbUrl;
 import java.util.List;
 
-abstract class AbstractTmdbRequest<T, U extends AbstractTmdbUrl> {
+public abstract class AbstractTmdbRequest<T, U extends AbstractTmdbUrl> {
 
     protected final U tmdbUrl;
     protected final TmdbHttpClient tmdbHttpClient;

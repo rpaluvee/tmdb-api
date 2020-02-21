@@ -1,5 +1,8 @@
 package com.cinemadice.tmdbapi.client;
 
+import com.cinemadice.tmdbapi.client.discover.TmdbDiscoverClient;
+import com.cinemadice.tmdbapi.client.movies.TmdbMoviesClient;
+
 public class TmdbClient {
 
     private final TmdbHttpClient tmdbHttpClient;

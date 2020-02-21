@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-class TmdbHttpClient {
+public class TmdbHttpClient {
 
     private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient();
 
@@ -25,7 +25,7 @@ class TmdbHttpClient {
                 .build();
     }
 
-    <T> T fetch(URL url, Class<T> clazz) {
+    public <T> T fetch(URL url, Class<T> clazz) {
         Request request = new Request.Builder()
                 .url(url)
                 .headers(headers)

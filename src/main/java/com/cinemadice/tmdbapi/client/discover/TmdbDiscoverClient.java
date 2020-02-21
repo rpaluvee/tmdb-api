@@ -1,10 +1,16 @@
-package com.cinemadice.tmdbapi.client;
+package com.cinemadice.tmdbapi.client.discover;
+
+import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 
 public class TmdbDiscoverClient {
 
     private final TmdbHttpClient tmdbHttpClient;
 
-    TmdbDiscoverClient(TmdbHttpClient tmdbHttpClient) {
+    public TmdbDiscoverClient(TmdbHttpClient tmdbHttpClient) {
+        if (tmdbHttpClient == null) {
+            throw new IllegalArgumentException(
+                    "TmdbHttpClient has to be initialized in TmdbClient with a valid Access Token");
+        }
         this.tmdbHttpClient = tmdbHttpClient;
     }
 
