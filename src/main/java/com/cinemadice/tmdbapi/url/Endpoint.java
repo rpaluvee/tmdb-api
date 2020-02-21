@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-enum Endpoint {
+public enum Endpoint {
     DISCOVER_MOVIE("/discover/movie"),
     DISCOVER_TV("/discover/tv"),
     UPCOMING_MOVIE("/movie/upcoming");

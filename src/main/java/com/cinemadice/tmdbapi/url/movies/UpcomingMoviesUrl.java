@@ -1,4 +1,8 @@
-package com.cinemadice.tmdbapi.url;
+package com.cinemadice.tmdbapi.url.movies;
+
+import com.cinemadice.tmdbapi.url.AbstractTmdbUrl;
+import com.cinemadice.tmdbapi.url.Endpoint;
+import com.cinemadice.tmdbapi.url.TmdbParameter;
 
 public class UpcomingMoviesUrl extends AbstractTmdbUrl {
 

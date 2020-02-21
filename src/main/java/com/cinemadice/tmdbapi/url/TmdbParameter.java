@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-enum TmdbParameter {
+public enum TmdbParameter {
     // General parameters
     LANGUAGE("language"),
     SORT_BY("sort_by"),

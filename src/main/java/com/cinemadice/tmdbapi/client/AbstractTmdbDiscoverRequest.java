@@ -1,6 +1,6 @@
 package com.cinemadice.tmdbapi.client;
 
-import com.cinemadice.tmdbapi.url.AbstractDiscoverUrl;
+import com.cinemadice.tmdbapi.url.discover.AbstractDiscoverUrl;
 
 abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> extends AbstractTmdbRequest<T, U> {
 

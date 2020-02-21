@@ -1,4 +1,7 @@
-package com.cinemadice.tmdbapi.url;
+package com.cinemadice.tmdbapi.url.discover;
+
+import com.cinemadice.tmdbapi.url.Endpoint;
+import com.cinemadice.tmdbapi.url.TmdbParameter;
 
 public class DiscoverMoviesUrl extends AbstractDiscoverUrl {
 

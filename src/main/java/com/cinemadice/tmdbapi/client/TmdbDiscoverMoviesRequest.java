@@ -2,7 +2,7 @@ package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.model.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.Movie;
-import com.cinemadice.tmdbapi.url.DiscoverMoviesUrl;
+import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 import java.net.URL;
 import java.util.List;
 
