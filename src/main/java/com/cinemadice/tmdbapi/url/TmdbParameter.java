@@ -49,7 +49,9 @@ public enum TmdbParameter {
     TIMEZONE("timezone"),
     WITH_NETWORKS("with_networks"),
     INCLUDE_NULL_FIRST_AIR_DATES("include_null_first_air_dates"),
-    SCREENED_THEATRICALLY("screened_theatrically");
+    SCREENED_THEATRICALLY("screened_theatrically"),
+
+    APPEND_TO_RESPONSE("append_to_response");
 
     @Getter
     private final String value;

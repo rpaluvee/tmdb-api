@@ -1,7 +1,6 @@
 package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.url.AbstractTmdbUrl;
-import java.util.List;
 
 public abstract class AbstractTmdbRequest<T, U extends AbstractTmdbUrl> {
 
@@ -18,7 +17,7 @@ public abstract class AbstractTmdbRequest<T, U extends AbstractTmdbUrl> {
         return thisInstance();
     }
 
-    protected abstract List<?> fetch();
+    protected abstract Object fetch();
 
     protected abstract T thisInstance();
 

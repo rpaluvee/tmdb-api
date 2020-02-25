@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi;
 
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.model.Movie;
+import com.cinemadice.tmdbapi.model.MovieDetails;
 import java.util.List;
 
 // Example of use
@@ -29,6 +30,9 @@ public class Main {
                 .fetch();
 
         upcomingMovies.forEach(um -> System.out.println(um.getTitle() + " (year: " + um.getReleaseDate() + ")"));
+
+        MovieDetails movieDetails = tmdbClient.movies().detailsOf(490132).fetch();
+        System.out.println(movieDetails);
     }
 
 }

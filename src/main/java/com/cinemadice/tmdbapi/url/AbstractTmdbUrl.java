@@ -14,12 +14,16 @@ public abstract class AbstractTmdbUrl {
     private static final String API_VERSION = "3";
     private static final String BASE_URL = "https://api.themoviedb.org/" + API_VERSION;
 
-    protected final Map<TmdbParameter, String> tmdbParameters;
-    protected final Endpoint endpoint;
+    protected final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
+    protected final String endpoint;
 
     protected AbstractTmdbUrl(Endpoint endpoint) {
-        this.tmdbParameters = new HashMap<>();
-        this.endpoint = endpoint;
+        this.endpoint = endpoint.getValue();
+    }
+
+    // TODO: Should make filling the placeholders more dynamic when multiple variables occur in endpoint url
+    protected AbstractTmdbUrl(Endpoint endpoint, EndpointPlaceholder placeholder, String value) {
+        this.endpoint = endpoint.getValue().replace(placeholder.getValue(), value);
     }
 
     public void addLanguage(String language) {
@@ -28,7 +32,7 @@ public abstract class AbstractTmdbUrl {
 
     public URL build() {
         try {
-            return new URL(BASE_URL + endpoint.getEndpointUrl() + "?" + buildQueryComponent());
+            return new URL(BASE_URL + endpoint + "?" + buildQueryComponent());
         } catch (MalformedURLException e) {
             throw new AssertionError(e);
         }

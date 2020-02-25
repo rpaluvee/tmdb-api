@@ -23,7 +23,6 @@ public class TmdbMoviesClient {
     }
 
     /* TODO: Implement following methods:
-    details()
     latest()
     playingNow()
     popular()

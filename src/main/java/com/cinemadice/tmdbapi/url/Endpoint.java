@@ -7,9 +7,10 @@ import lombok.Getter;
 public enum Endpoint {
     DISCOVER_MOVIE("/discover/movie"),
     DISCOVER_TV("/discover/tv"),
-    UPCOMING_MOVIE("/movie/upcoming");
+    UPCOMING_MOVIE("/movie/upcoming"),
+    MOVIE_DETAILS("/movie/" + EndpointPlaceholder.MOVIE_ID.getValue());
 
     @Getter
-    private String endpointUrl;
+    private String value;
 
 }
