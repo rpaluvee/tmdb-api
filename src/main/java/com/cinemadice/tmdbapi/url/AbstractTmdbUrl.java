@@ -15,7 +15,7 @@ public abstract class AbstractTmdbUrl {
     private static final String BASE_URL = "https://api.themoviedb.org/" + API_VERSION;
 
     protected final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
-    protected final String endpoint;
+    private final String endpoint;
 
     protected AbstractTmdbUrl(Endpoint endpoint) {
         this.endpoint = endpoint.getValue();
