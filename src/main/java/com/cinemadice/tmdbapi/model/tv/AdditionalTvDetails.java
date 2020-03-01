@@ -10,7 +10,7 @@ import lombok.Data;
 public class AdditionalTvDetails extends TvDetails {
 
     @SerializedName("created_by")
-    private CreatedBy createdBy;
+    private List<CreatedBy> createdBy;
     @SerializedName("episode_run_time")
     private List<Integer> episodeRunTime;
     private List<Genre> genres;

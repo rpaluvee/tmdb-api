@@ -3,6 +3,7 @@ package com.cinemadice.tmdbapi;
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.model.movies.AdditionalMovieDetails;
 import com.cinemadice.tmdbapi.model.movies.Movie;
+import com.cinemadice.tmdbapi.model.tv.AdditionalTvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import java.util.List;
 
@@ -17,32 +18,37 @@ public class Main {
         TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
 
         // --- Movie examples ---
+        // Discover movies
         List<Movie> movies = tmdbClient.discover().movies()
                 .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
                 .fetch();
-
         movies.forEach(movie -> System.out.println(movie.getTitle() + " (year: " + movie.getReleaseDate() + ")"));
 
+        // Fetch upcoming movies
         List<Movie> upcomingMovies = tmdbClient.movies().upcomingInTheatres()
                 .withLanguage("en-US")
                 .withRegion("US")
                 .withPage(2)
                 .fetch();
-
         upcomingMovies.forEach(um -> System.out.println(um.getTitle() + " (year: " + um.getReleaseDate() + ")"));
 
+        // Fetch additional details about a specific movie with its ID
         AdditionalMovieDetails additionalMovieDetails = tmdbClient.movies().detailsOf(490132).fetch();
         System.out.println(additionalMovieDetails);
 
         // --- TV examples ---
+        // Discover TV
         List<TvSeries> tv = tmdbClient.discover().tv()
                 .withLanguage("en-US")
                 .withPage(2)
                 .fetch();
-
         tv.forEach(tvSeries -> System.out.println(tvSeries.getName() + " (year: " + tvSeries.getFirstAirDate() + ")"));
+
+        // Fetch additional details about a TV show by its ID
+        AdditionalTvDetails additionalTvDetails = tmdbClient.tv().detailsOf(1399).fetch();
+        System.out.println(additionalTvDetails);
 
     }
 

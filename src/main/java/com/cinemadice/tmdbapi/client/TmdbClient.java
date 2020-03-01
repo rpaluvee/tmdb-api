@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.client.discover.TmdbDiscoverClient;
 import com.cinemadice.tmdbapi.client.movies.TmdbMoviesClient;
+import com.cinemadice.tmdbapi.client.tv.TmdbTvClient;
 
 public class TmdbClient {
 
