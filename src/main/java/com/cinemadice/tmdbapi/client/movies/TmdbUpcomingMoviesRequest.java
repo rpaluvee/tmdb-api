@@ -2,8 +2,8 @@ package com.cinemadice.tmdbapi.client.movies;
 
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
-import com.cinemadice.tmdbapi.model.Movie;
-import com.cinemadice.tmdbapi.model.UpcomingMovies;
+import com.cinemadice.tmdbapi.model.movies.Movie;
+import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
 import java.net.URL;
 import java.util.List;

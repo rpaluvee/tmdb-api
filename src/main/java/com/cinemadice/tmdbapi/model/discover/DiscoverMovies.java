@@ -1,5 +1,6 @@
-package com.cinemadice.tmdbapi.model;
+package com.cinemadice.tmdbapi.model.discover;
 
+import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import lombok.Data;
