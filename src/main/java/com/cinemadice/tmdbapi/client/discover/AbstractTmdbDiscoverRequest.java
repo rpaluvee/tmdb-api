@@ -10,8 +10,73 @@ abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> ext
         super(tmdbUrl, tmdbHttpClient);
     }
 
+    public T withSort(String sortBy) {
+        tmdbUrl.addSort(sortBy);
+        return thisInstance();
+    }
+
     public T withPage(int page) {
         tmdbUrl.addPage(page);
+        return thisInstance();
+    }
+
+    public T withVoteCountLessThanOrEqual(int voteCount) {
+        tmdbUrl.addVoteCountLessThanOrEqual(voteCount);
+        return thisInstance();
+    }
+
+    public T withVoteCountGreaterThanOrEqual(int voteCount) {
+        tmdbUrl.addVoteCountGreaterThanOrEqual(voteCount);
+        return thisInstance();
+    }
+
+    public T withVoteAverageLessThanOrEqual(int voteAverage) {
+        tmdbUrl.addVoteAverageLessThanOrEqual(voteAverage);
+        return thisInstance();
+    }
+
+    public T withVoteAverageGreaterThanOrEqual(int voteAverage) {
+        tmdbUrl.addVoteAverageGreaterThanOrEqual(voteAverage);
+        return thisInstance();
+    }
+
+    public T withCompanies(String companies) {
+        tmdbUrl.addWithCompanies(companies);
+        return thisInstance();
+    }
+
+    public T withGenres(String genres) {
+        tmdbUrl.addWithGenres(genres);
+        return thisInstance();
+    }
+
+    public T withoutGenres(String genres) {
+        tmdbUrl.addWithoutGenres(genres);
+        return thisInstance();
+    }
+
+    public T withKeywords(String keywords) {
+        tmdbUrl.addWithKeywords(keywords);
+        return thisInstance();
+    }
+
+    public T withoutKeywords(String keywords) {
+        tmdbUrl.addWithoutKeywords(keywords);
+        return thisInstance();
+    }
+
+    public T withRuntimeLessThanOrEqual(int runtime) {
+        tmdbUrl.addWithRuntimeLessThanOrEqual(runtime);
+        return thisInstance();
+    }
+
+    public T withRuntimeGreaterThanOrEqual(int runtime) {
+        tmdbUrl.addWithRuntimeGreaterThanOrEqual(runtime);
+        return thisInstance();
+    }
+
+    public T withOriginalLanguage(String language) {
+        tmdbUrl.addWithOriginalLanguage(language);
         return thisInstance();
     }
 
