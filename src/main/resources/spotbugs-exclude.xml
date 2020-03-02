@@ -1,0 +1,9 @@
+<FindBugsFilter>
+    <Match>
+        <!-- OkHttp documentation states that the response body can't be null when returned from Call.execute
+        (https://square.github.io/okhttp/4.x/okhttp/okhttp3/-response/body/) - false positive -->
+        <Class name="com.cinemadice.tmdbapi.client.TmdbHttpClient"/>
+        <Method name="readResponse"/>
+        <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE"/>
+    </Match>
+</FindBugsFilter>

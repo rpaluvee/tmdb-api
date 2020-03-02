@@ -2,9 +2,11 @@ package com.cinemadice.tmdbapi.model.tv;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 class CommonTvDetails {
 
     protected int id;

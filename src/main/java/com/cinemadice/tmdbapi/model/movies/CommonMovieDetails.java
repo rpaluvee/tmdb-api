@@ -1,9 +1,11 @@
 package com.cinemadice.tmdbapi.model.movies;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 class CommonMovieDetails {
 
     protected int id;
