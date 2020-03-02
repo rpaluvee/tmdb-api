@@ -22,13 +22,4 @@ public class TmdbTvClient {
         return new TmdbTvDetailsRequest(tmdbHttpClient, tvId);
     }
 
-    /* TODO: Implement following methods:
-    details()
-    latest()
-    airingToday()
-    onAir()
-    popular()
-    topRated()
-     */
-
 }

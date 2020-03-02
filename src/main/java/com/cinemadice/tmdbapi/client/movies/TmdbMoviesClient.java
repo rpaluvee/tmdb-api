@@ -22,11 +22,4 @@ public class TmdbMoviesClient {
         return new TmdbMovieDetailsRequest(tmdbHttpClient, movieId);
     }
 
-    /* TODO: Implement following methods:
-    latest()
-    playingNow()
-    popular()
-    topRated()
-     */
-
 }
