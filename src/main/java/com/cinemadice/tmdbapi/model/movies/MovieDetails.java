@@ -2,7 +2,6 @@ package com.cinemadice.tmdbapi.model.movies;
 
 import com.cinemadice.tmdbapi.model.Genre;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
-import com.cinemadice.tmdbapi.model.SpokenLanguage;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import lombok.Data;
