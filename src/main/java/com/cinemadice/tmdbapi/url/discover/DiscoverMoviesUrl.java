@@ -41,20 +41,20 @@ public class DiscoverMoviesUrl extends AbstractDiscoverUrl {
         tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_YEAR, String.valueOf(year));
     }
 
-    public void addPrimaryReleaseDateLessThanOrEqual(int primaryReleaseDate) {
-        tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_DATE_LTE, String.valueOf(primaryReleaseDate));
+    public void addPrimaryReleaseDateLessThanOrEqual(String primaryReleaseDate) {
+        tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_DATE_LTE, primaryReleaseDate);
     }
 
-    public void addPrimaryReleaseDateGreaterThanOrEqual(int primaryReleaseDate) {
-        tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_DATE_GTE, String.valueOf(primaryReleaseDate));
+    public void addPrimaryReleaseDateGreaterThanOrEqual(String primaryReleaseDate) {
+        tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_DATE_GTE, primaryReleaseDate);
     }
 
-    public void addReleaseDateLessThanOrEqual(int releaseDate) {
-        tmdbParameters.put(TmdbParameter.RELEASE_DATE_LTE, String.valueOf(releaseDate));
+    public void addReleaseDateLessThanOrEqual(String releaseDate) {
+        tmdbParameters.put(TmdbParameter.RELEASE_DATE_LTE, releaseDate);
     }
 
-    public void addReleaseDateGreaterThanOrEqual(int releaseDate) {
-        tmdbParameters.put(TmdbParameter.RELEASE_DATE_GTE, String.valueOf(releaseDate));
+    public void addReleaseDateGreaterThanOrEqual(String releaseDate) {
+        tmdbParameters.put(TmdbParameter.RELEASE_DATE_GTE, releaseDate);
     }
 
     public void addWithReleaseType(int releaseType) {
