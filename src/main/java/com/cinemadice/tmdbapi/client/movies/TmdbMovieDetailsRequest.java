@@ -2,7 +2,7 @@ package com.cinemadice.tmdbapi.client.movies;
 
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
-import com.cinemadice.tmdbapi.model.movies.AdditionalMovieDetails;
+import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.url.movies.MovieDetailsUrl;
 import java.net.URL;
 
@@ -20,9 +20,9 @@ public class TmdbMovieDetailsRequest extends AbstractTmdbRequest<TmdbMovieDetail
     */
 
     @Override
-    public AdditionalMovieDetails fetch() {
+    public MovieDetails fetch() {
         URL url = tmdbUrl.build();
-        return tmdbHttpClient.fetch(url, AdditionalMovieDetails.class);
+        return tmdbHttpClient.fetch(url, MovieDetails.class);
     }
 
     @Override

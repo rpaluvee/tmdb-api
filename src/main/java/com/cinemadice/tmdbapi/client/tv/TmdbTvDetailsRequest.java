@@ -2,7 +2,7 @@ package com.cinemadice.tmdbapi.client.tv;
 
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
-import com.cinemadice.tmdbapi.model.tv.AdditionalTvDetails;
+import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.url.tv.TvDetailsUrl;
 import java.net.URL;
 
@@ -20,9 +20,9 @@ public class TmdbTvDetailsRequest extends AbstractTmdbRequest<TmdbTvDetailsReque
     */
 
     @Override
-    public AdditionalTvDetails fetch() {
+    public TvDetails fetch() {
         URL url = tmdbUrl.build();
-        return tmdbHttpClient.fetch(url, AdditionalTvDetails.class);
+        return tmdbHttpClient.fetch(url, TvDetails.class);
     }
 
     @Override

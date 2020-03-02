@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class TvSeries extends TvDetails {
+public class TvSeries extends CommonTvDetails {
 
     @SerializedName("genre_ids")
     private List<Integer> genreIds;
