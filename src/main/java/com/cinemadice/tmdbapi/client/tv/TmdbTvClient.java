@@ -14,6 +14,10 @@ public class TmdbTvClient {
         this.tmdbHttpClient = tmdbHttpClient;
     }
 
+    public TmdbTvAiringTodayRequest airingToday() {
+        return new TmdbTvAiringTodayRequest(tmdbHttpClient);
+    }
+
     public TmdbTvDetailsRequest detailsOf(int tvId) {
         return new TmdbTvDetailsRequest(tmdbHttpClient, tvId);
     }

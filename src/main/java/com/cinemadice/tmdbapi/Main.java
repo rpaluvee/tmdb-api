@@ -46,10 +46,17 @@ public class Main {
                 .fetch();
         tv.forEach(tvSeries -> System.out.println(tvSeries.getName() + " (year: " + tvSeries.getFirstAirDate() + ")"));
 
-        // Fetch additional details about a TV show by its ID
+        // Fetch TV shows airing today
+        List<TvSeries> tvAiringToday = tmdbClient.tv().airingToday()
+                .withLanguage("en-US")
+                .withPage(2)
+                .fetch();
+        tvAiringToday.forEach(tvShow ->
+                System.out.println(tvShow.getName() + " (year: " + tvShow.getFirstAirDate() + ")"));
+
+        // Fetch additional details about a TV show with its ID
         TvDetails tvDetails = tmdbClient.tv().detailsOf(1399).fetch();
         System.out.println(tvDetails);
-
     }
 
 }
