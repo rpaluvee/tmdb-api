@@ -8,8 +8,8 @@ import java.net.URL;
 
 public class TmdbTvDetailsRequest extends AbstractTmdbRequest<TmdbTvDetailsRequest, TvDetailsUrl> {
 
-    TmdbTvDetailsRequest(TmdbHttpClient tmdbHttpClient, int tvId) {
-        super(new TvDetailsUrl(tvId), tmdbHttpClient);
+    TmdbTvDetailsRequest(TvDetailsUrl tvDetailsUrl, TmdbHttpClient tmdbHttpClient) {
+        super(tvDetailsUrl, tmdbHttpClient);
     }
 
     /* TODO: Implement appending results (https://developers.themoviedb.org/3/getting-started/append-to-response)

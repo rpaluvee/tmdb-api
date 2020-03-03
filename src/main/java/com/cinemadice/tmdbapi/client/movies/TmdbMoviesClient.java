@@ -1,6 +1,8 @@
 package com.cinemadice.tmdbapi.client.movies;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.url.movies.MovieDetailsUrl;
+import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
 
 public class TmdbMoviesClient {
 
@@ -15,11 +17,11 @@ public class TmdbMoviesClient {
     }
 
     public TmdbUpcomingMoviesRequest upcomingInTheatres() {
-        return new TmdbUpcomingMoviesRequest(tmdbHttpClient);
+        return new TmdbUpcomingMoviesRequest(new UpcomingMoviesUrl(), tmdbHttpClient);
     }
 
     public TmdbMovieDetailsRequest detailsOf(int movieId) {
-        return new TmdbMovieDetailsRequest(tmdbHttpClient, movieId);
+        return new TmdbMovieDetailsRequest(new MovieDetailsUrl(movieId), tmdbHttpClient);
     }
 
 }

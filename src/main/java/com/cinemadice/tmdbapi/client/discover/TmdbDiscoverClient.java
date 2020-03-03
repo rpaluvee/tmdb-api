@@ -1,6 +1,8 @@
 package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
+import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 
 public class TmdbDiscoverClient {
 
@@ -15,11 +17,11 @@ public class TmdbDiscoverClient {
     }
 
     public TmdbDiscoverMoviesRequest movies() {
-        return new TmdbDiscoverMoviesRequest(tmdbHttpClient);
+        return new TmdbDiscoverMoviesRequest(new DiscoverMoviesUrl(), tmdbHttpClient);
     }
 
     public TmdbDiscoverTvRequest tv() {
-        return new TmdbDiscoverTvRequest(tmdbHttpClient);
+        return new TmdbDiscoverTvRequest(new DiscoverTvUrl(), tmdbHttpClient);
     }
 
 }

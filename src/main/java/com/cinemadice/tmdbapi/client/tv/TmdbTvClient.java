@@ -1,6 +1,8 @@
 package com.cinemadice.tmdbapi.client.tv;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.url.tv.TvAiringTodayUrl;
+import com.cinemadice.tmdbapi.url.tv.TvDetailsUrl;
 
 public class TmdbTvClient {
 
@@ -15,11 +17,11 @@ public class TmdbTvClient {
     }
 
     public TmdbTvAiringTodayRequest airingToday() {
-        return new TmdbTvAiringTodayRequest(tmdbHttpClient);
+        return new TmdbTvAiringTodayRequest(new TvAiringTodayUrl(), tmdbHttpClient);
     }
 
     public TmdbTvDetailsRequest detailsOf(int tvId) {
-        return new TmdbTvDetailsRequest(tmdbHttpClient, tvId);
+        return new TmdbTvDetailsRequest(new TvDetailsUrl(tvId), tmdbHttpClient);
     }
 
 }

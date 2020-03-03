@@ -10,8 +10,8 @@ import java.util.List;
 public class TmdbDiscoverMoviesRequest extends
         AbstractTmdbDiscoverRequest<TmdbDiscoverMoviesRequest, DiscoverMoviesUrl> {
 
-    TmdbDiscoverMoviesRequest(TmdbHttpClient tmdbHttpClient) {
-        super(new DiscoverMoviesUrl(), tmdbHttpClient);
+    TmdbDiscoverMoviesRequest(DiscoverMoviesUrl discoverMoviesUrl, TmdbHttpClient tmdbHttpClient) {
+        super(discoverMoviesUrl, tmdbHttpClient);
     }
 
     public TmdbDiscoverMoviesRequest withRegion(String region) {

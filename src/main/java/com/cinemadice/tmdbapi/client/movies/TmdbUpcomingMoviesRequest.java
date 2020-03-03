@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TmdbUpcomingMoviesRequest extends AbstractTmdbRequest<TmdbUpcomingMoviesRequest, UpcomingMoviesUrl> {
 
-    TmdbUpcomingMoviesRequest(TmdbHttpClient tmdbHttpClient) {
-        super(new UpcomingMoviesUrl(), tmdbHttpClient);
+    TmdbUpcomingMoviesRequest(UpcomingMoviesUrl upcomingMoviesUrl, TmdbHttpClient tmdbHttpClient) {
+        super(upcomingMoviesUrl, tmdbHttpClient);
     }
 
     public TmdbUpcomingMoviesRequest withPage(int page) {

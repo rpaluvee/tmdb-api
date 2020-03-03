@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TmdbTvAiringTodayRequest extends AbstractTmdbRequest<TmdbTvAiringTodayRequest, TvAiringTodayUrl> {
 
-    TmdbTvAiringTodayRequest(TmdbHttpClient tmdbHttpClient) {
-        super(new TvAiringTodayUrl(), tmdbHttpClient);
+    TmdbTvAiringTodayRequest(TvAiringTodayUrl tvAiringTodayUrl, TmdbHttpClient tmdbHttpClient) {
+        super(tvAiringTodayUrl, tmdbHttpClient);
     }
 
     public TmdbTvAiringTodayRequest withPage(int page) {

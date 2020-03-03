@@ -9,8 +9,8 @@ import java.util.List;
 
 public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDiscoverTvRequest, DiscoverTvUrl> {
 
-    TmdbDiscoverTvRequest(TmdbHttpClient tmdbHttpClient) {
-        super(new DiscoverTvUrl(), tmdbHttpClient);
+    TmdbDiscoverTvRequest(DiscoverTvUrl discoverTvUrl, TmdbHttpClient tmdbHttpClient) {
+        super(discoverTvUrl, tmdbHttpClient);
     }
 
     public TmdbDiscoverTvRequest withAirDateLessThanOrEqual(String airDate) {
