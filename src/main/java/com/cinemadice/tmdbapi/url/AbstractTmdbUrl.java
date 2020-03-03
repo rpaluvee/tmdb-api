@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -14,7 +14,7 @@ public abstract class AbstractTmdbUrl {
     private static final String API_VERSION = "3";
     private static final String BASE_URL = "https://api.themoviedb.org/" + API_VERSION;
 
-    protected final Map<TmdbParameter, String> tmdbParameters = new HashMap<>();
+    protected final Map<TmdbParameter, String> tmdbParameters = new LinkedHashMap<>();
     private final String endpoint;
 
     protected AbstractTmdbUrl(Endpoint endpoint) {
