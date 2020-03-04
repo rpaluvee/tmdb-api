@@ -106,5 +106,18 @@ Project is created with:
   * Lombok 1.18.10
   * Gson 2.8.6
 
+## Static code analysis
+
+### Checkstyle (http://checkstyle.sourceforge.net/)
+Checkstyle is used to maintain a consistent code style.
+Checkstyle is configured to run automatically in Maven compile phase.
+
+### SpotBugs (https://spotbugs.github.io/)
+SpotBugs analyzes bytecode to find common bugs and code problems.  
+
+To run analysis, use `mvn compile spotbugs:check`
+
+To view results, use `mvn spotbugs:gui`
+
 ## License
 This project is released under the MIT license, see [LICENSE](LICENSE) file.
