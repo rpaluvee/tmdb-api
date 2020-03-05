@@ -35,10 +35,10 @@ class TmdbDiscoverMoviesRequestTest {
     public void fetchesWithNoParameters() throws MalformedURLException {
         // given
         List<Movie> expected = Collections.singletonList(new Movie());
+        URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?");
         DiscoverMovies fetchResult = new DiscoverMovies();
         fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(new URL("https://api.themoviedb.org/3/discover/movie?"),
-                DiscoverMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(fetchResult);
 
         // when
         List<Movie> actual = tmdbDiscoverMoviesRequest.fetch();
@@ -77,6 +77,8 @@ class TmdbDiscoverMoviesRequestTest {
         // given
         List<Movie> expected = Collections.singletonList(new Movie());
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?"
+                + "include_adult=true&"
+                + "include_video=true&"
                 + "region=test&"
                 + "primary_release_year=2020&"
                 + "with_cast=test&"
@@ -105,15 +107,15 @@ class TmdbDiscoverMoviesRequestTest {
                 + "vote_average.lte=1&"
                 + "vote_count.gte=1&"
                 + "vote_count.lte=1&"
-                + "language=test&"
-                + "include_adult=true&"
-                + "include_video=true");
+                + "language=test");
         DiscoverMovies fetchResult = new DiscoverMovies();
         fetchResult.setResults(expected);
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(fetchResult);
 
         // when
         List<Movie> actual = tmdbDiscoverMoviesRequest
+                .includeAdult(true)
+                .includeVideo(true)
                 .withRegion("test")
                 .withPrimaryReleaseYear(2020)
                 .withCast("test")
@@ -143,8 +145,6 @@ class TmdbDiscoverMoviesRequestTest {
                 .withVoteCountGreaterThanOrEqual(1)
                 .withVoteCountLessThanOrEqual(1)
                 .withLanguage("test")
-                .includeAdult(true)
-                .includeVideo(true)
                 .fetch();
 
         // then
