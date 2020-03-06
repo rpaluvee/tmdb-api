@@ -102,6 +102,7 @@
                 <configuration>
                     <configLocation>src/main/resources/checkstyle.xml</configLocation>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
