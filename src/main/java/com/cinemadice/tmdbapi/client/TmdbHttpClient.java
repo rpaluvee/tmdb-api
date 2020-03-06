@@ -4,13 +4,14 @@ import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
 import com.cinemadice.tmdbapi.model.ErrorResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
 
 public class TmdbHttpClient {
 

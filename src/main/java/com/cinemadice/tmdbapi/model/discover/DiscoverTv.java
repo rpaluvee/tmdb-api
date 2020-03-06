@@ -2,8 +2,9 @@ package com.cinemadice.tmdbapi.model.discover;
 
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class DiscoverTv {

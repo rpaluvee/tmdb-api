@@ -5,6 +5,7 @@ import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.tv.TvAiringTodayUrl;
+
 import java.net.URL;
 import java.util.List;
 

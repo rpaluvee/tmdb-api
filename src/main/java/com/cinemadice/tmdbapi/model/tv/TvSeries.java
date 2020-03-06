@@ -1,8 +1,9 @@
 package com.cinemadice.tmdbapi.model.tv;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class TvSeries extends CommonTvDetails {

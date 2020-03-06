@@ -5,6 +5,7 @@ import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
+
 import java.net.URL;
 import java.util.List;
 

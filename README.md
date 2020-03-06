@@ -11,7 +11,7 @@ is required to use this library. This Access Token can be obtained by registerin
 a TMDb API key. Steps to do so are described in the *Getting started* section of the 
 [TMDb API documentation](https://developers.themoviedb.org/3/getting-started/introduction).
 
-To use the library you have to instantiate the TMDb API Client class
+To use the library you have to initialize the TMDb API Client class
 `com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:  
 
 `TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");`  
