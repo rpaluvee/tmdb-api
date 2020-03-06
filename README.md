@@ -110,7 +110,7 @@ Project is created with:
 
 ### Checkstyle (http://checkstyle.sourceforge.net/)
 Checkstyle is used to maintain a consistent code style.
-Checkstyle is configured to run automatically in Maven compile phase.
+Checkstyle is configured to run automatically in Maven validate phase.
 
 ### SpotBugs (https://spotbugs.github.io/)
 SpotBugs analyzes bytecode to find common bugs and code problems.  
