@@ -18,10 +18,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TmdbMovieDetailsRequestTest {
 
-    TmdbMovieDetailsRequest tmdbMovieDetailsRequest;
+    private TmdbMovieDetailsRequest tmdbMovieDetailsRequest;
 
     @Mock
-    TmdbHttpClient tmdbHttpClient;
+    private TmdbHttpClient tmdbHttpClient;
 
     @BeforeEach
     public void setUp() {

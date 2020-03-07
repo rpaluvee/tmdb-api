@@ -21,10 +21,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TmdbDiscoverTvRequestTest {
 
-    TmdbDiscoverTvRequest tmdbDiscoverTvRequest;
+    private TmdbDiscoverTvRequest tmdbDiscoverTvRequest;
 
     @Mock
-    TmdbHttpClient tmdbHttpClient;
+    private TmdbHttpClient tmdbHttpClient;
 
     @BeforeEach
     public void setUp() {

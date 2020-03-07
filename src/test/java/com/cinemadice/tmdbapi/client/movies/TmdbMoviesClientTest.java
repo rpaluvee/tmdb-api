@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 public class TmdbMoviesClientTest {
 
-    TmdbMoviesClient tmdbMoviesClient;
+    private TmdbMoviesClient tmdbMoviesClient;
 
     @Mock
-    TmdbHttpClient tmdbHttpClient;
+    private TmdbHttpClient tmdbHttpClient;
 
     @BeforeEach
     public void setUp() {
