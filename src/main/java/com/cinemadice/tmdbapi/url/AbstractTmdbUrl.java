@@ -18,12 +18,12 @@ public abstract class AbstractTmdbUrl {
     private final String endpoint;
 
     protected AbstractTmdbUrl(Endpoint endpoint) {
-        this.endpoint = endpoint.getValue();
+        this.endpoint = endpoint.getUrl();
     }
 
     // TODO: Should make filling the placeholders more dynamic when multiple variables occur in endpoint url
     protected AbstractTmdbUrl(Endpoint endpoint, EndpointPlaceholder placeholder, String value) {
-        this.endpoint = endpoint.getValue().replace(placeholder.getValue(), value);
+        this.endpoint = endpoint.getUrl().replace(placeholder.getValue(), value);
     }
 
     public void addLanguage(String language) {

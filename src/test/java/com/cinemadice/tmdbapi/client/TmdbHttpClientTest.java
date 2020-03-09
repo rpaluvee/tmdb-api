@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.movies.Movie;
+import com.cinemadice.tmdbapi.url.Endpoint;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -101,7 +102,7 @@ public class TmdbHttpClientTest {
         expected.setTotalPages(4);
         expected.setResults(movies);
 
-        HttpUrl serverUrl = server.url("/3/discover/movie?");
+        HttpUrl serverUrl = server.url(Endpoint.DISCOVER_MOVIE.getUrl());
         MockResponse mockResponse = new MockResponse()
                 .setHeaders(headers)
                 .setResponseCode(HttpURLConnection.HTTP_OK)
