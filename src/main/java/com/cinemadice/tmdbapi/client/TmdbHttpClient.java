@@ -32,21 +32,20 @@ public class TmdbHttpClient {
                 .headers(headers)
                 .build();
 
-        return readResponse(url, request, clazz);
+        return readResponse(request, clazz);
     }
 
-    private <T> T readResponse(URL url, Request request, Class<T> clazz) {
+    private <T> T readResponse(Request request, Class<T> clazz) {
         try (Response response = OK_HTTP_CLIENT.newCall(request).execute()) {
             String responseBody = Objects.requireNonNull(response.body()).string();
             if (response.isSuccessful()) {
                 return fromJson(responseBody, clazz);
             } else {
                 ErrorResponse errorResponse = fromJson(responseBody, ErrorResponse.class);
-                throw new FailedTmdbRequestException(response.code(), response.message(),
-                        errorResponse.getStatusMessage());
+                throw new FailedTmdbRequestException(response.code(), response.message(), errorResponse);
             }
         } catch (IOException e) {
-            throw new FailedTmdbRequestException("Connection could not be established with URL: " + url, e);
+            throw new FailedTmdbRequestException("Connection could not be established with URL: " + request.url(), e);
         }
     }
 

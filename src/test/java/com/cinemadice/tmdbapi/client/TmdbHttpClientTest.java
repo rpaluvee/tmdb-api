@@ -1,5 +1,7 @@
 package com.cinemadice.tmdbapi.client;
 
+import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
+import com.cinemadice.tmdbapi.model.ErrorResponse;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.url.Endpoint;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class TmdbHttpClientTest {
@@ -45,6 +48,44 @@ public class TmdbHttpClientTest {
     @AfterEach
     public void tearDown() throws IOException {
         server.shutdown();
+    }
+
+    @Test
+    public void shouldThrowExceptionGivenUnsuccessfulResponse() {
+        // when
+        HttpUrl serverUrl = server.url("/return/unsuccessful/response");
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                .setBody(ResourceFileReader.readJson("unauthorized_response.json"));
+        server.enqueue(mockResponse);
+
+        // then
+        assertThrows(FailedTmdbRequestException.class, () -> tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class));
+    }
+
+    @Test
+    public void shouldFetchErrorResponseGivenUnsuccessfulResponse() {
+        // when
+        ErrorResponse expected = new ErrorResponse();
+        expected.setStatusCode(7);
+        expected.setStatusMessage("Invalid API key: You must be granted a valid key.");
+        expected.setSuccess(false);
+
+        HttpUrl serverUrl = server.url("/some/endpoint");
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                .setBody(ResourceFileReader.readJson("unauthorized_response.json"));
+        server.enqueue(mockResponse);
+
+        try {
+            // given
+            tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class);
+        } catch (FailedTmdbRequestException e) {
+            // then
+            assertEquals(expected, e.getErrorResponse());
+        }
     }
 
     @Test
