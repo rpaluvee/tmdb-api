@@ -48,7 +48,7 @@ public class TmdbHttpClientTest {
     }
 
     @Test
-    public void shouldFetchGivenDiscoverMoviesEndpoint() {
+    public void shouldFetchDiscoverMovies() {
         // when
         List<Integer> firstMovieGenres = new ArrayList<>();
         firstMovieGenres.add(28);
