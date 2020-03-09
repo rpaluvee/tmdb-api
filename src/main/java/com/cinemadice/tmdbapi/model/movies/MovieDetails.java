@@ -8,7 +8,28 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class MovieDetails extends CommonMovieDetails {
+public class MovieDetails {
+
+    private int id;
+    private String title;
+    @SerializedName("original_title")
+    private String originalTitle;
+    @SerializedName("vote_count")
+    private int voteCount;
+    @SerializedName("vote_average")
+    private double voteAverage;
+    private float popularity;
+    @SerializedName("original_language")
+    private String originalLanguage;
+    @SerializedName("backdrop_path")
+    private String backdropPath;
+    @SerializedName("poster_path")
+    private String posterPath;
+    private String overview;
+    @SerializedName("release_date")
+    private String releaseDate;
+    private boolean video;
+    private boolean adult;
 
     @SerializedName("belongs_to_collection")
     private Object belongsToCollection;
