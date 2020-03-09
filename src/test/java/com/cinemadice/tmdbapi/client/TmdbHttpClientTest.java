@@ -52,7 +52,7 @@ public class TmdbHttpClientTest {
 
     @Test
     public void shouldThrowExceptionGivenUnsuccessfulResponse() {
-        // when
+        // given
         HttpUrl serverUrl = server.url("/some/endpoint");
         MockResponse mockResponse = new MockResponse()
                 .setHeaders(headers)
@@ -60,14 +60,14 @@ public class TmdbHttpClientTest {
                 .setBody(ResourceFileReader.readJson("unauthorized_response.json"));
         server.enqueue(mockResponse);
 
-        // then
+        // when
         assertThrows(FailedTmdbRequestException.class,
                 () -> tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class));
     }
 
     @Test
     public void shouldFetchErrorResponseGivenUnsuccessfulResponse() {
-        // when
+        // given
         ErrorResponse expected = new ErrorResponse();
         expected.setStatusCode(7);
         expected.setStatusMessage("Invalid API key: You must be granted a valid key.");
@@ -81,7 +81,7 @@ public class TmdbHttpClientTest {
         server.enqueue(mockResponse);
 
         try {
-            // given
+            // when
             tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class);
         } catch (FailedTmdbRequestException e) {
             // then
@@ -91,7 +91,7 @@ public class TmdbHttpClientTest {
 
     @Test
     public void shouldFetchDiscoverMovies() {
-        // when
+        // given
         List<Integer> firstMovieGenres = new ArrayList<>();
         firstMovieGenres.add(28);
         firstMovieGenres.add(12);
@@ -151,7 +151,7 @@ public class TmdbHttpClientTest {
                 .setBody(ResourceFileReader.readJson("discover_movies_response.json"));
         server.enqueue(mockResponse);
 
-        // given
+        // when
         DiscoverMovies actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverMovies.class);
 
         // then
