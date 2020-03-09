@@ -63,7 +63,7 @@ public class TmdbHttpClientTest {
     }
 
     @Test
-    public void shouldFetchErrorResponseGivenUnsuccessfulResponse() {
+    public void shouldFetchErrorResponse() {
         // given
         ErrorResponse expected = new ErrorResponse();
         expected.setStatusCode(7);
