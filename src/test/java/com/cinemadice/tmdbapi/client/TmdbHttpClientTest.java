@@ -53,7 +53,7 @@ public class TmdbHttpClientTest {
     @Test
     public void shouldThrowExceptionGivenUnsuccessfulResponse() {
         // when
-        HttpUrl serverUrl = server.url("/return/unsuccessful/response");
+        HttpUrl serverUrl = server.url("/some/endpoint");
         MockResponse mockResponse = new MockResponse()
                 .setHeaders(headers)
                 .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
@@ -61,7 +61,8 @@ public class TmdbHttpClientTest {
         server.enqueue(mockResponse);
 
         // then
-        assertThrows(FailedTmdbRequestException.class, () -> tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class));
+        assertThrows(FailedTmdbRequestException.class,
+                () -> tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class));
     }
 
     @Test
