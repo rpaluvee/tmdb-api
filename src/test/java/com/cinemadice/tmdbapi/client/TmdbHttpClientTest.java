@@ -9,8 +9,8 @@ import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -29,11 +29,11 @@ public class TmdbHttpClientTest {
             + "xGfDomDajnMlr_YlcpJoztrSlDAAlA2VAXizQGJy5A";
 
     private TmdbHttpClient tmdbHttpClient = new TmdbHttpClient(ACCESS_TOKEN);
-    private MockWebServer server;
-    private Headers headers;
+    private static MockWebServer server;
+    private static Headers headers;
 
-    @BeforeEach
-    public void setUp() throws IOException {
+    @BeforeAll
+    static void setUp() throws IOException {
         headers = new Headers.Builder()
                 .add("Authorization", "Bearer " + ACCESS_TOKEN)
                 .add("Content-Type", "application/json;charset=utf-8")
@@ -43,8 +43,8 @@ public class TmdbHttpClientTest {
         server.start();
     }
 
-    @AfterEach
-    public void tearDown() throws IOException {
+    @AfterAll
+    static void tearDown() throws IOException {
         server.shutdown();
     }
 
