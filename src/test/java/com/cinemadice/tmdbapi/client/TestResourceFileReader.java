@@ -2,10 +2,9 @@ package com.cinemadice.tmdbapi.client;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
+import java.util.Objects;
 
 final class TestResourceFileReader {
 
@@ -14,18 +13,14 @@ final class TestResourceFileReader {
     private TestResourceFileReader() {
     }
 
-    static String readJson(String fileName) {
-        if (CLASS_LOADER.getResource(fileName) == null) {
-            throw new RuntimeException("Resource does not exist: " + fileName);
-        }
-        String filePath = new File(CLASS_LOADER.getResource(fileName).getFile()).getAbsolutePath();
-        StringBuilder json = new StringBuilder();
-        try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
-            stream.forEach(line -> json.append(line.trim()));
+    static String readFileContents(String fileName) {
+        try {
+            return new String(Files.readAllBytes(Paths.get(
+                    new File(Objects.requireNonNull(CLASS_LOADER.getResource(fileName)).getFile()).getAbsolutePath()
+            )));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return json.toString();
     }
 
 }
