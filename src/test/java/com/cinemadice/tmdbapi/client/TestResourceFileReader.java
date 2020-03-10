@@ -7,11 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-final class ResourceFileReader {
+final class TestResourceFileReader {
 
-    private static final ClassLoader CLASS_LOADER = ResourceFileReader.class.getClassLoader();
+    private static final ClassLoader CLASS_LOADER = TestResourceFileReader.class.getClassLoader();
 
-    private ResourceFileReader() {
+    private TestResourceFileReader() {
     }
 
     static String readJson(String fileName) {

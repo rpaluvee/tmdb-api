@@ -55,7 +55,7 @@ public class TmdbHttpClientTest {
         MockResponse mockResponse = new MockResponse()
                 .setHeaders(headers)
                 .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
-                .setBody(ResourceFileReader.readJson("unauthorized_response.json"));
+                .setBody(TestResourceFileReader.readJson("unauthorized_response.json"));
         server.enqueue(mockResponse);
 
         // then
@@ -75,7 +75,7 @@ public class TmdbHttpClientTest {
         MockResponse mockResponse = new MockResponse()
                 .setHeaders(headers)
                 .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
-                .setBody(ResourceFileReader.readJson("unauthorized_response.json"));
+                .setBody(TestResourceFileReader.readJson("unauthorized_response.json"));
         server.enqueue(mockResponse);
 
         try {
@@ -147,7 +147,7 @@ public class TmdbHttpClientTest {
         MockResponse mockResponse = new MockResponse()
                 .setHeaders(headers)
                 .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(ResourceFileReader.readJson("discover_movies_response.json"));
+                .setBody(TestResourceFileReader.readJson("discover_movies_response.json"));
         server.enqueue(mockResponse);
 
         // when
