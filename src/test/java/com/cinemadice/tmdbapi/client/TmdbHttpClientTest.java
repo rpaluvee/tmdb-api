@@ -81,6 +81,7 @@ public class TmdbHttpClientTest {
         try {
             // when
             tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class);
+            fail();
         } catch (FailedTmdbRequestException e) {
             // then
             assertEquals(expected, e.getTmdbErrorResponse());
