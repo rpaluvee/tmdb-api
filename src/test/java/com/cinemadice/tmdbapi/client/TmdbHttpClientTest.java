@@ -1,7 +1,7 @@
 package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
-import com.cinemadice.tmdbapi.model.ErrorResponse;
+import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.url.Endpoint;
@@ -20,6 +20,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class TmdbHttpClientTest {
 
@@ -57,15 +58,15 @@ public class TmdbHttpClientTest {
                 .setBody(ResourceFileReader.readJson("unauthorized_response.json"));
         server.enqueue(mockResponse);
 
-        // when
+        // then
         assertThrows(FailedTmdbRequestException.class,
-                () -> tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class));
+                () -> tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class));
     }
 
     @Test
     public void shouldFetchErrorResponse() {
         // given
-        ErrorResponse expected = new ErrorResponse();
+        TmdbErrorResponse expected = new TmdbErrorResponse();
         expected.setStatusCode(7);
         expected.setStatusMessage("Invalid API key: You must be granted a valid key.");
         expected.setSuccess(false);
@@ -79,10 +80,10 @@ public class TmdbHttpClientTest {
 
         try {
             // when
-            tmdbHttpClient.fetch(serverUrl.url(), ErrorResponse.class);
+            tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class);
         } catch (FailedTmdbRequestException e) {
             // then
-            assertEquals(expected, e.getErrorResponse());
+            assertEquals(expected, e.getTmdbErrorResponse());
         }
     }
 

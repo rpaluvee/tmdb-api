@@ -1,22 +1,26 @@
 package com.cinemadice.tmdbapi.exception;
 
-import com.cinemadice.tmdbapi.model.ErrorResponse;
+import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import lombok.Getter;
 
 @Getter
 public class FailedTmdbRequestException extends RuntimeException {
 
-    private int code;
-    private ErrorResponse errorResponse;
+    private int responseStatusCode;
+    private String responseStatusMessage;
+    private TmdbErrorResponse tmdbErrorResponse;
 
     public FailedTmdbRequestException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public FailedTmdbRequestException(int code, String message, ErrorResponse errorResponse) {
-        super(String.format("TMDb API responded with %s: %s - %s", code, message, errorResponse.getStatusMessage()));
-        this.code = code;
-        this.errorResponse = errorResponse;
+    public FailedTmdbRequestException(int responseStatusCode,
+                                      String responseStatusMessage,
+                                      TmdbErrorResponse tmdbErrorResponse) {
+        super(responseStatusMessage);
+        this.responseStatusCode = responseStatusCode;
+        this.responseStatusMessage = responseStatusMessage;
+        this.tmdbErrorResponse = tmdbErrorResponse;
     }
 
 }
