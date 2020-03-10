@@ -13,63 +13,73 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <junit.jupiter.version>5.6.0</junit.jupiter.version>
-        <mockito-core.version>2.28.2</mockito-core.version>
-        <mockito-junit-jupiter.version>2.23.0</mockito-junit-jupiter.version>
+        <!-- General compiler additions -->
         <lombok.version>1.18.10</lombok.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+
+        <!-- Compile time dependencies -->
         <gson.version>2.8.6</gson.version>
         <okhttp.version>4.3.1</okhttp.version>
+
+        <!-- Test dependencies -->
+        <junit.jupiter.version>5.6.0</junit.jupiter.version>
+        <mockito-junit-jupiter.version>2.23.0</mockito-junit-jupiter.version>
         <mockwebserver.version>4.4.0</mockwebserver.version>
-        <checkstyle-maven-plugin.version>3.1.0</checkstyle-maven-plugin.version>
-        <checkstyle.version>8.29</checkstyle.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <surefire.version>2.22.0</surefire.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+
+        <!-- Static analysis tools -->
+        <checkstyle-maven-plugin.version>3.1.0</checkstyle-maven-plugin.version>
+        <checkstyle.version>8.29</checkstyle.version>
         <spotbugs-maven-plugin.version>3.1.12.2</spotbugs-maven-plugin.version>
         <spotbugs.version>4.0.0</spotbugs.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito-core.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito-junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- Compile time dependencies -->
+        <!-- Lombok is used to reduce the amount of boilerplate Java code -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Gson is used to deserialize JSON objects -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
         </dependency>
+        <!-- OkHttp is used to make HTTPS requests to TMDb API -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>${okhttp.version}</version>
         </dependency>
+
+        <!-- Test dependencies -->
+        <!-- JUnit Jupiter API is used for writing tests in JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- JUnit Jupiter Engine is used to run JUnit 5 tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Mockito JUnit Jupiter is used for initializing mocks in JUnit 5 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito-junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- OkHttp MockWebServer is used to mock TMDb API web server and its responses for unit testing -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>mockwebserver</artifactId>
