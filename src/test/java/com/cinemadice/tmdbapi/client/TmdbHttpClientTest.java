@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class TmdbHttpClientTest {
 
     private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2JiNWE1OWI4MmM2NmI5YTJjZjRjN2U3MTQ"
-            + "0MmZkYiIsInN1YiI6IjVkZjJiZjk3MmNkZTk4MDAxNjMwMmZhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t"
+            + "0MmZkYiIsInN1YiI6IjVkZjJiZjk3MmNkZTk4MDAxNjMwMmZhasdsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t"
             + "xGfDomDajnMlr_YlcpJoztrSlDAAlA2VAXizQGJy5A";
 
     private TmdbHttpClient tmdbHttpClient = new TmdbHttpClient(ACCESS_TOKEN);
