@@ -33,7 +33,6 @@ public abstract class AbstractTmdbUrl {
     public URL build() {
         try {
             URL url = new URL(BASE_URL + endpoint + "?" + buildQueryComponent());
-            System.out.println(url); // temporary for debugging
             return url;
         } catch (MalformedURLException e) {
             throw new AssertionError(e);
