@@ -14,6 +14,6 @@ public class UpcomingMovies {
     @SerializedName("total_pages")
     private int totalPages;
     private List<Movie> results;
-    private Object dates;
+    private Dates dates;
 
 }

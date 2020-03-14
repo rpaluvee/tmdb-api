@@ -4,7 +4,9 @@ import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
 import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
+import com.cinemadice.tmdbapi.model.movies.Dates;
 import com.cinemadice.tmdbapi.model.movies.Movie;
+import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.Endpoint;
 import okhttp3.Headers;
@@ -169,6 +171,56 @@ public class TmdbHttpClientTest {
 
         // when
         DiscoverMovies actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverMovies.class);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFetchUpcomingMovieGivenSuccessfulResponse() {
+        // given
+        List<Integer> genres = new ArrayList<>();
+        genres.add(18);
+
+        Dates dates = new Dates();
+        dates.setMaximum("2016-09-22");
+        dates.setMinimum("2016-09-01");
+
+        Movie movie = new Movie();
+        movie.setPosterPath("/pEFRzXtLmxYNjGd0XqJDHPDFKB2.jpg");
+        movie.setAdult(false);
+        movie.setOverview("A lighthouse keeper...");
+        movie.setReleaseDate("2016-09-02");
+        movie.setGenreIds(genres);
+        movie.setId(283552);
+        movie.setOriginalTitle("The Light Between Oceans");
+        movie.setOriginalLanguage("en");
+        movie.setTitle("The Light Between Oceans");
+        movie.setBackdropPath("/2Ah63TIvVmZM3hzUwR5hXFg2LEk.jpg");
+        movie.setPopularity(4.546151f);
+        movie.setVoteCount(11);
+        movie.setVideo(false);
+        movie.setVoteAverage(4.41);
+
+        List<Movie> movies = new ArrayList<>();
+        movies.add(movie);
+
+        UpcomingMovies expected = new UpcomingMovies();
+        expected.setPage(1);
+        expected.setTotalResults(222);
+        expected.setTotalPages(12);
+        expected.setResults(movies);
+        expected.setDates(dates);
+
+        HttpUrl serverUrl = server.url(Endpoint.UPCOMING_MOVIE.getUrl());
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(TestResourceFileReader.readFileContents("upcoming_movies_response.json"));
+        server.enqueue(mockResponse);
+
+        // when
+        UpcomingMovies actual = tmdbHttpClient.fetch(serverUrl.url(), UpcomingMovies.class);
 
         // then
         assertEquals(expected, actual);
