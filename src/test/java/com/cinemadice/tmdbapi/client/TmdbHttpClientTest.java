@@ -12,6 +12,7 @@ import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.model.movies.ProductionCountry;
 import com.cinemadice.tmdbapi.model.movies.SpokenLanguage;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
+import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.Endpoint;
 import okhttp3.Headers;
@@ -343,6 +344,53 @@ public class TmdbHttpClientTest {
 
         // when
         DiscoverTv actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverTv.class);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFetchTvAiringTodayGivenSuccessfulResponse() {
+        // given
+        List<Integer> genreIds = new ArrayList<>();
+        genreIds.add(18);
+
+        List<String> originCountry = new ArrayList<>();
+        originCountry.add("GB");
+
+        TvSeries tvSeries = new TvSeries();
+        tvSeries.setPosterPath("/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg");
+        tvSeries.setPopularity(11.520271f);
+        tvSeries.setId(67419);
+        tvSeries.setBackdropPath("/b0BckgEovxYLBbIk5xXyWYQpmlT.jpg");
+        tvSeries.setVoteAverage(1.39);
+        tvSeries.setOverview("The early life of...");
+        tvSeries.setFirstAirDate("2016-08-28");
+        tvSeries.setOriginCountry(originCountry);
+        tvSeries.setGenreIds(genreIds);
+        tvSeries.setOriginalLanguage("en");
+        tvSeries.setVoteCount(9);
+        tvSeries.setName("Victoria");
+        tvSeries.setOriginalName("Victoria");
+
+        List<TvSeries> tvSeriesList = new ArrayList<>();
+        tvSeriesList.add(tvSeries);
+
+        TvAiringToday expected = new TvAiringToday();
+        expected.setPage(1);
+        expected.setTotalResults(43);
+        expected.setTotalPages(3);
+        expected.setResults(tvSeriesList);
+
+        HttpUrl serverUrl = server.url(Endpoint.TV_AIRING_TODAY.getUrl());
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(TestResourceFileReader.readFileContents("tv_airing_today_response.json"));
+        server.enqueue(mockResponse);
+
+        // when
+        TvAiringToday actual = tmdbHttpClient.fetch(serverUrl.url(), TvAiringToday.class);
 
         // then
         assertEquals(expected, actual);
