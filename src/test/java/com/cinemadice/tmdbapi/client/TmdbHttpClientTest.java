@@ -1,11 +1,16 @@
 package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
+import com.cinemadice.tmdbapi.model.Genre;
+import com.cinemadice.tmdbapi.model.ProductionCompany;
 import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Dates;
 import com.cinemadice.tmdbapi.model.movies.Movie;
+import com.cinemadice.tmdbapi.model.movies.MovieDetails;
+import com.cinemadice.tmdbapi.model.movies.ProductionCountry;
+import com.cinemadice.tmdbapi.model.movies.SpokenLanguage;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.Endpoint;
@@ -221,6 +226,76 @@ public class TmdbHttpClientTest {
 
         // when
         UpcomingMovies actual = tmdbHttpClient.fetch(serverUrl.url(), UpcomingMovies.class);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFetchMovieDetailsGivenSuccessfulResponse() {
+        // given
+        Genre genre = new Genre();
+        genre.setId(18);
+        genre.setName("Drama");
+        List<Genre> genres = new ArrayList<>();
+        genres.add(genre);
+
+        ProductionCompany productionCompany = new ProductionCompany();
+        productionCompany.setId(508);
+        productionCompany.setLogoPath("/7PzJdsLGlR7oW4J0J5Xcd0pHGRg.png");
+        productionCompany.setName("Regency Enterprises");
+        productionCompany.setOriginCountry("US");
+        List<ProductionCompany> productionCompanies = new ArrayList<>();
+        productionCompanies.add(productionCompany);
+
+        ProductionCountry productionCountry = new ProductionCountry();
+        productionCountry.setIso("US");
+        productionCountry.setName("United States of America");
+        List<ProductionCountry> productionCountries = new ArrayList<>();
+        productionCountries.add(productionCountry);
+
+        SpokenLanguage spokenLanguage = new SpokenLanguage();
+        spokenLanguage.setIso("en");
+        spokenLanguage.setName("English");
+        List<SpokenLanguage> spokenLanguages = new ArrayList<>();
+        spokenLanguages.add(spokenLanguage);
+
+        MovieDetails expected = new MovieDetails();
+        expected.setAdult(false);
+        expected.setBackdropPath("/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg");
+        expected.setBelongsToCollection(null);
+        expected.setBudget(63000000);
+        expected.setGenres(genres);
+        expected.setHomepage("");
+        expected.setId(550);
+        expected.setImdbId("tt0137523");
+        expected.setOriginalLanguage("en");
+        expected.setOriginalTitle("Fight Club");
+        expected.setOverview("A ticking-time-bomb...");
+        expected.setPopularity(0.5f);
+        expected.setPosterPath(null);
+        expected.setProductionCompanies(productionCompanies);
+        expected.setProductionCountries(productionCountries);
+        expected.setReleaseDate("1999-10-12");
+        expected.setRevenue(100853753);
+        expected.setRuntime(139);
+        expected.setSpokenLanguages(spokenLanguages);
+        expected.setStatus("Released");
+        expected.setTagline("How much can...");
+        expected.setTitle("Fight Club");
+        expected.setVideo(false);
+        expected.setVoteAverage(7.8);
+        expected.setVoteCount(3439);
+
+        HttpUrl serverUrl = server.url(Endpoint.MOVIE_DETAILS.getUrl());
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(TestResourceFileReader.readFileContents("movie_details_response.json"));
+        server.enqueue(mockResponse);
+
+        // when
+        MovieDetails actual = tmdbHttpClient.fetch(serverUrl.url(), MovieDetails.class);
 
         // then
         assertEquals(expected, actual);
