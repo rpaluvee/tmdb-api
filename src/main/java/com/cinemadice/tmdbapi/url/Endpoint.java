@@ -14,6 +14,6 @@ public enum Endpoint {
     TV_DETAILS("/tv/" + EndpointPlaceholder.TV_ID.getValue());
 
     @Getter
-    private String value;
+    private String url;
 
 }

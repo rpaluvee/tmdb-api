@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class ErrorResponse {
+public class TmdbErrorResponse {
 
     @SerializedName("status_code")
     private int statusCode;

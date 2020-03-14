@@ -1,7 +1,7 @@
 package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
-import com.cinemadice.tmdbapi.model.ErrorResponse;
+import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import okhttp3.Headers;
@@ -32,21 +32,20 @@ public class TmdbHttpClient {
                 .headers(headers)
                 .build();
 
-        return readResponse(url, request, clazz);
+        return readResponse(request, clazz);
     }
 
-    private <T> T readResponse(URL url, Request request, Class<T> clazz) {
+    private <T> T readResponse(Request request, Class<T> clazz) {
         try (Response response = OK_HTTP_CLIENT.newCall(request).execute()) {
             String responseBody = Objects.requireNonNull(response.body()).string();
             if (response.isSuccessful()) {
                 return fromJson(responseBody, clazz);
             } else {
-                ErrorResponse errorResponse = fromJson(responseBody, ErrorResponse.class);
-                throw new FailedTmdbRequestException(response.code(), response.message(),
-                        errorResponse.getStatusMessage());
+                TmdbErrorResponse tmdbErrorResponse = fromJson(responseBody, TmdbErrorResponse.class);
+                throw new FailedTmdbRequestException(response.code(), response.message(), tmdbErrorResponse);
             }
         } catch (IOException e) {
-            throw new FailedTmdbRequestException("Connection could not be established with URL: " + url, e);
+            throw new FailedTmdbRequestException("Connection could not be established with URL: " + request.url(), e);
         }
     }
 

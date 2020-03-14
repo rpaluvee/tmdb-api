@@ -1,0 +1,47 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "poster_path": null,
+      "adult": false,
+      "overview": "Amy is only...",
+      "release_date": "1996-09-13",
+      "genre_ids": [
+        28,
+        12,
+        18,
+        10751
+      ],
+      "id": 11076,
+      "original_title": "Fly Away Home",
+      "original_language": "en",
+      "title": "Fly Away Home",
+      "backdrop_path": null,
+      "popularity": 1.022039,
+      "vote_count": 13,
+      "video": false,
+      "vote_average": 6.69
+    },
+    {
+      "poster_path": null,
+      "adult": false,
+      "overview": "With their father away...",
+      "release_date": "1994-12-21",
+      "genre_ids": [
+        18,
+        10749
+      ],
+      "id": 9587,
+      "original_title": "Little Women",
+      "original_language": "en",
+      "title": "Little Women",
+      "backdrop_path": null,
+      "popularity": 1.051359,
+      "vote_count": 50,
+      "video": false,
+      "vote_average": 6.65
+    }
+  ],
+  "total_results": 61,
+  "total_pages": 4
+}
