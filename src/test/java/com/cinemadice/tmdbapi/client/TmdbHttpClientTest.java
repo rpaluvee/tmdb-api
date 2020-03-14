@@ -3,7 +3,9 @@ package com.cinemadice.tmdbapi.client;
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
 import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
+import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Movie;
+import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.Endpoint;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -79,7 +81,7 @@ public class TmdbHttpClientTest {
     }
 
     @Test
-    public void shouldFetchErrorResponse() {
+    public void shouldFetchErrorResponseGivenUnsuccessfulResponse() {
         // given
         TmdbErrorResponse expected = new TmdbErrorResponse();
         expected.setStatusCode(7);
@@ -104,7 +106,7 @@ public class TmdbHttpClientTest {
     }
 
     @Test
-    public void shouldFetchDiscoverMovies() {
+    public void shouldFetchDiscoverMoviesGivenSuccessfulResponse() {
         // given
         List<Integer> firstMovieGenres = new ArrayList<>();
         firstMovieGenres.add(28);
@@ -167,6 +169,53 @@ public class TmdbHttpClientTest {
 
         // when
         DiscoverMovies actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverMovies.class);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFetchDiscoverTvGivenSuccessfulResponse() {
+        // given
+        List<Integer> genres = new ArrayList<>();
+        genres.add(28);
+
+        List<String> originCountry = new ArrayList<>();
+        originCountry.add("US");
+
+        TvSeries tvSeries = new TvSeries();
+        tvSeries.setName("Marvel's Daredevil");
+        tvSeries.setOriginalName("Marvel's Daredevil");
+        tvSeries.setPosterPath("/dDfjzRicTeVaiysRTwx56aM8bC3.jpg");
+        tvSeries.setFirstAirDate("2015-04-10");
+        tvSeries.setOverview("Lawyer-by-day Matt Murdock...");
+        tvSeries.setGenreIds(genres);
+        tvSeries.setOriginCountry(originCountry);
+        tvSeries.setId(61889);
+        tvSeries.setOriginalLanguage("en");
+        tvSeries.setBackdropPath(null);
+        tvSeries.setPopularity(5.4f);
+        tvSeries.setVoteCount(19);
+        tvSeries.setVoteAverage(7.74);
+
+        List<TvSeries> tvSeriesList = new ArrayList<>();
+        tvSeriesList.add(tvSeries);
+
+        DiscoverTv expected = new DiscoverTv();
+        expected.setPage(1);
+        expected.setTotalResults(61470);
+        expected.setTotalPages(3074);
+        expected.setResults(tvSeriesList);
+
+        HttpUrl serverUrl = server.url(Endpoint.DISCOVER_TV.getUrl());
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(TestResourceFileReader.readFileContents("discover_tv_response.json"));
+        server.enqueue(mockResponse);
+
+        // when
+        DiscoverTv actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverTv.class);
 
         // then
         assertEquals(expected, actual);
