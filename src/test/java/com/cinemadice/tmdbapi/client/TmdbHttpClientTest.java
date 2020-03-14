@@ -49,6 +49,21 @@ public class TmdbHttpClientTest {
     }
 
     @Test
+    public void shouldThrowExceptionGivenBadJson() {
+        // given
+        HttpUrl serverUrl = server.url("/some/endpoint");
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody("bad_json");
+        server.enqueue(mockResponse);
+
+        // then
+        assertThrows(FailedTmdbRequestException.class,
+                () -> tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class));
+    }
+
+    @Test
     public void shouldThrowExceptionGivenUnsuccessfulResponse() {
         // given
         HttpUrl serverUrl = server.url("/some/endpoint");
