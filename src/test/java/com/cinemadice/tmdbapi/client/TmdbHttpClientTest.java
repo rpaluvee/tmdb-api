@@ -26,6 +26,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -63,455 +64,463 @@ public class TmdbHttpClientTest {
         server.shutdown();
     }
 
-    @Test
-    public void shouldThrowExceptionGivenBadJson() {
-        // given
-        HttpUrl serverUrl = server.url("/some/endpoint");
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody("bad_json");
-        server.enqueue(mockResponse);
+    @Nested
+    class WhenResponseUnsuccessful {
 
-        // then
-        assertThrows(FailedTmdbRequestException.class,
-                () -> tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class));
-    }
+        @Test
+        public void shouldFetchErrorResponse() {
+            // given
+            TmdbErrorResponse expected = new TmdbErrorResponse();
+            expected.setStatusCode(7);
+            expected.setStatusMessage("Invalid API key: You must be granted a valid key.");
+            expected.setSuccess(false);
 
-    @Test
-    public void shouldThrowExceptionGivenUnsuccessfulResponse() {
-        // given
-        HttpUrl serverUrl = server.url("/some/endpoint");
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
-                .setBody(TestResourceFileReader.readFileContents("unauthorized_response.json"));
-        server.enqueue(mockResponse);
+            HttpUrl serverUrl = server.url("/some/endpoint");
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                    .setBody(TestResourceFileReader.readFileContents("unauthorized_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertThrows(FailedTmdbRequestException.class,
-                () -> tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class));
-    }
+            try {
+                // when
+                tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class);
+                fail();
+            } catch (FailedTmdbRequestException e) {
+                // then
+                assertEquals(expected, e.getTmdbErrorResponse());
+            }
+        }
 
-    @Test
-    public void shouldFetchErrorResponseGivenUnsuccessfulResponse() {
-        // given
-        TmdbErrorResponse expected = new TmdbErrorResponse();
-        expected.setStatusCode(7);
-        expected.setStatusMessage("Invalid API key: You must be granted a valid key.");
-        expected.setSuccess(false);
+        @Test
+        public void shouldThrowExceptionGivenBadJson() {
+            // given
+            HttpUrl serverUrl = server.url("/some/endpoint");
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody("bad_json");
+            server.enqueue(mockResponse);
 
-        HttpUrl serverUrl = server.url("/some/endpoint");
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
-                .setBody(TestResourceFileReader.readFileContents("unauthorized_response.json"));
-        server.enqueue(mockResponse);
-
-        try {
-            // when
-            tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class);
-            fail();
-        } catch (FailedTmdbRequestException e) {
             // then
-            assertEquals(expected, e.getTmdbErrorResponse());
+            assertThrows(FailedTmdbRequestException.class,
+                    () -> tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class));
+        }
+
+        @Test
+        public void shouldThrowExceptionGivenUnauthorized() {
+            // given
+            HttpUrl serverUrl = server.url("/some/endpoint");
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                    .setBody(TestResourceFileReader.readFileContents("unauthorized_response.json"));
+            server.enqueue(mockResponse);
+
+            // then
+            assertThrows(FailedTmdbRequestException.class,
+                    () -> tmdbHttpClient.fetch(serverUrl.url(), TmdbErrorResponse.class));
         }
     }
 
-    @Test
-    public void shouldFetchDiscoverMoviesGivenSuccessfulResponse() {
-        // given
-        List<Integer> firstMovieGenres = new ArrayList<>();
-        firstMovieGenres.add(28);
-        firstMovieGenres.add(12);
-        firstMovieGenres.add(18);
-        firstMovieGenres.add(10751);
+    @Nested
+    class WhenResponseSuccessful {
 
-        Movie firstMovie = new Movie();
-        firstMovie.setPosterPath(null);
-        firstMovie.setAdult(false);
-        firstMovie.setOverview("Amy is only...");
-        firstMovie.setReleaseDate("1996-09-13");
-        firstMovie.setGenreIds(firstMovieGenres);
-        firstMovie.setId(11076);
-        firstMovie.setOriginalTitle("Fly Away Home");
-        firstMovie.setOriginalLanguage("en");
-        firstMovie.setTitle("Fly Away Home");
-        firstMovie.setBackdropPath(null);
-        firstMovie.setPopularity(1.022039f);
-        firstMovie.setVoteCount(13);
-        firstMovie.setVideo(false);
-        firstMovie.setVoteAverage(6.69);
+        @Test
+        public void shouldFetchDiscoverMovies() {
+            // given
+            List<Integer> firstMovieGenres = new ArrayList<>();
+            firstMovieGenres.add(28);
+            firstMovieGenres.add(12);
+            firstMovieGenres.add(18);
+            firstMovieGenres.add(10751);
 
-        List<Integer> secondMovieGenres = new ArrayList<>();
-        secondMovieGenres.add(18);
-        secondMovieGenres.add(10749);
+            Movie firstMovie = new Movie();
+            firstMovie.setPosterPath(null);
+            firstMovie.setAdult(false);
+            firstMovie.setOverview("Amy is only...");
+            firstMovie.setReleaseDate("1996-09-13");
+            firstMovie.setGenreIds(firstMovieGenres);
+            firstMovie.setId(11076);
+            firstMovie.setOriginalTitle("Fly Away Home");
+            firstMovie.setOriginalLanguage("en");
+            firstMovie.setTitle("Fly Away Home");
+            firstMovie.setBackdropPath(null);
+            firstMovie.setPopularity(1.022039f);
+            firstMovie.setVoteCount(13);
+            firstMovie.setVideo(false);
+            firstMovie.setVoteAverage(6.69);
 
-        Movie secondMovie = new Movie();
-        secondMovie.setPosterPath(null);
-        secondMovie.setAdult(false);
-        secondMovie.setOverview("With their father away...");
-        secondMovie.setReleaseDate("1994-12-21");
-        secondMovie.setGenreIds(secondMovieGenres);
-        secondMovie.setId(9587);
-        secondMovie.setOriginalTitle("Little Women");
-        secondMovie.setOriginalLanguage("en");
-        secondMovie.setTitle("Little Women");
-        secondMovie.setBackdropPath(null);
-        secondMovie.setPopularity(1.051359f);
-        secondMovie.setVoteCount(50);
-        secondMovie.setVideo(false);
-        secondMovie.setVoteAverage(6.65);
+            List<Integer> secondMovieGenres = new ArrayList<>();
+            secondMovieGenres.add(18);
+            secondMovieGenres.add(10749);
 
-        List<Movie> movies = new ArrayList<>();
-        movies.add(firstMovie);
-        movies.add(secondMovie);
+            Movie secondMovie = new Movie();
+            secondMovie.setPosterPath(null);
+            secondMovie.setAdult(false);
+            secondMovie.setOverview("With their father away...");
+            secondMovie.setReleaseDate("1994-12-21");
+            secondMovie.setGenreIds(secondMovieGenres);
+            secondMovie.setId(9587);
+            secondMovie.setOriginalTitle("Little Women");
+            secondMovie.setOriginalLanguage("en");
+            secondMovie.setTitle("Little Women");
+            secondMovie.setBackdropPath(null);
+            secondMovie.setPopularity(1.051359f);
+            secondMovie.setVoteCount(50);
+            secondMovie.setVideo(false);
+            secondMovie.setVoteAverage(6.65);
 
-        DiscoverMovies expected = new DiscoverMovies();
-        expected.setPage(1);
-        expected.setTotalResults(61);
-        expected.setTotalPages(4);
-        expected.setResults(movies);
+            List<Movie> movies = new ArrayList<>();
+            movies.add(firstMovie);
+            movies.add(secondMovie);
 
-        HttpUrl serverUrl = server.url(Endpoint.DISCOVER_MOVIE.getUrl());
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(TestResourceFileReader.readFileContents("discover_movies_response.json"));
-        server.enqueue(mockResponse);
+            DiscoverMovies expected = new DiscoverMovies();
+            expected.setPage(1);
+            expected.setTotalResults(61);
+            expected.setTotalPages(4);
+            expected.setResults(movies);
 
-        // when
-        DiscoverMovies actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverMovies.class);
+            HttpUrl serverUrl = server.url(Endpoint.DISCOVER_MOVIE.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("discover_movies_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertEquals(expected, actual);
-    }
+            // when
+            DiscoverMovies actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverMovies.class);
 
-    @Test
-    public void shouldFetchUpcomingMovieGivenSuccessfulResponse() {
-        // given
-        List<Integer> genres = new ArrayList<>();
-        genres.add(18);
+            // then
+            assertEquals(expected, actual);
+        }
 
-        Dates dates = new Dates();
-        dates.setMaximum("2016-09-22");
-        dates.setMinimum("2016-09-01");
+        @Test
+        public void shouldFetchUpcomingMovie() {
+            // given
+            List<Integer> genres = new ArrayList<>();
+            genres.add(18);
 
-        Movie movie = new Movie();
-        movie.setPosterPath("/pEFRzXtLmxYNjGd0XqJDHPDFKB2.jpg");
-        movie.setAdult(false);
-        movie.setOverview("A lighthouse keeper...");
-        movie.setReleaseDate("2016-09-02");
-        movie.setGenreIds(genres);
-        movie.setId(283552);
-        movie.setOriginalTitle("The Light Between Oceans");
-        movie.setOriginalLanguage("en");
-        movie.setTitle("The Light Between Oceans");
-        movie.setBackdropPath("/2Ah63TIvVmZM3hzUwR5hXFg2LEk.jpg");
-        movie.setPopularity(4.546151f);
-        movie.setVoteCount(11);
-        movie.setVideo(false);
-        movie.setVoteAverage(4.41);
+            Dates dates = new Dates();
+            dates.setMaximum("2016-09-22");
+            dates.setMinimum("2016-09-01");
 
-        List<Movie> movies = new ArrayList<>();
-        movies.add(movie);
+            Movie movie = new Movie();
+            movie.setPosterPath("/pEFRzXtLmxYNjGd0XqJDHPDFKB2.jpg");
+            movie.setAdult(false);
+            movie.setOverview("A lighthouse keeper...");
+            movie.setReleaseDate("2016-09-02");
+            movie.setGenreIds(genres);
+            movie.setId(283552);
+            movie.setOriginalTitle("The Light Between Oceans");
+            movie.setOriginalLanguage("en");
+            movie.setTitle("The Light Between Oceans");
+            movie.setBackdropPath("/2Ah63TIvVmZM3hzUwR5hXFg2LEk.jpg");
+            movie.setPopularity(4.546151f);
+            movie.setVoteCount(11);
+            movie.setVideo(false);
+            movie.setVoteAverage(4.41);
 
-        UpcomingMovies expected = new UpcomingMovies();
-        expected.setPage(1);
-        expected.setTotalResults(222);
-        expected.setTotalPages(12);
-        expected.setResults(movies);
-        expected.setDates(dates);
+            List<Movie> movies = new ArrayList<>();
+            movies.add(movie);
 
-        HttpUrl serverUrl = server.url(Endpoint.UPCOMING_MOVIE.getUrl());
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(TestResourceFileReader.readFileContents("upcoming_movies_response.json"));
-        server.enqueue(mockResponse);
+            UpcomingMovies expected = new UpcomingMovies();
+            expected.setPage(1);
+            expected.setTotalResults(222);
+            expected.setTotalPages(12);
+            expected.setResults(movies);
+            expected.setDates(dates);
 
-        // when
-        UpcomingMovies actual = tmdbHttpClient.fetch(serverUrl.url(), UpcomingMovies.class);
+            HttpUrl serverUrl = server.url(Endpoint.UPCOMING_MOVIE.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("upcoming_movies_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertEquals(expected, actual);
-    }
+            // when
+            UpcomingMovies actual = tmdbHttpClient.fetch(serverUrl.url(), UpcomingMovies.class);
 
-    @Test
-    public void shouldFetchMovieDetailsGivenSuccessfulResponse() {
-        // given
-        Genre genre = new Genre();
-        genre.setId(18);
-        genre.setName("Drama");
-        List<Genre> genres = new ArrayList<>();
-        genres.add(genre);
+            // then
+            assertEquals(expected, actual);
+        }
 
-        ProductionCompany productionCompany = new ProductionCompany();
-        productionCompany.setId(508);
-        productionCompany.setLogoPath("/7PzJdsLGlR7oW4J0J5Xcd0pHGRg.png");
-        productionCompany.setName("Regency Enterprises");
-        productionCompany.setOriginCountry("US");
-        List<ProductionCompany> productionCompanies = new ArrayList<>();
-        productionCompanies.add(productionCompany);
+        @Test
+        public void shouldFetchMovieDetails() {
+            // given
+            Genre genre = new Genre();
+            genre.setId(18);
+            genre.setName("Drama");
+            List<Genre> genres = new ArrayList<>();
+            genres.add(genre);
 
-        ProductionCountry productionCountry = new ProductionCountry();
-        productionCountry.setIso("US");
-        productionCountry.setName("United States of America");
-        List<ProductionCountry> productionCountries = new ArrayList<>();
-        productionCountries.add(productionCountry);
+            ProductionCompany productionCompany = new ProductionCompany();
+            productionCompany.setId(508);
+            productionCompany.setLogoPath("/7PzJdsLGlR7oW4J0J5Xcd0pHGRg.png");
+            productionCompany.setName("Regency Enterprises");
+            productionCompany.setOriginCountry("US");
+            List<ProductionCompany> productionCompanies = new ArrayList<>();
+            productionCompanies.add(productionCompany);
 
-        SpokenLanguage spokenLanguage = new SpokenLanguage();
-        spokenLanguage.setIso("en");
-        spokenLanguage.setName("English");
-        List<SpokenLanguage> spokenLanguages = new ArrayList<>();
-        spokenLanguages.add(spokenLanguage);
+            ProductionCountry productionCountry = new ProductionCountry();
+            productionCountry.setIso("US");
+            productionCountry.setName("United States of America");
+            List<ProductionCountry> productionCountries = new ArrayList<>();
+            productionCountries.add(productionCountry);
 
-        MovieDetails expected = new MovieDetails();
-        expected.setAdult(false);
-        expected.setBackdropPath("/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg");
-        expected.setBelongsToCollection(null);
-        expected.setBudget(63000000);
-        expected.setGenres(genres);
-        expected.setHomepage("");
-        expected.setId(550);
-        expected.setImdbId("tt0137523");
-        expected.setOriginalLanguage("en");
-        expected.setOriginalTitle("Fight Club");
-        expected.setOverview("A ticking-time-bomb...");
-        expected.setPopularity(0.5f);
-        expected.setPosterPath(null);
-        expected.setProductionCompanies(productionCompanies);
-        expected.setProductionCountries(productionCountries);
-        expected.setReleaseDate("1999-10-12");
-        expected.setRevenue(100853753);
-        expected.setRuntime(139);
-        expected.setSpokenLanguages(spokenLanguages);
-        expected.setStatus("Released");
-        expected.setTagline("How much can...");
-        expected.setTitle("Fight Club");
-        expected.setVideo(false);
-        expected.setVoteAverage(7.8);
-        expected.setVoteCount(3439);
+            SpokenLanguage spokenLanguage = new SpokenLanguage();
+            spokenLanguage.setIso("en");
+            spokenLanguage.setName("English");
+            List<SpokenLanguage> spokenLanguages = new ArrayList<>();
+            spokenLanguages.add(spokenLanguage);
 
-        HttpUrl serverUrl = server.url(Endpoint.MOVIE_DETAILS.getUrl());
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(TestResourceFileReader.readFileContents("movie_details_response.json"));
-        server.enqueue(mockResponse);
+            MovieDetails expected = new MovieDetails();
+            expected.setAdult(false);
+            expected.setBackdropPath("/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg");
+            expected.setBelongsToCollection(null);
+            expected.setBudget(63000000);
+            expected.setGenres(genres);
+            expected.setHomepage("");
+            expected.setId(550);
+            expected.setImdbId("tt0137523");
+            expected.setOriginalLanguage("en");
+            expected.setOriginalTitle("Fight Club");
+            expected.setOverview("A ticking-time-bomb...");
+            expected.setPopularity(0.5f);
+            expected.setPosterPath(null);
+            expected.setProductionCompanies(productionCompanies);
+            expected.setProductionCountries(productionCountries);
+            expected.setReleaseDate("1999-10-12");
+            expected.setRevenue(100853753);
+            expected.setRuntime(139);
+            expected.setSpokenLanguages(spokenLanguages);
+            expected.setStatus("Released");
+            expected.setTagline("How much can...");
+            expected.setTitle("Fight Club");
+            expected.setVideo(false);
+            expected.setVoteAverage(7.8);
+            expected.setVoteCount(3439);
 
-        // when
-        MovieDetails actual = tmdbHttpClient.fetch(serverUrl.url(), MovieDetails.class);
+            HttpUrl serverUrl = server.url(Endpoint.MOVIE_DETAILS.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("movie_details_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertEquals(expected, actual);
-    }
+            // when
+            MovieDetails actual = tmdbHttpClient.fetch(serverUrl.url(), MovieDetails.class);
 
-    @Test
-    public void shouldFetchDiscoverTvGivenSuccessfulResponse() {
-        // given
-        List<Integer> genres = new ArrayList<>();
-        genres.add(28);
+            // then
+            assertEquals(expected, actual);
+        }
 
-        List<String> originCountry = new ArrayList<>();
-        originCountry.add("US");
+        @Test
+        public void shouldFetchDiscoverTv() {
+            // given
+            List<Integer> genres = new ArrayList<>();
+            genres.add(28);
 
-        TvSeries tvSeries = new TvSeries();
-        tvSeries.setName("Marvel's Daredevil");
-        tvSeries.setOriginalName("Marvel's Daredevil");
-        tvSeries.setPosterPath("/dDfjzRicTeVaiysRTwx56aM8bC3.jpg");
-        tvSeries.setFirstAirDate("2015-04-10");
-        tvSeries.setOverview("Lawyer-by-day Matt Murdock...");
-        tvSeries.setGenreIds(genres);
-        tvSeries.setOriginCountry(originCountry);
-        tvSeries.setId(61889);
-        tvSeries.setOriginalLanguage("en");
-        tvSeries.setBackdropPath(null);
-        tvSeries.setPopularity(5.4f);
-        tvSeries.setVoteCount(19);
-        tvSeries.setVoteAverage(7.74);
+            List<String> originCountry = new ArrayList<>();
+            originCountry.add("US");
 
-        List<TvSeries> tvSeriesList = new ArrayList<>();
-        tvSeriesList.add(tvSeries);
+            TvSeries tvSeries = new TvSeries();
+            tvSeries.setName("Marvel's Daredevil");
+            tvSeries.setOriginalName("Marvel's Daredevil");
+            tvSeries.setPosterPath("/dDfjzRicTeVaiysRTwx56aM8bC3.jpg");
+            tvSeries.setFirstAirDate("2015-04-10");
+            tvSeries.setOverview("Lawyer-by-day Matt Murdock...");
+            tvSeries.setGenreIds(genres);
+            tvSeries.setOriginCountry(originCountry);
+            tvSeries.setId(61889);
+            tvSeries.setOriginalLanguage("en");
+            tvSeries.setBackdropPath(null);
+            tvSeries.setPopularity(5.4f);
+            tvSeries.setVoteCount(19);
+            tvSeries.setVoteAverage(7.74);
 
-        DiscoverTv expected = new DiscoverTv();
-        expected.setPage(1);
-        expected.setTotalResults(61470);
-        expected.setTotalPages(3074);
-        expected.setResults(tvSeriesList);
+            List<TvSeries> tvSeriesList = new ArrayList<>();
+            tvSeriesList.add(tvSeries);
 
-        HttpUrl serverUrl = server.url(Endpoint.DISCOVER_TV.getUrl());
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(TestResourceFileReader.readFileContents("discover_tv_response.json"));
-        server.enqueue(mockResponse);
+            DiscoverTv expected = new DiscoverTv();
+            expected.setPage(1);
+            expected.setTotalResults(61470);
+            expected.setTotalPages(3074);
+            expected.setResults(tvSeriesList);
 
-        // when
-        DiscoverTv actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverTv.class);
+            HttpUrl serverUrl = server.url(Endpoint.DISCOVER_TV.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("discover_tv_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertEquals(expected, actual);
-    }
+            // when
+            DiscoverTv actual = tmdbHttpClient.fetch(serverUrl.url(), DiscoverTv.class);
 
-    @Test
-    public void shouldFetchTvAiringTodayGivenSuccessfulResponse() {
-        // given
-        List<Integer> genreIds = new ArrayList<>();
-        genreIds.add(18);
+            // then
+            assertEquals(expected, actual);
+        }
 
-        List<String> originCountry = new ArrayList<>();
-        originCountry.add("GB");
+        @Test
+        public void shouldFetchTvAiringToday() {
+            // given
+            List<Integer> genreIds = new ArrayList<>();
+            genreIds.add(18);
 
-        TvSeries tvSeries = new TvSeries();
-        tvSeries.setPosterPath("/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg");
-        tvSeries.setPopularity(11.520271f);
-        tvSeries.setId(67419);
-        tvSeries.setBackdropPath("/b0BckgEovxYLBbIk5xXyWYQpmlT.jpg");
-        tvSeries.setVoteAverage(1.39);
-        tvSeries.setOverview("The early life of...");
-        tvSeries.setFirstAirDate("2016-08-28");
-        tvSeries.setOriginCountry(originCountry);
-        tvSeries.setGenreIds(genreIds);
-        tvSeries.setOriginalLanguage("en");
-        tvSeries.setVoteCount(9);
-        tvSeries.setName("Victoria");
-        tvSeries.setOriginalName("Victoria");
+            List<String> originCountry = new ArrayList<>();
+            originCountry.add("GB");
 
-        List<TvSeries> tvSeriesList = new ArrayList<>();
-        tvSeriesList.add(tvSeries);
+            TvSeries tvSeries = new TvSeries();
+            tvSeries.setPosterPath("/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg");
+            tvSeries.setPopularity(11.520271f);
+            tvSeries.setId(67419);
+            tvSeries.setBackdropPath("/b0BckgEovxYLBbIk5xXyWYQpmlT.jpg");
+            tvSeries.setVoteAverage(1.39);
+            tvSeries.setOverview("The early life of...");
+            tvSeries.setFirstAirDate("2016-08-28");
+            tvSeries.setOriginCountry(originCountry);
+            tvSeries.setGenreIds(genreIds);
+            tvSeries.setOriginalLanguage("en");
+            tvSeries.setVoteCount(9);
+            tvSeries.setName("Victoria");
+            tvSeries.setOriginalName("Victoria");
 
-        TvAiringToday expected = new TvAiringToday();
-        expected.setPage(1);
-        expected.setTotalResults(43);
-        expected.setTotalPages(3);
-        expected.setResults(tvSeriesList);
+            List<TvSeries> tvSeriesList = new ArrayList<>();
+            tvSeriesList.add(tvSeries);
 
-        HttpUrl serverUrl = server.url(Endpoint.TV_AIRING_TODAY.getUrl());
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(TestResourceFileReader.readFileContents("tv_airing_today_response.json"));
-        server.enqueue(mockResponse);
+            TvAiringToday expected = new TvAiringToday();
+            expected.setPage(1);
+            expected.setTotalResults(43);
+            expected.setTotalPages(3);
+            expected.setResults(tvSeriesList);
 
-        // when
-        TvAiringToday actual = tmdbHttpClient.fetch(serverUrl.url(), TvAiringToday.class);
+            HttpUrl serverUrl = server.url(Endpoint.TV_AIRING_TODAY.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("tv_airing_today_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertEquals(expected, actual);
-    }
+            // when
+            TvAiringToday actual = tmdbHttpClient.fetch(serverUrl.url(), TvAiringToday.class);
 
-    @Test
-    public void shouldFetchTvDetailsGivenSuccessfulResponse() {
-        // given
-        CreatedBy createdBy = new CreatedBy();
-        createdBy.setId(228068);
-        createdBy.setCreditId("552e611e9251413fea000901");
-        createdBy.setName("D. B. Weiss");
-        createdBy.setGender(2);
-        createdBy.setProfilePath("/caUAtilEe06OwOjoQY3B7BgpARi.jpg");
-        List<CreatedBy> createdByList = new ArrayList<>();
-        createdByList.add(createdBy);
+            // then
+            assertEquals(expected, actual);
+        }
 
-        List<Integer> episodeRunTime = new ArrayList<>();
-        episodeRunTime.add(60);
+        @Test
+        public void shouldFetchTvDetails() {
+            // given
+            CreatedBy createdBy = new CreatedBy();
+            createdBy.setId(228068);
+            createdBy.setCreditId("552e611e9251413fea000901");
+            createdBy.setName("D. B. Weiss");
+            createdBy.setGender(2);
+            createdBy.setProfilePath("/caUAtilEe06OwOjoQY3B7BgpARi.jpg");
+            List<CreatedBy> createdByList = new ArrayList<>();
+            createdByList.add(createdBy);
 
-        Genre genre = new Genre();
-        genre.setId(10759);
-        genre.setName("Action & Adventure");
-        List<Genre> genres = new ArrayList<>();
-        genres.add(genre);
+            List<Integer> episodeRunTime = new ArrayList<>();
+            episodeRunTime.add(60);
 
-        List<String> languages = new ArrayList<>();
-        languages.add("es");
-        languages.add("en");
-        languages.add("de");
+            Genre genre = new Genre();
+            genre.setId(10759);
+            genre.setName("Action & Adventure");
+            List<Genre> genres = new ArrayList<>();
+            genres.add(genre);
 
-        LastEpisodeToAir lastEpisodeToAir = new LastEpisodeToAir();
-        lastEpisodeToAir.setAirDate("2017-08-27");
-        lastEpisodeToAir.setEpisodeNumber(7);
-        lastEpisodeToAir.setId(1340528);
-        lastEpisodeToAir.setName("The Dragon and the Wolf");
-        lastEpisodeToAir.setOverview("A meeting is held...");
-        lastEpisodeToAir.setProductionCode("707");
-        lastEpisodeToAir.setSeasonNumber(7);
-        lastEpisodeToAir.setShowId(1399);
-        lastEpisodeToAir.setStillPath("/jLe9VcbGRDUJeuM8IwB7VX4GDRg.jpg");
-        lastEpisodeToAir.setVoteAverage(9.145f);
-        lastEpisodeToAir.setVoteCount(31);
+            List<String> languages = new ArrayList<>();
+            languages.add("es");
+            languages.add("en");
+            languages.add("de");
 
-        Network network = new Network();
-        network.setName("HBO");
-        network.setId(49);
-        network.setLogoPath("/tuomPhY2UtuPTqqFnKMVHvSb724.png");
-        network.setOriginCountry("US");
-        List<Network> networks = new ArrayList<>();
-        networks.add(network);
+            LastEpisodeToAir lastEpisodeToAir = new LastEpisodeToAir();
+            lastEpisodeToAir.setAirDate("2017-08-27");
+            lastEpisodeToAir.setEpisodeNumber(7);
+            lastEpisodeToAir.setId(1340528);
+            lastEpisodeToAir.setName("The Dragon and the Wolf");
+            lastEpisodeToAir.setOverview("A meeting is held...");
+            lastEpisodeToAir.setProductionCode("707");
+            lastEpisodeToAir.setSeasonNumber(7);
+            lastEpisodeToAir.setShowId(1399);
+            lastEpisodeToAir.setStillPath("/jLe9VcbGRDUJeuM8IwB7VX4GDRg.jpg");
+            lastEpisodeToAir.setVoteAverage(9.145f);
+            lastEpisodeToAir.setVoteCount(31);
 
-        List<String> originCountry = new ArrayList<>();
-        originCountry.add("US");
+            Network network = new Network();
+            network.setName("HBO");
+            network.setId(49);
+            network.setLogoPath("/tuomPhY2UtuPTqqFnKMVHvSb724.png");
+            network.setOriginCountry("US");
+            List<Network> networks = new ArrayList<>();
+            networks.add(network);
 
-        ProductionCompany productionCompany = new ProductionCompany();
-        productionCompany.setId(76043);
-        productionCompany.setLogoPath("/9RO2vbQ67otPrBLXCaC8UMp3Qat.png");
-        productionCompany.setName("Revolution Sun Studios");
-        productionCompany.setOriginCountry("US");
-        List<ProductionCompany> productionCompanies = new ArrayList<>();
-        productionCompanies.add(productionCompany);
+            List<String> originCountry = new ArrayList<>();
+            originCountry.add("US");
 
-        Season season = new Season();
-        season.setAirDate("2010-12-05");
-        season.setEpisodeCount(14);
-        season.setId(3627);
-        season.setName("Specials");
-        season.setOverview("");
-        season.setPosterPath("/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg");
-        season.setSeasonNumber(0);
-        List<Season> seasons = new ArrayList<>();
-        seasons.add(season);
+            ProductionCompany productionCompany = new ProductionCompany();
+            productionCompany.setId(76043);
+            productionCompany.setLogoPath("/9RO2vbQ67otPrBLXCaC8UMp3Qat.png");
+            productionCompany.setName("Revolution Sun Studios");
+            productionCompany.setOriginCountry("US");
+            List<ProductionCompany> productionCompanies = new ArrayList<>();
+            productionCompanies.add(productionCompany);
 
-        TvDetails expected = new TvDetails();
-        expected.setBackdropPath("/gX8SYlnL9ZznfZwEH4KJUePBFUM.jpg");
-        expected.setCreatedBy(createdByList);
-        expected.setEpisodeRunTime(episodeRunTime);
-        expected.setFirstAirDate("2011-04-17");
-        expected.setGenres(genres);
-        expected.setHomepage("http://www.hbo.com/game-of-thrones");
-        expected.setId(1399);
-        expected.setInProduction(true);
-        expected.setLanguages(languages);
-        expected.setLastAirDate("2017-08-27");
-        expected.setLastEpisodeToAir(lastEpisodeToAir);
-        expected.setName("Game of Thrones");
-        expected.setNextEpisodeToAir(null);
-        expected.setNetworks(networks);
-        expected.setNumberOfEpisodes(67);
-        expected.setNumberOfSeasons(7);
-        expected.setOriginCountry(originCountry);
-        expected.setOriginalLanguage("en");
-        expected.setOriginalName("Game of Thrones");
-        expected.setOverview("Seven noble families...");
-        expected.setPopularity(53.516f);
-        expected.setPosterPath("/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg");
-        expected.setProductionCompanies(productionCompanies);
-        expected.setSeasons(seasons);
-        expected.setStatus("Returning Series");
-        expected.setType("Scripted");
-        expected.setVoteAverage(8.2);
-        expected.setVoteCount(4682);
+            Season season = new Season();
+            season.setAirDate("2010-12-05");
+            season.setEpisodeCount(14);
+            season.setId(3627);
+            season.setName("Specials");
+            season.setOverview("");
+            season.setPosterPath("/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg");
+            season.setSeasonNumber(0);
+            List<Season> seasons = new ArrayList<>();
+            seasons.add(season);
 
-        HttpUrl serverUrl = server.url(Endpoint.TV_DETAILS.getUrl());
-        MockResponse mockResponse = new MockResponse()
-                .setHeaders(headers)
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(TestResourceFileReader.readFileContents("tv_details_response.json"));
-        server.enqueue(mockResponse);
+            TvDetails expected = new TvDetails();
+            expected.setBackdropPath("/gX8SYlnL9ZznfZwEH4KJUePBFUM.jpg");
+            expected.setCreatedBy(createdByList);
+            expected.setEpisodeRunTime(episodeRunTime);
+            expected.setFirstAirDate("2011-04-17");
+            expected.setGenres(genres);
+            expected.setHomepage("http://www.hbo.com/game-of-thrones");
+            expected.setId(1399);
+            expected.setInProduction(true);
+            expected.setLanguages(languages);
+            expected.setLastAirDate("2017-08-27");
+            expected.setLastEpisodeToAir(lastEpisodeToAir);
+            expected.setName("Game of Thrones");
+            expected.setNextEpisodeToAir(null);
+            expected.setNetworks(networks);
+            expected.setNumberOfEpisodes(67);
+            expected.setNumberOfSeasons(7);
+            expected.setOriginCountry(originCountry);
+            expected.setOriginalLanguage("en");
+            expected.setOriginalName("Game of Thrones");
+            expected.setOverview("Seven noble families...");
+            expected.setPopularity(53.516f);
+            expected.setPosterPath("/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg");
+            expected.setProductionCompanies(productionCompanies);
+            expected.setSeasons(seasons);
+            expected.setStatus("Returning Series");
+            expected.setType("Scripted");
+            expected.setVoteAverage(8.2);
+            expected.setVoteCount(4682);
 
-        // when
-        TvDetails actual = tmdbHttpClient.fetch(serverUrl.url(), TvDetails.class);
+            HttpUrl serverUrl = server.url(Endpoint.TV_DETAILS.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("tv_details_response.json"));
+            server.enqueue(mockResponse);
 
-        // then
-        assertEquals(expected, actual);
+            // when
+            TvDetails actual = tmdbHttpClient.fetch(serverUrl.url(), TvDetails.class);
+
+            // then
+            assertEquals(expected, actual);
+        }
     }
 
 }
