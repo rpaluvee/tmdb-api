@@ -12,7 +12,12 @@ import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.model.movies.ProductionCountry;
 import com.cinemadice.tmdbapi.model.movies.SpokenLanguage;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
+import com.cinemadice.tmdbapi.model.tv.CreatedBy;
+import com.cinemadice.tmdbapi.model.tv.LastEpisodeToAir;
+import com.cinemadice.tmdbapi.model.tv.Network;
+import com.cinemadice.tmdbapi.model.tv.Season;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
+import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.Endpoint;
 import okhttp3.Headers;
@@ -391,6 +396,119 @@ public class TmdbHttpClientTest {
 
         // when
         TvAiringToday actual = tmdbHttpClient.fetch(serverUrl.url(), TvAiringToday.class);
+
+        // then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFetchTvDetailsGivenSuccessfulResponse() {
+        // given
+        CreatedBy createdBy = new CreatedBy();
+        createdBy.setId(228068);
+        createdBy.setCreditId("552e611e9251413fea000901");
+        createdBy.setName("D. B. Weiss");
+        createdBy.setGender(2);
+        createdBy.setProfilePath("/caUAtilEe06OwOjoQY3B7BgpARi.jpg");
+        List<CreatedBy> createdByList = new ArrayList<>();
+        createdByList.add(createdBy);
+
+        List<Integer> episodeRunTime = new ArrayList<>();
+        episodeRunTime.add(60);
+
+        Genre genre = new Genre();
+        genre.setId(10759);
+        genre.setName("Action & Adventure");
+        List<Genre> genres = new ArrayList<>();
+        genres.add(genre);
+
+        List<String> languages = new ArrayList<>();
+        languages.add("es");
+        languages.add("en");
+        languages.add("de");
+
+        LastEpisodeToAir lastEpisodeToAir = new LastEpisodeToAir();
+        lastEpisodeToAir.setAirDate("2017-08-27");
+        lastEpisodeToAir.setEpisodeNumber(7);
+        lastEpisodeToAir.setId(1340528);
+        lastEpisodeToAir.setName("The Dragon and the Wolf");
+        lastEpisodeToAir.setOverview("A meeting is held...");
+        lastEpisodeToAir.setProductionCode("707");
+        lastEpisodeToAir.setSeasonNumber(7);
+        lastEpisodeToAir.setShowId(1399);
+        lastEpisodeToAir.setStillPath("/jLe9VcbGRDUJeuM8IwB7VX4GDRg.jpg");
+        lastEpisodeToAir.setVoteAverage(9.145f);
+        lastEpisodeToAir.setVoteCount(31);
+
+        Network network = new Network();
+        network.setName("HBO");
+        network.setId(49);
+        network.setLogoPath("/tuomPhY2UtuPTqqFnKMVHvSb724.png");
+        network.setOriginCountry("US");
+        List<Network> networks = new ArrayList<>();
+        networks.add(network);
+
+        List<String> originCountry = new ArrayList<>();
+        originCountry.add("US");
+
+        ProductionCompany productionCompany = new ProductionCompany();
+        productionCompany.setId(76043);
+        productionCompany.setLogoPath("/9RO2vbQ67otPrBLXCaC8UMp3Qat.png");
+        productionCompany.setName("Revolution Sun Studios");
+        productionCompany.setOriginCountry("US");
+        List<ProductionCompany> productionCompanies = new ArrayList<>();
+        productionCompanies.add(productionCompany);
+
+        Season season = new Season();
+        season.setAirDate("2010-12-05");
+        season.setEpisodeCount(14);
+        season.setId(3627);
+        season.setName("Specials");
+        season.setOverview("");
+        season.setPosterPath("/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg");
+        season.setSeasonNumber(0);
+        List<Season> seasons = new ArrayList<>();
+        seasons.add(season);
+
+        TvDetails expected = new TvDetails();
+        expected.setBackdropPath("/gX8SYlnL9ZznfZwEH4KJUePBFUM.jpg");
+        expected.setCreatedBy(createdByList);
+        expected.setEpisodeRunTime(episodeRunTime);
+        expected.setFirstAirDate("2011-04-17");
+        expected.setGenres(genres);
+        expected.setHomepage("http://www.hbo.com/game-of-thrones");
+        expected.setId(1399);
+        expected.setInProduction(true);
+        expected.setLanguages(languages);
+        expected.setLastAirDate("2017-08-27");
+        expected.setLastEpisodeToAir(lastEpisodeToAir);
+        expected.setName("Game of Thrones");
+        expected.setNextEpisodeToAir(null);
+        expected.setNetworks(networks);
+        expected.setNumberOfEpisodes(67);
+        expected.setNumberOfSeasons(7);
+        expected.setOriginCountry(originCountry);
+        expected.setOriginalLanguage("en");
+        expected.setOriginalName("Game of Thrones");
+        expected.setOverview("Seven noble families...");
+        expected.setPopularity(53.516f);
+        expected.setPosterPath("/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg");
+        expected.setProductionCompanies(productionCompanies);
+        expected.setSeasons(seasons);
+        expected.setStatus("Returning Series");
+        expected.setType("Scripted");
+        expected.setVoteAverage(8.2);
+        expected.setVoteCount(4682);
+
+        HttpUrl serverUrl = server.url(Endpoint.TV_DETAILS.getUrl());
+        MockResponse mockResponse = new MockResponse()
+                .setHeaders(headers)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(TestResourceFileReader.readFileContents("tv_details_response.json"));
+        server.enqueue(mockResponse);
+
+        // when
+        TvDetails actual = tmdbHttpClient.fetch(serverUrl.url(), TvDetails.class);
 
         // then
         assertEquals(expected, actual);
