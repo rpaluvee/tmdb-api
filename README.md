@@ -27,7 +27,7 @@ List<Movie> movies = tmdbClient.discover().movies()
         .fetch();
 ```
 
-More example of usage can be found at [src/test/java/com/cinemadice/tmdbapi/samples](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples).
+More example of usage can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
 
 ## Installation
 Include the library as a dependency to your project with Maven  
@@ -51,53 +51,26 @@ Database API. To view all the methods available, you should head over to
 
 #### Discover features
 
-* Search for movies `GET /discover/movie` and TV shows `GET /discover/tv` based 
-on data. Movies are queryable by fields like average rating, certifications, 
-release dates and genres.
-* Get movie details:  
-  * Average rating
-  * Popularity
-  * Title
-  * Release date
-  * Original language
-  * Original title
-  * Overview
-  * Adult
-  * Genre 
-
-### To do:
+* Search for movies and TV shows based on data. Movies and TV shows are queryable by fields like average rating, 
+certifications, release dates, genres and many more parameters.  
+`tmdbClient.discover().movies()`  
+`tmdbClient.discover().tv()`
 
 #### Movie Features
 
-* Get additional details `GET /movie/{movie_id}`
-  * Primary info
-  * Alternative titles
-  * Cast
-  * Crew
-  * Images (posters, backdrops)
-  * Plot keywords
-  * Release information
-  * Trailers
-  * Translations
-  * Similiar movies
-  * Reviews
-  * Belongs to lists
-  * Changes
+* Search for upcoming movies in theatres  
+`tmdbClient.movies().upcomingInTheatres()`
+
+* Get additional details  
+`tmdbClient.movies().detailsOf(<MOVIE_ID>)`
 
 #### TV Features
 
-* Get additional details `GET /tv/{tv_id}`
-  * Primary info
-  * Cast
-  * Changes
-  * Crew
-  * Images (posters, backdrops)
-  * External IDs
-  * Translations
-  
-#### Custom library features
+* Search for TV shows airing today  
+`tmdbClient.tv().airingToday()`
 
-* Filter movies and TV shows result by page range
+* Get additional details  
+`tmdbClient.tv().detailsOf(<TV_ID>)`
 
 ## Technologies
 
@@ -105,9 +78,11 @@ Project is created with:
 
 #### Language
   * Java SE 8
+
 #### Libraries
   * Lombok 1.18.10
   * Gson 2.8.6
+  * OkHttp 4.3.1
 
 ## Static code analysis
 
