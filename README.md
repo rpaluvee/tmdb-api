@@ -16,16 +16,21 @@ To use the library you have to initialize the TMDb API Client class
 
 `TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");`  
 
-With this client you can specify whether to discover movies or TV shows. 
-For example if you want to fetch all movies released in 2008:  
+With this client you can specify whether to discover movies or TV shows and also 
+retrieve additional details about them.
+
+A simple example of discovering movies released in 2008 in english language:  
 ```
 List<Movie> movies = tmdbClient.discover().movies()
         .withPrimaryReleaseYear(2008)
+        .language("en")
         .fetch();
 ```
 
-## Setup
-Add the library as a dependency to your project with Maven  
+More example of usage can be found at [src/test/java/com/cinemadice/tmdbapi/samples](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples).
+
+## Installation
+Include the library as a dependency to your project with Maven  
 ```
 <dependency>
     <groupId>com.cinemadice</groupId>
@@ -33,8 +38,6 @@ Add the library as a dependency to your project with Maven
     <version>0.1.0</version>
 </dependency>
 ```
-
-TODO: Gradle
 
 ## Scope
 

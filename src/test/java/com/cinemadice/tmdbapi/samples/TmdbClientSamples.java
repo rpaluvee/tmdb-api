@@ -1,61 +1,75 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.samples;
 
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-// Example of use
-public class Main {
+@Disabled
+public class TmdbClientSamples {
 
-    private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2JiNWE1OWI4MmM2NmI5YTJjZjRjN2U3MTQ"
-            + "0MmZkYiIsInN1YiI6IjVkZjJiZjk3MmNkZTk4MDAxNjMwMmZhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t"
-            + "xGfDomDajnMlr_YlcpJoztrSlDAAlA2VAXizQGJy5A";
+    private static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
 
-    public static void main(String[] args) {
-        TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
+    private static TmdbClient tmdbClient;
 
-        // --- Movie examples ---
-        // Discover movies
+    @BeforeAll
+    static void setUp() {
+        tmdbClient = new TmdbClient(ACCESS_TOKEN);
+    }
+
+    @Test
+    public void discoverSomeMovies() {
         List<Movie> movies = tmdbClient.discover().movies()
                 .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
                 .fetch();
         movies.forEach(movie -> System.out.println(movie.getTitle() + " (year: " + movie.getReleaseDate() + ")"));
+    }
 
-        // Fetch upcoming movies
+    @Test
+    public void fetchSomeUpcomingMovies() {
         List<Movie> upcomingMovies = tmdbClient.movies().upcomingInTheatres()
                 .withLanguage("en-US")
                 .withRegion("US")
                 .withPage(2)
                 .fetch();
         upcomingMovies.forEach(um -> System.out.println(um.getTitle() + " (year: " + um.getReleaseDate() + ")"));
+    }
 
-        // Fetch additional details about a specific movie with its ID
+    @Test
+    public void fetchAdditionalDetailsAboutAMovie() {
         MovieDetails movieDetails = tmdbClient.movies().detailsOf(490132).fetch();
         System.out.println(movieDetails);
+    }
 
-        // --- TV examples ---
-        // Discover TV
+    @Test
+    public void discoverSomeTvShows() {
         List<TvSeries> tv = tmdbClient.discover().tv()
                 .withLanguage("en-US")
                 .withPage(2)
                 .fetch();
         tv.forEach(tvSeries -> System.out.println(tvSeries.getName() + " (year: " + tvSeries.getFirstAirDate() + ")"));
+    }
 
-        // Fetch TV shows airing today
+    @Test
+    public void fetchTvShowsAiringToday() {
         List<TvSeries> tvAiringToday = tmdbClient.tv().airingToday()
                 .withLanguage("en-US")
                 .withPage(2)
                 .fetch();
         tvAiringToday.forEach(tvShow ->
                 System.out.println(tvShow.getName() + " (year: " + tvShow.getFirstAirDate() + ")"));
+    }
 
-        // Fetch additional details about a TV show with its ID
+    @Test
+    public void fetchAdditionalDetailsAboutATvShow() {
         TvDetails tvDetails = tmdbClient.tv().detailsOf(1399).fetch();
         System.out.println(tvDetails);
     }
