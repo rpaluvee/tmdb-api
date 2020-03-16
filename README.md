@@ -23,7 +23,7 @@ List<Movie> movies = tmdbClient.discover().movies()
         .fetch();
 ```
 
-More example of usage can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
+More example of use can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
 
 ## Installation
 Include the library as a dependency to your project with Maven  
