@@ -49,7 +49,7 @@ To view all the methods available, you should head over to
 #### Discover features
 
 * Search for movies based on various parameters such as average rating, 
-cast, crew, region, release year, genres and many more.  
+cast, region, release year, genres and many more.  
 `tmdbClient.discover().movies()...`  
 
 * Search for TV shows based on various parameters such as air date, 
