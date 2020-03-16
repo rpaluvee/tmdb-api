@@ -14,13 +14,9 @@ a TMDb API key. Steps to do so are described in the *Getting started* section of
 To use the library you have to initialize the TMDb API Client class
 `com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:  
 
-`TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");`  
-
-With this client you can specify whether to discover movies or TV shows and also 
-retrieve additional details about them.
-
-A simple example of discovering movies released in 2008 in english language:  
+A simple example of discovering movies released in 2008 with english language:  
 ```
+TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");
 List<Movie> movies = tmdbClient.discover().movies()
         .withPrimaryReleaseYear(2008)
         .language("en")
