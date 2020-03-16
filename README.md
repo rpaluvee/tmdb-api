@@ -38,35 +38,39 @@ Include the library as a dependency to your project with Maven
 ## Scope
 
 The purpose of this library is to provide its user with the ability to easily 
-search for movies and TV shows and receive details about them.   
-This library supports only the `/discover`, `/movie`, `/tv` methods of the Movie 
-Database API. To view all the methods available, you should head over to 
+search for movies and TV shows and receive details about them.
+
+Currently this library supports only a subset of methods defined in TMDb API. 
+To view all the methods available, you should head over to 
 [TMDb API overview](https://www.themoviedb.org/documentation/api)
 
 ## Features
 
 #### Discover features
 
-* Search for movies and TV shows based on data. Movies and TV shows are queryable by fields like average rating, 
-certifications, release dates, genres and many more parameters.  
-`tmdbClient.discover().movies()`  
-`tmdbClient.discover().tv()`
+* Search for movies based on various parameters such as average rating, 
+cast, crew, region, release year, genres and many more.  
+`tmdbClient.discover().movies()...`  
+
+* Search for TV shows based on various parameters such as air date, 
+timezone, keywords, language, genres and many more.  
+`tmdbClient.discover().tv()...`
 
 #### Movie Features
 
 * Search for upcoming movies in theatres  
-`tmdbClient.movies().upcomingInTheatres()`
+`tmdbClient.movies().upcomingInTheatres()...`
 
 * Get additional details  
-`tmdbClient.movies().detailsOf(<MOVIE_ID>)`
+`tmdbClient.movies().detailsOf(<MOVIE_ID>)...`
 
 #### TV Features
 
 * Search for TV shows airing today  
-`tmdbClient.tv().airingToday()`
+`tmdbClient.tv().airingToday()...`
 
 * Get additional details  
-`tmdbClient.tv().detailsOf(<TV_ID>)`
+`tmdbClient.tv().detailsOf(<TV_ID>)...`
 
 ## Technologies
 
