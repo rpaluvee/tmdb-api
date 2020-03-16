@@ -129,18 +129,18 @@ public class TmdbHttpClientTest {
         @Test
         public void shouldFetchDiscoverMovies() {
             // given
-            List<Integer> firstMovieGenres = new ArrayList<>();
-            firstMovieGenres.add(28);
-            firstMovieGenres.add(12);
-            firstMovieGenres.add(18);
-            firstMovieGenres.add(10751);
+            List<Integer> firstMovieGenreIds = new ArrayList<>();
+            firstMovieGenreIds.add(28);
+            firstMovieGenreIds.add(12);
+            firstMovieGenreIds.add(18);
+            firstMovieGenreIds.add(10751);
 
             Movie firstMovie = new Movie();
             firstMovie.setPosterPath(null);
             firstMovie.setAdult(false);
             firstMovie.setOverview("Amy is only...");
             firstMovie.setReleaseDate("1996-09-13");
-            firstMovie.setGenreIds(firstMovieGenres);
+            firstMovie.setGenreIds(firstMovieGenreIds);
             firstMovie.setId(11076);
             firstMovie.setOriginalTitle("Fly Away Home");
             firstMovie.setOriginalLanguage("en");
@@ -151,16 +151,16 @@ public class TmdbHttpClientTest {
             firstMovie.setVideo(false);
             firstMovie.setVoteAverage(6.69);
 
-            List<Integer> secondMovieGenres = new ArrayList<>();
-            secondMovieGenres.add(18);
-            secondMovieGenres.add(10749);
+            List<Integer> secondMovieGenreIds = new ArrayList<>();
+            secondMovieGenreIds.add(18);
+            secondMovieGenreIds.add(10749);
 
             Movie secondMovie = new Movie();
             secondMovie.setPosterPath(null);
             secondMovie.setAdult(false);
             secondMovie.setOverview("With their father away...");
             secondMovie.setReleaseDate("1994-12-21");
-            secondMovie.setGenreIds(secondMovieGenres);
+            secondMovie.setGenreIds(secondMovieGenreIds);
             secondMovie.setId(9587);
             secondMovie.setOriginalTitle("Little Women");
             secondMovie.setOriginalLanguage("en");
@@ -198,8 +198,8 @@ public class TmdbHttpClientTest {
         @Test
         public void shouldFetchUpcomingMovie() {
             // given
-            List<Integer> genres = new ArrayList<>();
-            genres.add(18);
+            List<Integer> genreIds = new ArrayList<>();
+            genreIds.add(18);
 
             Dates dates = new Dates();
             dates.setMaximum("2016-09-22");
@@ -210,7 +210,7 @@ public class TmdbHttpClientTest {
             movie.setAdult(false);
             movie.setOverview("A lighthouse keeper...");
             movie.setReleaseDate("2016-09-02");
-            movie.setGenreIds(genres);
+            movie.setGenreIds(genreIds);
             movie.setId(283552);
             movie.setOriginalTitle("The Light Between Oceans");
             movie.setOriginalLanguage("en");
@@ -318,26 +318,26 @@ public class TmdbHttpClientTest {
         @Test
         public void shouldFetchDiscoverTv() {
             // given
-            List<Integer> genres = new ArrayList<>();
-            genres.add(28);
+            List<Integer> genreIds = new ArrayList<>();
+            genreIds.add(28);
 
             List<String> originCountry = new ArrayList<>();
             originCountry.add("US");
 
             TvSeries tvSeries = new TvSeries();
+            tvSeries.setPosterPath("/dDfjzRicTeVaiysRTwx56aM8bC3.jpg");
+            tvSeries.setPopularity(5.4f);
+            tvSeries.setId(61889);
+            tvSeries.setBackdropPath(null);
+            tvSeries.setVoteAverage(7.74);
+            tvSeries.setOverview("Lawyer-by-day Matt Murdock...");
+            tvSeries.setFirstAirDate("2015-04-10");
+            tvSeries.setOriginCountry(originCountry);
+            tvSeries.setGenreIds(genreIds);
+            tvSeries.setOriginalLanguage("en");
+            tvSeries.setVoteCount(19);
             tvSeries.setName("Marvel's Daredevil");
             tvSeries.setOriginalName("Marvel's Daredevil");
-            tvSeries.setPosterPath("/dDfjzRicTeVaiysRTwx56aM8bC3.jpg");
-            tvSeries.setFirstAirDate("2015-04-10");
-            tvSeries.setOverview("Lawyer-by-day Matt Murdock...");
-            tvSeries.setGenreIds(genres);
-            tvSeries.setOriginCountry(originCountry);
-            tvSeries.setId(61889);
-            tvSeries.setOriginalLanguage("en");
-            tvSeries.setBackdropPath(null);
-            tvSeries.setPopularity(5.4f);
-            tvSeries.setVoteCount(19);
-            tvSeries.setVoteAverage(7.74);
 
             List<TvSeries> tvSeriesList = new ArrayList<>();
             tvSeriesList.add(tvSeries);
