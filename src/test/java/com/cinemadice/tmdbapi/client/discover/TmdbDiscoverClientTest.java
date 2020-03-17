@@ -24,18 +24,18 @@ public class TmdbDiscoverClientTest {
     }
 
     @Test
-    public void throwsExceptionWhenGivenNull() {
+    public void shouldThrowExceptionGivenNull() {
         assertThrows(IllegalArgumentException.class, () -> new TmdbDiscoverClient(null));
     }
 
     @Test
-    public void initializesMoviesRequest() {
+    public void shouldInitializeMoviesRequest() {
         TmdbDiscoverMoviesRequest result = tmdbDiscoverClient.movies();
         assertNotNull(result);
     }
 
     @Test
-    public void initializesTvRequest() {
+    public void shouldInitializeTvRequest() {
         TmdbDiscoverTvRequest result = tmdbDiscoverClient.tv();
         assertNotNull(result);
     }

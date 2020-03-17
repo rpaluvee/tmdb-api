@@ -29,7 +29,7 @@ public class TmdbMovieDetailsRequestTest {
     }
 
     @Test
-    public void fetchesWithNoParameters() throws MalformedURLException {
+    public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
         MovieDetails expected = new MovieDetails();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/1?");
@@ -43,7 +43,7 @@ public class TmdbMovieDetailsRequestTest {
     }
 
     @Test
-    public void fetchesWithAllParameters() throws MalformedURLException {
+    public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         MovieDetails expected = new MovieDetails();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/1?language=test");

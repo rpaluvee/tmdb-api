@@ -24,18 +24,18 @@ public class TmdbTvClientTest {
     }
 
     @Test
-    public void throwsExceptionWhenGivenNull() {
+    public void shouldThrowExceptionGivenNull() {
         assertThrows(IllegalArgumentException.class, () -> new TmdbTvClient(null));
     }
 
     @Test
-    public void initializesAiringTodayRequest() {
+    public void shouldInitializeAiringTodayRequest() {
         TmdbTvAiringTodayRequest result = tmdbTvClient.airingToday();
         assertNotNull(result);
     }
 
     @Test
-    public void initializesTvDetailsRequest() {
+    public void shouldInitializeTvDetailsRequest() {
         TmdbTvDetailsRequest result = tmdbTvClient.detailsOf(1);
         assertNotNull(result);
     }

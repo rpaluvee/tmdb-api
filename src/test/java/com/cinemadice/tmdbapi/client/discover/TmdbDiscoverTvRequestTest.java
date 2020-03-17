@@ -32,7 +32,7 @@ public class TmdbDiscoverTvRequestTest {
     }
 
     @Test
-    public void fetchesWithNoParameters() throws MalformedURLException {
+    public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
         List<TvSeries> expected = Collections.singletonList(new TvSeries());
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?");
@@ -48,7 +48,7 @@ public class TmdbDiscoverTvRequestTest {
     }
 
     @Test
-    public void fetchesWithSomeParameters() throws MalformedURLException {
+    public void shouldFetchGivenSomeParameters() throws MalformedURLException {
         // given
         List<TvSeries> expected = Collections.singletonList(new TvSeries());
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?"
@@ -73,7 +73,7 @@ public class TmdbDiscoverTvRequestTest {
     }
 
     @Test
-    public void fetchesWithAllParameters() throws MalformedURLException {
+    public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         List<TvSeries> expected = Collections.singletonList(new TvSeries());
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?"

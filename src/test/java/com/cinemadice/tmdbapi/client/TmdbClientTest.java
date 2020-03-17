@@ -23,36 +23,36 @@ public class TmdbClientTest {
     private TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
 
     @Test
-    public void throwsExceptionWhenAccessTokenIsNull() {
+    public void shouldThrowExceptionGivenNullAccessToken() {
         assertThrows(IllegalArgumentException.class, () -> new TmdbClient(null));
     }
 
     @Test
-    public void throwsExceptionWhenAccessTokenIsEmpty() {
+    public void shouldThrowExceptionGivenEmptyAccessToken() {
         assertThrows(IllegalArgumentException.class, () -> new TmdbClient(""));
     }
 
     @Test
-    public void returnsDiscoverClient() {
+    public void shouldReturnDiscoverClient() {
         TmdbDiscoverClient result = tmdbClient.discover();
         assertNotNull(result);
     }
 
     @Test
-    public void returnsMoviesClient() {
+    public void shouldReturnMoviesClient() {
         TmdbMoviesClient result = tmdbClient.movies();
         assertNotNull(result);
     }
 
     @Test
-    public void returnsTvClient() {
+    public void shouldReturnTvClient() {
         TmdbTvClient result = tmdbClient.tv();
         assertNotNull(result);
     }
 
     // Testing lazy initialization of feature client classes
     @Nested
-    class WhenClientsInstantiated {
+    class WhenClientsAlreadyInitialized {
 
         @Mock
         private TmdbDiscoverClient tmdbDiscoverClient;
@@ -65,19 +65,19 @@ public class TmdbClientTest {
         private TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
 
         @Test
-        public void returnsDiscoverClient() {
+        public void shouldReturnDiscoverClient() {
             TmdbDiscoverClient result = tmdbClient.discover();
             assertNotNull(result);
         }
 
         @Test
-        public void returnsMoviesClient() {
+        public void shouldReturnMoviesClient() {
             TmdbMoviesClient result = tmdbClient.movies();
             assertNotNull(result);
         }
 
         @Test
-        public void returnsTvClient() {
+        public void shouldReturnTvClient() {
             TmdbTvClient result = tmdbClient.tv();
             assertNotNull(result);
         }

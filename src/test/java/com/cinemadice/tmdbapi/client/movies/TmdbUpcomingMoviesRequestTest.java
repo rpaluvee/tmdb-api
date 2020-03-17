@@ -32,7 +32,7 @@ public class TmdbUpcomingMoviesRequestTest {
     }
 
     @Test
-    public void fetchesWithNoParameters() throws MalformedURLException {
+    public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
         List<Movie> expected = Collections.singletonList(new Movie());
         UpcomingMovies fetchResult = new UpcomingMovies();
@@ -48,7 +48,7 @@ public class TmdbUpcomingMoviesRequestTest {
     }
 
     @Test
-    public void fetchesWithSomeParameters() throws MalformedURLException {
+    public void shouldFetchGivenSomeParameters() throws MalformedURLException {
         // given
         List<Movie> expected = Collections.singletonList(new Movie());
         UpcomingMovies fetchResult = new UpcomingMovies();
@@ -69,7 +69,7 @@ public class TmdbUpcomingMoviesRequestTest {
     }
 
     @Test
-    public void fetchesWithAllParameters() throws MalformedURLException {
+    public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         List<Movie> expected = Collections.singletonList(new Movie());
         UpcomingMovies fetchResult = new UpcomingMovies();

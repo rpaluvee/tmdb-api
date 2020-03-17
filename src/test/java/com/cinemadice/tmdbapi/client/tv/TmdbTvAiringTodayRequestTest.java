@@ -32,7 +32,7 @@ public class TmdbTvAiringTodayRequestTest {
     }
 
     @Test
-    public void fetchesWithNoParameters() throws MalformedURLException {
+    public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
         List<TvSeries> expected = Collections.singletonList(new TvSeries());
         TvAiringToday fetchResult = new TvAiringToday();
@@ -48,7 +48,7 @@ public class TmdbTvAiringTodayRequestTest {
     }
 
     @Test
-    public void fetchesWithAllParameters() throws MalformedURLException {
+    public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         List<TvSeries> expected = Collections.singletonList(new TvSeries());
         TvAiringToday fetchResult = new TvAiringToday();
