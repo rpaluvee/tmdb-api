@@ -12,7 +12,7 @@ a TMDb API key. Steps to do so are described in the *Getting started* section of
 [TMDb API documentation](https://developers.themoviedb.org/3/getting-started/introduction).
 
 To use the library you have to initialize the TMDb API Client class
-`com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:  
+`com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:
 
 A simple example of discovering movies released in 2008 with english language:  
 ```
@@ -38,10 +38,9 @@ Include the library as a dependency to your project with Maven
 ## Scope
 
 The purpose of this library is to provide its user with the ability to easily 
-search for movies and TV shows and receive details about them.
-
-Currently this library supports only a subset of methods defined in TMDb API. 
-To view all the methods available, you should head over to 
+search for movies and TV shows and receive details about them. Currently this 
+library supports only a subset of methods defined in TMDb API. To view all the 
+methods available, you should head over to 
 [TMDb API overview](https://www.themoviedb.org/documentation/api)
 
 ## Features
@@ -72,6 +71,15 @@ timezone, keywords, language, genres and many more.
 * Get additional details  
 `tmdbClient.tv().detailsOf(<TV_ID>)...`
 
+## Build
+
+#### Prerequisites
+  * Java JDK version 8
+
+To build Java Archive use `$ ./mvnw clean package`
+
+To run unit tests use `$ ./mvnw clean test`
+
 ## Technologies
 
 Project is created with:  
@@ -93,9 +101,9 @@ Checkstyle is configured to run automatically in Maven validate phase.
 ### SpotBugs (https://spotbugs.github.io/)
 SpotBugs analyzes bytecode to find common bugs and code problems.  
 
-To run analysis, use `mvn compile spotbugs:check`
+To run analysis, use `$ ./mvnw compile spotbugs:check`
 
-To view results, use `mvn spotbugs:gui`
+To view results, use `$ ./mvnw spotbugs:gui`
 
 ## License
 This project is released under the MIT license, see [LICENSE](LICENSE) file.
