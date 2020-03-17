@@ -16,9 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 public class TmdbClientTest {
 
-    private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2JiNWE1OWI4MmM2NmI5YTJjZjRjN2U3MTQ"
-            + "0MmZkYiIsInN1YiI6IjVkZjJiZjk3MmNkZTk4MDAxNjMwMmZhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.t"
-            + "xGfDomDajnMlr_YlcpJoztrSlDAAlA2VAXizQGJy5A";
+    private static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
 
     private TmdbClient tmdbClient = new TmdbClient(ACCESS_TOKEN);
 
