@@ -34,14 +34,12 @@ public class TmdbTvAiringTodayRequestTest {
     @Test
     public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
-        List<TvSeries> expected = Collections.singletonList(new TvSeries());
-        TvAiringToday fetchResult = new TvAiringToday();
-        fetchResult.setResults(expected);
+        TvAiringToday expected = new TvAiringToday();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/airing_today?");
-        when(tmdbHttpClient.fetch(expectedUrl, TvAiringToday.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, TvAiringToday.class)).thenReturn(expected);
 
         // when
-        List<TvSeries> actual = tmdbTvAiringTodayRequest.fetch();
+        TvAiringToday actual = tmdbTvAiringTodayRequest.fetch();
 
         // then
         assertEquals(expected, actual);
@@ -50,14 +48,12 @@ public class TmdbTvAiringTodayRequestTest {
     @Test
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
-        List<TvSeries> expected = Collections.singletonList(new TvSeries());
-        TvAiringToday fetchResult = new TvAiringToday();
-        fetchResult.setResults(expected);
+        TvAiringToday expected = new TvAiringToday();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/airing_today?page=1&language=test");
-        when(tmdbHttpClient.fetch(expectedUrl, TvAiringToday.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, TvAiringToday.class)).thenReturn(expected);
 
         // when
-        List<TvSeries> actual = tmdbTvAiringTodayRequest
+        TvAiringToday actual = tmdbTvAiringTodayRequest
                 .withPage(1)
                 .withLanguage("test")
                 .fetch();

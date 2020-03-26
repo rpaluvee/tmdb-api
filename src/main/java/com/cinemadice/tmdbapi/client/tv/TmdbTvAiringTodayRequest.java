@@ -21,10 +21,9 @@ public class TmdbTvAiringTodayRequest extends AbstractTmdbRequest<TmdbTvAiringTo
     }
 
     @Override
-    public List<TvSeries> fetch() {
+    public TvAiringToday fetch() {
         URL url = tmdbUrl.build();
-        TvAiringToday tvAiringToday = tmdbHttpClient.fetch(url, TvAiringToday.class);
-        return tvAiringToday.getResults();
+        return tmdbHttpClient.fetch(url, TvAiringToday.class);
     }
 
     @Override
