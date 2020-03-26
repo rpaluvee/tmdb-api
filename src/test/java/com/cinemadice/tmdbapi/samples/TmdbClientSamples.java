@@ -5,6 +5,7 @@ import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
+import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,12 +39,13 @@ public class TmdbClientSamples {
 
     @Test
     public void fetchSomeUpcomingMovies() {
-        List<Movie> upcomingMovies = tmdbClient.movies().upcomingInTheatres()
+        UpcomingMovies upcomingMovies = tmdbClient.movies().upcomingInTheatres()
                 .withLanguage("en-US")
                 .withRegion("US")
                 .withPage(2)
                 .fetch();
-        upcomingMovies.forEach(um -> System.out.println(um.getTitle() + " (year: " + um.getReleaseDate() + ")"));
+        List<Movie> movies = upcomingMovies.getResults();
+        movies.forEach(um -> System.out.println(um.getTitle() + " (year: " + um.getReleaseDate() + ")"));
     }
 
     @Test

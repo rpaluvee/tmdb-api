@@ -1,7 +1,6 @@
 package com.cinemadice.tmdbapi.client.movies;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
-import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -34,14 +31,12 @@ public class TmdbUpcomingMoviesRequestTest {
     @Test
     public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
-        List<Movie> expected = Collections.singletonList(new Movie());
-        UpcomingMovies fetchResult = new UpcomingMovies();
-        fetchResult.setResults(expected);
+        UpcomingMovies expected = new UpcomingMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/upcoming?");
-        when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(expected);
 
         // when
-        List<Movie> actual = tmdbUpcomingMoviesRequest.fetch();
+        UpcomingMovies actual = tmdbUpcomingMoviesRequest.fetch();
 
         // then
         assertEquals(expected, actual);
@@ -50,16 +45,14 @@ public class TmdbUpcomingMoviesRequestTest {
     @Test
     public void shouldFetchGivenSomeParameters() throws MalformedURLException {
         // given
-        List<Movie> expected = Collections.singletonList(new Movie());
-        UpcomingMovies fetchResult = new UpcomingMovies();
-        fetchResult.setResults(expected);
+        UpcomingMovies expected = new UpcomingMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/upcoming?"
                 + "region=test&"
                 + "language=test");
-        when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(expected);
 
         // when
-        List<Movie> actual = tmdbUpcomingMoviesRequest
+        UpcomingMovies actual = tmdbUpcomingMoviesRequest
                 .withRegion("test")
                 .withLanguage("test")
                 .fetch();
@@ -71,17 +64,15 @@ public class TmdbUpcomingMoviesRequestTest {
     @Test
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
-        List<Movie> expected = Collections.singletonList(new Movie());
-        UpcomingMovies fetchResult = new UpcomingMovies();
-        fetchResult.setResults(expected);
+        UpcomingMovies expected = new UpcomingMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/upcoming?"
                 + "region=test&"
                 + "page=1&"
                 + "language=test");
-        when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(expected);
 
         // when
-        List<Movie> actual = tmdbUpcomingMoviesRequest
+        UpcomingMovies actual = tmdbUpcomingMoviesRequest
                 .withRegion("test")
                 .withPage(1)
                 .withLanguage("test")

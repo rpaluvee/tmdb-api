@@ -26,10 +26,9 @@ public class TmdbUpcomingMoviesRequest extends AbstractTmdbRequest<TmdbUpcomingM
     }
 
     @Override
-    public List<Movie> fetch() {
+    public UpcomingMovies fetch() {
         URL url = tmdbUrl.build();
-        UpcomingMovies upcomingMovies = tmdbHttpClient.fetch(url, UpcomingMovies.class);
-        return upcomingMovies.getResults();
+        return tmdbHttpClient.fetch(url, UpcomingMovies.class);
     }
 
     @Override
