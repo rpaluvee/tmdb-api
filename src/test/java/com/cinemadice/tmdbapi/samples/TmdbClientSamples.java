@@ -1,6 +1,8 @@
 package com.cinemadice.tmdbapi.samples;
 
 import com.cinemadice.tmdbapi.client.TmdbClient;
+import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
+import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
@@ -25,11 +27,12 @@ public class TmdbClientSamples {
 
     @Test
     public void discoverSomeMovies() {
-        List<Movie> movies = tmdbClient.discover().movies()
+        DiscoverMovies discoverMovies = tmdbClient.discover().movies()
                 .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
                 .fetch();
+        List<Movie> movies = discoverMovies.getResults();
         movies.forEach(movie -> System.out.println(movie.getTitle() + " (year: " + movie.getReleaseDate() + ")"));
     }
 
@@ -51,10 +54,11 @@ public class TmdbClientSamples {
 
     @Test
     public void discoverSomeTvShows() {
-        List<TvSeries> tv = tmdbClient.discover().tv()
+        DiscoverTv discoverTv = tmdbClient.discover().tv()
                 .withLanguage("en-US")
                 .withPage(2)
                 .fetch();
+        List<TvSeries> tv = discoverTv.getResults();
         tv.forEach(tvSeries -> System.out.println(tvSeries.getName() + " (year: " + tvSeries.getFirstAirDate() + ")"));
     }
 

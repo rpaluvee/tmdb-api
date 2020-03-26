@@ -2,11 +2,9 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
-import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 
 import java.net.URL;
-import java.util.List;
 
 public class TmdbDiscoverMoviesRequest extends
         AbstractTmdbDiscoverRequest<TmdbDiscoverMoviesRequest, DiscoverMoviesUrl> {
@@ -96,10 +94,9 @@ public class TmdbDiscoverMoviesRequest extends
     }
 
     @Override
-    public List<Movie> fetch() {
+    public DiscoverMovies fetch() {
         URL url = tmdbUrl.build();
-        DiscoverMovies discoverMovies = tmdbHttpClient.fetch(url, DiscoverMovies.class);
-        return discoverMovies.getResults();
+        return tmdbHttpClient.fetch(url, DiscoverMovies.class);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
-import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -34,14 +31,12 @@ public class TmdbDiscoverTvRequestTest {
     @Test
     public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
-        List<TvSeries> expected = Collections.singletonList(new TvSeries());
+        DiscoverTv expected = new DiscoverTv();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?");
-        DiscoverTv fetchResult = new DiscoverTv();
-        fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(expected);
 
         // when
-        List<TvSeries> actual = tmdbDiscoverTvRequest.fetch();
+        DiscoverTv actual = tmdbDiscoverTvRequest.fetch();
 
         // then
         assertEquals(expected, actual);
@@ -50,18 +45,16 @@ public class TmdbDiscoverTvRequestTest {
     @Test
     public void shouldFetchGivenSomeParameters() throws MalformedURLException {
         // given
-        List<TvSeries> expected = Collections.singletonList(new TvSeries());
+        DiscoverTv expected = new DiscoverTv();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?"
                 + "first_air_date_year=2020&"
                 + "language=test&"
                 + "sort_by=test&"
                 + "page=1");
-        DiscoverTv fetchResult = new DiscoverTv();
-        fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(expected);
 
         // when
-        List<TvSeries> actual = tmdbDiscoverTvRequest
+        DiscoverTv actual = tmdbDiscoverTvRequest
                 .withFirstAirDateYear(2020)
                 .withLanguage("test")
                 .withSort("test")
@@ -75,7 +68,7 @@ public class TmdbDiscoverTvRequestTest {
     @Test
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
-        List<TvSeries> expected = Collections.singletonList(new TvSeries());
+        DiscoverTv expected = new DiscoverTv();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?"
                 + "screened_theatrically=true&"
                 + "include_null_first_air_dates=true&"
@@ -101,12 +94,10 @@ public class TmdbDiscoverTvRequestTest {
                 + "vote_count.gte=1&"
                 + "vote_count.lte=1&"
                 + "language=test");
-        DiscoverTv fetchResult = new DiscoverTv();
-        fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(expected);
 
         // when
-        List<TvSeries> actual = tmdbDiscoverTvRequest
+        DiscoverTv actual = tmdbDiscoverTvRequest
                 .screenedTheatrically(true)
                 .includeNullFirstAirDates(true)
                 .withAirDateGreaterThanOrEqual("test")

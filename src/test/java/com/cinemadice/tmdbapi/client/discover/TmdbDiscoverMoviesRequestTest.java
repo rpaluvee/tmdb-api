@@ -2,7 +2,6 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
-import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -34,14 +31,12 @@ class TmdbDiscoverMoviesRequestTest {
     @Test
     public void shouldFetchGivenNoParameters() throws MalformedURLException {
         // given
-        List<Movie> expected = Collections.singletonList(new Movie());
+        DiscoverMovies expected = new DiscoverMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?");
-        DiscoverMovies fetchResult = new DiscoverMovies();
-        fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(expected);
 
         // when
-        List<Movie> actual = tmdbDiscoverMoviesRequest.fetch();
+        DiscoverMovies actual = tmdbDiscoverMoviesRequest.fetch();
 
         // then
         assertEquals(expected, actual);
@@ -50,18 +45,16 @@ class TmdbDiscoverMoviesRequestTest {
     @Test
     public void shouldFetchGivenSomeParameters() throws MalformedURLException {
         // given
-        List<Movie> expected = Collections.singletonList(new Movie());
+        DiscoverMovies expected = new DiscoverMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?"
                 + "primary_release_year=2020&"
                 + "language=test&"
                 + "sort_by=test&"
                 + "page=1");
-        DiscoverMovies fetchResult = new DiscoverMovies();
-        fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(expected);
 
         // when
-        List<Movie> actual = tmdbDiscoverMoviesRequest
+        DiscoverMovies actual = tmdbDiscoverMoviesRequest
                 .withPrimaryReleaseYear(2020)
                 .withLanguage("test")
                 .withSort("test")
@@ -75,7 +68,7 @@ class TmdbDiscoverMoviesRequestTest {
     @Test
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
-        List<Movie> expected = Collections.singletonList(new Movie());
+        DiscoverMovies expected = new DiscoverMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?"
                 + "include_adult=true&"
                 + "include_video=true&"
@@ -108,12 +101,10 @@ class TmdbDiscoverMoviesRequestTest {
                 + "vote_count.gte=1&"
                 + "vote_count.lte=1&"
                 + "language=test");
-        DiscoverMovies fetchResult = new DiscoverMovies();
-        fetchResult.setResults(expected);
-        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(fetchResult);
+        when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(expected);
 
         // when
-        List<Movie> actual = tmdbDiscoverMoviesRequest
+        DiscoverMovies actual = tmdbDiscoverMoviesRequest
                 .includeAdult(true)
                 .includeVideo(true)
                 .withRegion("test")
