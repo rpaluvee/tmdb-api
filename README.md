@@ -17,10 +17,11 @@ To use the library you have to initialize the TMDb API Client class
 A simple example of discovering movies released in 2008 with english language:  
 ```
 TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");
-List<Movie> movies = tmdbClient.discover().movies()
+DiscoverMovies discoverMovies = tmdbClient.discover().movies()
         .withPrimaryReleaseYear(2008)
         .language("en")
         .fetch();
+List<Movie> movies = discoverMovies.getResults();
 ```
 
 More example of use can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
