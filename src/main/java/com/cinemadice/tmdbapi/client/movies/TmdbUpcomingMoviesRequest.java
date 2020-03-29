@@ -15,6 +15,11 @@ public class TmdbUpcomingMoviesRequest extends AbstractTmdbRequest<TmdbUpcomingM
         super(upcomingMoviesUrl, tmdbHttpClient);
     }
 
+    public TmdbUpcomingMoviesRequest withLanguage(String language) {
+        tmdbUrl.addLanguage(language);
+        return this;
+    }
+
     public TmdbUpcomingMoviesRequest withPage(int page) {
         tmdbUrl.addPage(page);
         return this;

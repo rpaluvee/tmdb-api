@@ -15,6 +15,11 @@ public class TmdbTvAiringTodayRequest extends AbstractTmdbRequest<TmdbTvAiringTo
         super(tvAiringTodayUrl, tmdbHttpClient);
     }
 
+    public TmdbTvAiringTodayRequest withLanguage(String language) {
+        tmdbUrl.addLanguage(language);
+        return this;
+    }
+
     public TmdbTvAiringTodayRequest withPage(int page) {
         tmdbUrl.addPage(page);
         return this;

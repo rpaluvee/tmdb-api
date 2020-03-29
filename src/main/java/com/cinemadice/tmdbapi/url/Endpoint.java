@@ -11,7 +11,9 @@ public enum Endpoint {
 
     DISCOVER_TV("/discover/tv"),
     TV_AIRING_TODAY("/tv/airing_today"),
-    TV_DETAILS("/tv/" + EndpointPlaceholder.TV_ID.getValue());
+    TV_DETAILS("/tv/" + EndpointPlaceholder.TV_ID.getValue()),
+
+    CONFIGURATION("/configuration");
 
     @Getter
     private String url;

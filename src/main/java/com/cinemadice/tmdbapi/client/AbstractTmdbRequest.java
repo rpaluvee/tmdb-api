@@ -12,11 +12,6 @@ public abstract class AbstractTmdbRequest<T, U extends AbstractTmdbUrl> {
         this.tmdbHttpClient = tmdbHttpClient;
     }
 
-    public T withLanguage(String language) {
-        tmdbUrl.addLanguage(language);
-        return thisInstance();
-    }
-
     protected abstract Object fetch();
 
     protected abstract T thisInstance();

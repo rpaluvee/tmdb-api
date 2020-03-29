@@ -3,6 +3,7 @@ package com.cinemadice.tmdbapi.client;
 import com.cinemadice.tmdbapi.client.discover.TmdbDiscoverClient;
 import com.cinemadice.tmdbapi.client.movies.TmdbMoviesClient;
 import com.cinemadice.tmdbapi.client.tv.TmdbTvClient;
+import com.cinemadice.tmdbapi.url.ConfigurationUrl;
 
 public class TmdbClient {
 
@@ -37,6 +38,10 @@ public class TmdbClient {
             this.tmdbTvClient = new TmdbTvClient(tmdbHttpClient);
         }
         return tmdbTvClient;
+    }
+
+    public TmdbApiConfigurationRequest configuration() {
+        return new TmdbApiConfigurationRequest(new ConfigurationUrl(), tmdbHttpClient);
     }
 
 }

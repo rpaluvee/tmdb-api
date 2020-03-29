@@ -10,6 +10,11 @@ abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> ext
         super(tmdbUrl, tmdbHttpClient);
     }
 
+    public T withLanguage(String language) {
+        tmdbUrl.addLanguage(language);
+        return thisInstance();
+    }
+
     public T withSort(String sortBy) {
         tmdbUrl.addSort(sortBy);
         return thisInstance();

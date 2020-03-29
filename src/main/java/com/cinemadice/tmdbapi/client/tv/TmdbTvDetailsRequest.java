@@ -13,6 +13,11 @@ public class TmdbTvDetailsRequest extends AbstractTmdbRequest<TmdbTvDetailsReque
         super(tvDetailsUrl, tmdbHttpClient);
     }
 
+    public TmdbTvDetailsRequest withLanguage(String language) {
+        tmdbUrl.addLanguage(language);
+        return this;
+    }
+
     /* TODO: Implement appending results (https://developers.themoviedb.org/3/getting-started/append-to-response)
     public TmdbTvDetailsRequest withAppendedResult(String appendedResult) {
         tmdbUrl.addAppendToResponse(appendedResult);

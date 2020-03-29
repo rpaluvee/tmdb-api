@@ -2,7 +2,9 @@ package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
 import com.cinemadice.tmdbapi.model.Genre;
+import com.cinemadice.tmdbapi.model.ImagesConfiguration;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
+import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
 import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
@@ -517,6 +519,54 @@ public class TmdbHttpClientTest {
 
             // when
             TvDetails actual = tmdbHttpClient.fetch(serverUrl.url(), TvDetails.class);
+
+            // then
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void shouldFetchConfiguration() {
+            // given
+            List<String> backdropSizes = new ArrayList<>();
+            backdropSizes.add("w300");
+            backdropSizes.add("original");
+            List<String> logoSizes = new ArrayList<>();
+            logoSizes.add("w45");
+            logoSizes.add("original");
+            List<String> posterSizes = new ArrayList<>();
+            posterSizes.add("w500");
+            posterSizes.add("w780");
+            List<String> profileSizes = new ArrayList<>();
+            profileSizes.add("w45");
+            profileSizes.add("original");
+            List<String> stillSizes = new ArrayList<>();
+            stillSizes.add("w300");
+            stillSizes.add("original");
+            List<String> changeKeys = new ArrayList<>();
+            changeKeys.add("biography");
+            changeKeys.add("videos");
+            ImagesConfiguration imagesConfiguration = new ImagesConfiguration();
+            imagesConfiguration.setBaseUrl("http://image.tmdb.org/t/p/");
+            imagesConfiguration.setSecureBaseUrl("https://image.tmdb.org/t/p/");
+            imagesConfiguration.setBackdropSizes(backdropSizes);
+            imagesConfiguration.setLogoSizes(logoSizes);
+            imagesConfiguration.setPosterSizes(posterSizes);
+            imagesConfiguration.setProfileSizes(profileSizes);
+            imagesConfiguration.setStillSizes(stillSizes);
+
+            TmdbApiConfiguration expected = new TmdbApiConfiguration();
+            expected.setImagesConfiguration(imagesConfiguration);
+            expected.setChangeKeys(changeKeys);
+
+            HttpUrl serverUrl = server.url(Endpoint.CONFIGURATION.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("configuration_response.json"));
+            server.enqueue(mockResponse);
+
+            // when
+            TmdbApiConfiguration actual = tmdbHttpClient.fetch(serverUrl.url(), TmdbApiConfiguration.class);
 
             // then
             assertEquals(expected, actual);

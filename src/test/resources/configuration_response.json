@@ -1,0 +1,30 @@
+{
+  "images": {
+    "base_url": "http://image.tmdb.org/t/p/",
+    "secure_base_url": "https://image.tmdb.org/t/p/",
+    "backdrop_sizes": [
+      "w300",
+      "original"
+    ],
+    "logo_sizes": [
+      "w45",
+      "original"
+    ],
+    "poster_sizes": [
+      "w500",
+      "w780"
+    ],
+    "profile_sizes": [
+      "w45",
+      "original"
+    ],
+    "still_sizes": [
+      "w300",
+      "original"
+    ]
+  },
+  "change_keys": [
+    "biography",
+    "videos"
+  ]
+}

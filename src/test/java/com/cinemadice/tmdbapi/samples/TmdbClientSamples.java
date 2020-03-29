@@ -1,6 +1,7 @@
 package com.cinemadice.tmdbapi.samples;
 
 import com.cinemadice.tmdbapi.client.TmdbClient;
+import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Movie;
@@ -12,11 +13,13 @@ import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.MovieGenre;
 import com.cinemadice.tmdbapi.url.TvGenre;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Disabled
 public class TmdbClientSamples {
 
     private static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
@@ -91,6 +94,12 @@ public class TmdbClientSamples {
     public void fetchAdditionalDetailsAboutATvShow() {
         TvDetails tvDetails = tmdbClient.tv().detailsOf(1399).fetch();
         System.out.println(tvDetails);
+    }
+
+    @Test
+    public void fetchTmdbApiConfiguration() {
+        TmdbApiConfiguration tmdbApiConfiguration = tmdbClient.configuration().fetch();
+        System.out.println(tmdbApiConfiguration);
     }
 
 }
