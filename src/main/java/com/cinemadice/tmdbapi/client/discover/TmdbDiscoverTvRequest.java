@@ -2,9 +2,12 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
+import com.cinemadice.tmdbapi.url.TvGenre;
 import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 
 import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDiscoverTvRequest, DiscoverTvUrl> {
 
@@ -55,6 +58,22 @@ public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDisco
     public TmdbDiscoverTvRequest screenedTheatrically(boolean hasScreenedTheatrically) {
         tmdbUrl.addScreenedTheatrically(hasScreenedTheatrically);
         return this;
+    }
+
+    public TmdbDiscoverTvRequest withGenres(List<TvGenre> genres) {
+        tmdbUrl.addWithGenres(constructTvGenreIds(genres));
+        return this;
+    }
+
+    public TmdbDiscoverTvRequest withoutGenres(List<TvGenre> genres) {
+        tmdbUrl.addWithoutGenres(constructTvGenreIds(genres));
+        return this;
+    }
+
+    private String constructTvGenreIds(List<TvGenre> movieGenres) {
+        return movieGenres.stream()
+                .map(TvGenre::getId)
+                .collect(Collectors.joining(","));
     }
 
     @Override

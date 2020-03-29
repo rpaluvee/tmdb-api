@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
+import com.cinemadice.tmdbapi.url.TvGenre;
 import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -80,10 +83,10 @@ public class TmdbDiscoverTvRequestTest {
                 + "with_networks=test&"
                 + "timezone=test&"
                 + "with_companies=test&"
-                + "with_genres=test&"
+                + "with_genres=10759%2C10766&"
                 + "with_keywords=test&"
                 + "with_original_language=test&"
-                + "without_genres=test&"
+                + "without_genres=10759%2C10766&"
                 + "without_keywords=test&"
                 + "page=1&"
                 + "with_runtime.gte=1&"
@@ -97,6 +100,10 @@ public class TmdbDiscoverTvRequestTest {
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(expected);
 
         // when
+        List<TvGenre> tvGenres = new ArrayList<>();
+        tvGenres.add(TvGenre.ACTION_AND_ADVENTURE);
+        tvGenres.add(TvGenre.SOAP);
+
         DiscoverTv actual = tmdbDiscoverTvRequest
                 .screenedTheatrically(true)
                 .includeNullFirstAirDates(true)
@@ -108,10 +115,10 @@ public class TmdbDiscoverTvRequestTest {
                 .withNetworks("test")
                 .withTimezone("test")
                 .withCompanies("test")
-                .withGenres("test")
+                .withGenres(tvGenres)
                 .withKeywords("test")
                 .withOriginalLanguage("test")
-                .withoutGenres("test")
+                .withoutGenres(tvGenres)
                 .withoutKeywords("test")
                 .withPage(1)
                 .withRuntimeGreaterThanOrEqual(1)

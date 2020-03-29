@@ -9,13 +9,14 @@ import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
+import com.cinemadice.tmdbapi.url.MovieGenre;
+import com.cinemadice.tmdbapi.url.TvGenre;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Disabled
 public class TmdbClientSamples {
 
     private static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
@@ -29,7 +30,12 @@ public class TmdbClientSamples {
 
     @Test
     public void discoverSomeMovies() {
+        List<MovieGenre> movieGenres = new ArrayList<>();
+        movieGenres.add(MovieGenre.ACTION);
+        movieGenres.add(MovieGenre.ADVENTURE);
+
         DiscoverMovies discoverMovies = tmdbClient.discover().movies()
+                .withGenres(movieGenres)
                 .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
@@ -57,7 +63,12 @@ public class TmdbClientSamples {
 
     @Test
     public void discoverSomeTvShows() {
+        List<TvGenre> tvGenres = new ArrayList<>();
+        tvGenres.add(TvGenre.CRIME);
+        tvGenres.add(TvGenre.MYSTERY);
+
         DiscoverTv discoverTv = tmdbClient.discover().tv()
+                .withGenres(tvGenres)
                 .withLanguage("en-US")
                 .withPage(2)
                 .fetch();

@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
+import com.cinemadice.tmdbapi.url.MovieGenre;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -87,10 +90,10 @@ class TmdbDiscoverMoviesRequestTest {
                 + "release_date.lte=test&"
                 + "with_release_type=1&"
                 + "with_companies=test&"
-                + "with_genres=test&"
+                + "with_genres=12%2C80&"
                 + "with_keywords=test&"
                 + "with_original_language=test&"
-                + "without_genres=test&"
+                + "without_genres=12%2C80&"
                 + "without_keywords=test&"
                 + "page=1&"
                 + "with_runtime.gte=1&"
@@ -104,6 +107,10 @@ class TmdbDiscoverMoviesRequestTest {
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(expected);
 
         // when
+        List<MovieGenre> movieGenres = new ArrayList<>();
+        movieGenres.add(MovieGenre.ADVENTURE);
+        movieGenres.add(MovieGenre.CRIME);
+
         DiscoverMovies actual = tmdbDiscoverMoviesRequest
                 .includeAdult(true)
                 .includeVideo(true)
@@ -122,10 +129,10 @@ class TmdbDiscoverMoviesRequestTest {
                 .withReleaseDateLessThanOrEqual("test")
                 .withReleaseType(1)
                 .withCompanies("test")
-                .withGenres("test")
+                .withGenres(movieGenres)
                 .withKeywords("test")
                 .withOriginalLanguage("test")
-                .withoutGenres("test")
+                .withoutGenres(movieGenres)
                 .withoutKeywords("test")
                 .withPage(1)
                 .withRuntimeGreaterThanOrEqual(1)

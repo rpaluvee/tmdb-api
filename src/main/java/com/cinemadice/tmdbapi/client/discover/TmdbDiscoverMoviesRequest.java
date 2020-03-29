@@ -2,9 +2,12 @@ package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
+import com.cinemadice.tmdbapi.url.MovieGenre;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 
 import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TmdbDiscoverMoviesRequest extends
         AbstractTmdbDiscoverRequest<TmdbDiscoverMoviesRequest, DiscoverMoviesUrl> {
@@ -91,6 +94,22 @@ public class TmdbDiscoverMoviesRequest extends
     public TmdbDiscoverMoviesRequest withPeople(String people) {
         tmdbUrl.addWithPeople(people);
         return this;
+    }
+
+    public TmdbDiscoverMoviesRequest withGenres(List<MovieGenre> genres) {
+        tmdbUrl.addWithGenres(constructMovieGenreIds(genres));
+        return this;
+    }
+
+    public TmdbDiscoverMoviesRequest withoutGenres(List<MovieGenre> genres) {
+        tmdbUrl.addWithoutGenres(constructMovieGenreIds(genres));
+        return this;
+    }
+
+    private String constructMovieGenreIds(List<MovieGenre> movieGenres) {
+        return movieGenres.stream()
+                .map(MovieGenre::getId)
+                .collect(Collectors.joining(","));
     }
 
     @Override

@@ -45,16 +45,6 @@ abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> ext
         return thisInstance();
     }
 
-    public T withGenres(String genres) {
-        tmdbUrl.addWithGenres(genres);
-        return thisInstance();
-    }
-
-    public T withoutGenres(String genres) {
-        tmdbUrl.addWithoutGenres(genres);
-        return thisInstance();
-    }
-
     public T withKeywords(String keywords) {
         tmdbUrl.addWithKeywords(keywords);
         return thisInstance();

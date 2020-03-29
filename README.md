@@ -14,17 +14,17 @@ a TMDb API key. Steps to do so are described in the *Getting started* section of
 To use the library you have to initialize the TMDb API Client class
 `com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:
 
-A simple example of discovering movies released in 2008 with english language:  
+A simple example of discovering movies released in 2008 with the English language:  
 ```
 TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");
-DiscoverMovies discoverMovies = tmdbClient.discover().movies()
+List<Movie> movies = tmdbClient.discover().movies()
         .withPrimaryReleaseYear(2008)
         .language("en")
-        .fetch();
-List<Movie> movies = discoverMovies.getResults();
+        .fetch()
+        .getResults();
 ```
 
-More example of use can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
+More examples of use can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
 
 ## Installation
 Include the library as a dependency to your project with Maven  
