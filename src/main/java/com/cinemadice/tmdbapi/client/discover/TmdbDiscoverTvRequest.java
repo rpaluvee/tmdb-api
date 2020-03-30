@@ -7,6 +7,7 @@ import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDiscoverTvRequest, DiscoverTvUrl> {
@@ -72,6 +73,7 @@ public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDisco
 
     private String constructTvGenreIds(List<TvGenre> movieGenres) {
         return movieGenres.stream()
+                .filter(Objects::nonNull)
                 .map(TvGenre::getId)
                 .collect(Collectors.joining(","));
     }
