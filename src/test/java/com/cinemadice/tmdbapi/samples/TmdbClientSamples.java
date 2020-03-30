@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Disabled
@@ -32,12 +33,8 @@ public class TmdbClientSamples {
 
     @Test
     public void discoverSomeMovies() {
-        List<MovieGenre> movieGenres = new ArrayList<>();
-        movieGenres.add(MovieGenre.ACTION);
-        movieGenres.add(MovieGenre.ADVENTURE);
-
         DiscoverMovies discoverMovies = tmdbClient.discover().movies()
-                .withGenres(movieGenres)
+                .withGenres(Arrays.asList(MovieGenre.ACTION, MovieGenre.COMEDY))
                 .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
                 .withPage(2)
@@ -65,12 +62,8 @@ public class TmdbClientSamples {
 
     @Test
     public void discoverSomeTvShows() {
-        List<TvGenre> tvGenres = new ArrayList<>();
-        tvGenres.add(TvGenre.CRIME);
-        tvGenres.add(TvGenre.MYSTERY);
-
         DiscoverTv discoverTv = tmdbClient.discover().tv()
-                .withGenres(tvGenres)
+                .withGenres(Arrays.asList(TvGenre.CRIME, TvGenre.MYSTERY))
                 .withLanguage("en-US")
                 .withPage(2)
                 .fetch();

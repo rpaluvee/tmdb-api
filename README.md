@@ -14,10 +14,11 @@ a TMDb API key. Steps to do so are described in the *Getting started* section of
 To use the library you have to initialize the TMDb API Client class
 `com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:
 
-A simple example of discovering movies released in 2008 with the English language:  
+A simple example of discovering action/comedy movies released in 2008 with the English language:  
 ```
 TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");
 List<Movie> movies = tmdbClient.discover().movies()
+        .withGenres(Arrays.asList(MovieGenre.ACTION, MovieGenre.COMEDY))
         .withPrimaryReleaseYear(2008)
         .language("en")
         .fetch()
