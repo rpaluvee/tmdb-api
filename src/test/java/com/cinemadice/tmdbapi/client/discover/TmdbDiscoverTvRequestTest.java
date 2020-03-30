@@ -1,8 +1,8 @@
 package com.cinemadice.tmdbapi.client.discover;
 
+import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
-import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

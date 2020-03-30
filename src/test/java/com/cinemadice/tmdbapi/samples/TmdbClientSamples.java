@@ -1,5 +1,7 @@
 package com.cinemadice.tmdbapi.samples;
 
+import com.cinemadice.tmdbapi.MovieGenre;
+import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
@@ -10,8 +12,6 @@ import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
-import com.cinemadice.tmdbapi.MovieGenre;
-import com.cinemadice.tmdbapi.TvGenre;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
