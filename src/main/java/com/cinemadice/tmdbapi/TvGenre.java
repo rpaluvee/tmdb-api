@@ -1,4 +1,4 @@
-package com.cinemadice.tmdbapi.url;
+package com.cinemadice.tmdbapi;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

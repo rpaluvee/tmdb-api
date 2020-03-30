@@ -10,10 +10,9 @@ import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
-import com.cinemadice.tmdbapi.url.MovieGenre;
-import com.cinemadice.tmdbapi.url.TvGenre;
+import com.cinemadice.tmdbapi.MovieGenre;
+import com.cinemadice.tmdbapi.TvGenre;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
