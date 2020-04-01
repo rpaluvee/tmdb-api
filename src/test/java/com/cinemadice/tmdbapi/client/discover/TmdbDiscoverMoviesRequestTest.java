@@ -1,6 +1,7 @@
 package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.MovieGenre;
+import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
@@ -75,7 +76,7 @@ class TmdbDiscoverMoviesRequestTest {
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?"
                 + "include_adult=true&"
                 + "include_video=true&"
-                + "region=test&"
+                + "region=US&"
                 + "primary_release_year=2020&"
                 + "with_cast=test&"
                 + "certification=test&"
@@ -114,7 +115,7 @@ class TmdbDiscoverMoviesRequestTest {
         DiscoverMovies actual = tmdbDiscoverMoviesRequest
                 .includeAdult(true)
                 .includeVideo(true)
-                .withRegion("test")
+                .withRegion(Region.UNITED_STATES_OF_AMERICA)
                 .withPrimaryReleaseYear(2020)
                 .withCast("test")
                 .withCertification("test")

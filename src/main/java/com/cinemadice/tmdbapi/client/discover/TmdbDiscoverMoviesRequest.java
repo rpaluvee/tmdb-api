@@ -1,6 +1,7 @@
 package com.cinemadice.tmdbapi.client.discover;
 
 import com.cinemadice.tmdbapi.MovieGenre;
+import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
@@ -17,8 +18,8 @@ public class TmdbDiscoverMoviesRequest extends
         super(discoverMoviesUrl, tmdbHttpClient);
     }
 
-    public TmdbDiscoverMoviesRequest withRegion(String region) {
-        tmdbUrl.addRegion(region);
+    public TmdbDiscoverMoviesRequest withRegion(Region region) {
+        tmdbUrl.addRegion(region.getIsoCode());
         return this;
     }
 

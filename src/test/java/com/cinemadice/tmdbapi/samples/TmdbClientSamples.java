@@ -1,6 +1,7 @@
 package com.cinemadice.tmdbapi.samples;
 
 import com.cinemadice.tmdbapi.MovieGenre;
+import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
@@ -15,7 +16,6 @@ import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,8 +35,8 @@ public class TmdbClientSamples {
     public void discoverSomeMovies() {
         DiscoverMovies discoverMovies = tmdbClient.discover().movies()
                 .withGenres(Arrays.asList(MovieGenre.ACTION, MovieGenre.COMEDY))
-                .withLanguage("en-US")
                 .withPrimaryReleaseYear(2018)
+                .withRegion(Region.UNITED_STATES_OF_AMERICA)
                 .withPage(2)
                 .fetch();
         List<Movie> movies = discoverMovies.getResults();
