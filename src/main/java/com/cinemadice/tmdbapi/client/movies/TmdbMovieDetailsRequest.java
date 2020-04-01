@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.client.movies;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
@@ -13,8 +14,8 @@ public class TmdbMovieDetailsRequest extends AbstractTmdbRequest<TmdbMovieDetail
         super(movieDetailsUrl, tmdbHttpClient);
     }
 
-    public TmdbMovieDetailsRequest withLanguage(String language) {
-        tmdbUrl.addLanguage(language);
+    public TmdbMovieDetailsRequest withLanguage(Language language) {
+        tmdbUrl.addLanguage(language.getIsoCode());
         return this;
     }
 

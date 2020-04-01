@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.client.discover;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.url.discover.AbstractDiscoverUrl;
@@ -10,8 +11,8 @@ abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> ext
         super(tmdbUrl, tmdbHttpClient);
     }
 
-    public T withLanguage(String language) {
-        tmdbUrl.addLanguage(language);
+    public T withLanguage(Language language) {
+        tmdbUrl.addLanguage(language.getIsoCode());
         return thisInstance();
     }
 
@@ -70,8 +71,8 @@ abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> ext
         return thisInstance();
     }
 
-    public T withOriginalLanguage(String language) {
-        tmdbUrl.addWithOriginalLanguage(language);
+    public T withOriginalLanguage(Language language) {
+        tmdbUrl.addWithOriginalLanguage(language.getIsoCode());
         return thisInstance();
     }
 

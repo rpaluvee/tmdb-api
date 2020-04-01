@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.client.discover;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.MovieGenre;
 import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
@@ -52,7 +53,7 @@ class TmdbDiscoverMoviesRequestTest {
         DiscoverMovies expected = new DiscoverMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/movie?"
                 + "primary_release_year=2020&"
-                + "language=test&"
+                + "language=en&"
                 + "sort_by=test&"
                 + "page=1");
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(expected);
@@ -60,7 +61,7 @@ class TmdbDiscoverMoviesRequestTest {
         // when
         DiscoverMovies actual = tmdbDiscoverMoviesRequest
                 .withPrimaryReleaseYear(2020)
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .withSort("test")
                 .withPage(1)
                 .fetch();
@@ -93,7 +94,7 @@ class TmdbDiscoverMoviesRequestTest {
                 + "with_companies=test&"
                 + "with_genres=12%2C80&"
                 + "with_keywords=test&"
-                + "with_original_language=test&"
+                + "with_original_language=en&"
                 + "without_genres=12%2C80&"
                 + "without_keywords=test&"
                 + "page=1&"
@@ -104,7 +105,7 @@ class TmdbDiscoverMoviesRequestTest {
                 + "vote_average.lte=1&"
                 + "vote_count.gte=1&"
                 + "vote_count.lte=1&"
-                + "language=test");
+                + "language=en");
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverMovies.class)).thenReturn(expected);
 
         // when
@@ -132,7 +133,7 @@ class TmdbDiscoverMoviesRequestTest {
                 .withCompanies("test")
                 .withGenres(movieGenres)
                 .withKeywords("test")
-                .withOriginalLanguage("test")
+                .withOriginalLanguage(Language.ENGLISH)
                 .withoutGenres(movieGenres)
                 .withoutKeywords("test")
                 .withPage(1)
@@ -143,7 +144,7 @@ class TmdbDiscoverMoviesRequestTest {
                 .withVoteAverageLessThanOrEqual(1)
                 .withVoteCountGreaterThanOrEqual(1)
                 .withVoteCountLessThanOrEqual(1)
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .fetch();
 
         // then

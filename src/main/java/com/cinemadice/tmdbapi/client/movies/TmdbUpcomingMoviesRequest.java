@@ -1,8 +1,9 @@
 package com.cinemadice.tmdbapi.client.movies;
 
+import com.cinemadice.tmdbapi.Language;
+import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
-import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
 
@@ -15,8 +16,8 @@ public class TmdbUpcomingMoviesRequest extends AbstractTmdbRequest<TmdbUpcomingM
         super(upcomingMoviesUrl, tmdbHttpClient);
     }
 
-    public TmdbUpcomingMoviesRequest withLanguage(String language) {
-        tmdbUrl.addLanguage(language);
+    public TmdbUpcomingMoviesRequest withLanguage(Language language) {
+        tmdbUrl.addLanguage(language.getIsoCode());
         return this;
     }
 
@@ -25,8 +26,8 @@ public class TmdbUpcomingMoviesRequest extends AbstractTmdbRequest<TmdbUpcomingM
         return this;
     }
 
-    public TmdbUpcomingMoviesRequest withRegion(String region) {
-        tmdbUrl.addRegion(region);
+    public TmdbUpcomingMoviesRequest withRegion(Region region) {
+        tmdbUrl.addRegion(region.getIsoCode());
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.client.tv;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
@@ -49,13 +50,13 @@ public class TmdbTvAiringTodayRequestTest {
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         TvAiringToday expected = new TvAiringToday();
-        URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/airing_today?page=1&language=test");
+        URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/airing_today?page=1&language=en");
         when(tmdbHttpClient.fetch(expectedUrl, TvAiringToday.class)).thenReturn(expected);
 
         // when
         TvAiringToday actual = tmdbTvAiringTodayRequest
                 .withPage(1)
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .fetch();
 
         // then

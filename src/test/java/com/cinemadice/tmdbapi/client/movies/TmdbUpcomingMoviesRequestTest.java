@@ -1,5 +1,7 @@
 package com.cinemadice.tmdbapi.client.movies;
 
+import com.cinemadice.tmdbapi.Language;
+import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
@@ -47,14 +49,14 @@ public class TmdbUpcomingMoviesRequestTest {
         // given
         UpcomingMovies expected = new UpcomingMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/upcoming?"
-                + "region=test&"
-                + "language=test");
+                + "region=GB&"
+                + "language=en");
         when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(expected);
 
         // when
         UpcomingMovies actual = tmdbUpcomingMoviesRequest
-                .withRegion("test")
-                .withLanguage("test")
+                .withRegion(Region.UNITED_KINGDOM)
+                .withLanguage(Language.ENGLISH)
                 .fetch();
 
         // then
@@ -66,16 +68,16 @@ public class TmdbUpcomingMoviesRequestTest {
         // given
         UpcomingMovies expected = new UpcomingMovies();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/upcoming?"
-                + "region=test&"
+                + "region=US&"
                 + "page=1&"
-                + "language=test");
+                + "language=en");
         when(tmdbHttpClient.fetch(expectedUrl, UpcomingMovies.class)).thenReturn(expected);
 
         // when
         UpcomingMovies actual = tmdbUpcomingMoviesRequest
-                .withRegion("test")
+                .withRegion(Region.UNITED_STATES_OF_AMERICA)
                 .withPage(1)
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .fetch();
 
         // then

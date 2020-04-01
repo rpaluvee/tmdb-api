@@ -1,13 +1,12 @@
 package com.cinemadice.tmdbapi.client.tv;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
-import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import com.cinemadice.tmdbapi.url.tv.TvAiringTodayUrl;
 
 import java.net.URL;
-import java.util.List;
 
 public class TmdbTvAiringTodayRequest extends AbstractTmdbRequest<TmdbTvAiringTodayRequest, TvAiringTodayUrl> {
 
@@ -15,8 +14,8 @@ public class TmdbTvAiringTodayRequest extends AbstractTmdbRequest<TmdbTvAiringTo
         super(tvAiringTodayUrl, tmdbHttpClient);
     }
 
-    public TmdbTvAiringTodayRequest withLanguage(String language) {
-        tmdbUrl.addLanguage(language);
+    public TmdbTvAiringTodayRequest withLanguage(Language language) {
+        tmdbUrl.addLanguage(language.getIsoCode());
         return this;
     }
 

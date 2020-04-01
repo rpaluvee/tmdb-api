@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.client.tv;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.url.tv.TvDetailsUrl;
@@ -46,12 +47,12 @@ public class TmdbTvDetailsRequestTest {
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         TvDetails expected = new TvDetails();
-        URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/1?language=test");
+        URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/1?language=en");
         when(tmdbHttpClient.fetch(expectedUrl, TvDetails.class)).thenReturn(expected);
 
         // when
         TvDetails actual = tmdbTvDetailsRequest
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .fetch();
 
         // then

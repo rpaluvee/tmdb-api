@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.client.discover;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
@@ -51,7 +52,7 @@ public class TmdbDiscoverTvRequestTest {
         DiscoverTv expected = new DiscoverTv();
         URL expectedUrl = new URL("https://api.themoviedb.org/3/discover/tv?"
                 + "first_air_date_year=2020&"
-                + "language=test&"
+                + "language=en&"
                 + "sort_by=test&"
                 + "page=1");
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(expected);
@@ -59,7 +60,7 @@ public class TmdbDiscoverTvRequestTest {
         // when
         DiscoverTv actual = tmdbDiscoverTvRequest
                 .withFirstAirDateYear(2020)
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .withSort("test")
                 .withPage(1)
                 .fetch();
@@ -85,7 +86,7 @@ public class TmdbDiscoverTvRequestTest {
                 + "with_companies=test&"
                 + "with_genres=10759%2C10766&"
                 + "with_keywords=test&"
-                + "with_original_language=test&"
+                + "with_original_language=en&"
                 + "without_genres=10759%2C10766&"
                 + "without_keywords=test&"
                 + "page=1&"
@@ -96,7 +97,7 @@ public class TmdbDiscoverTvRequestTest {
                 + "vote_average.lte=1&"
                 + "vote_count.gte=1&"
                 + "vote_count.lte=1&"
-                + "language=test");
+                + "language=en");
         when(tmdbHttpClient.fetch(expectedUrl, DiscoverTv.class)).thenReturn(expected);
 
         // when
@@ -117,7 +118,7 @@ public class TmdbDiscoverTvRequestTest {
                 .withCompanies("test")
                 .withGenres(tvGenres)
                 .withKeywords("test")
-                .withOriginalLanguage("test")
+                .withOriginalLanguage(Language.ENGLISH)
                 .withoutGenres(tvGenres)
                 .withoutKeywords("test")
                 .withPage(1)
@@ -128,7 +129,7 @@ public class TmdbDiscoverTvRequestTest {
                 .withVoteAverageLessThanOrEqual(1)
                 .withVoteCountGreaterThanOrEqual(1)
                 .withVoteCountLessThanOrEqual(1)
-                .withLanguage("test")
+                .withLanguage(Language.ENGLISH)
                 .fetch();
 
         // then

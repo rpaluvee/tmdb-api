@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.samples;
 
+import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.MovieGenre;
 import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.TvGenre;
@@ -35,6 +36,7 @@ public class TmdbClientSamples {
     public void discoverSomeMovies() {
         DiscoverMovies discoverMovies = tmdbClient.discover().movies()
                 .withGenres(Arrays.asList(MovieGenre.ACTION, MovieGenre.COMEDY))
+                .withOriginalLanguage(Language.ENGLISH)
                 .withPrimaryReleaseYear(2018)
                 .withRegion(Region.UNITED_STATES_OF_AMERICA)
                 .withPage(2)
@@ -46,8 +48,8 @@ public class TmdbClientSamples {
     @Test
     public void fetchSomeUpcomingMovies() {
         UpcomingMovies upcomingMovies = tmdbClient.movies().upcomingInTheatres()
-                .withLanguage("en-US")
-                .withRegion("US")
+                .withLanguage(Language.ENGLISH)
+                .withRegion(Region.UNITED_STATES_OF_AMERICA)
                 .withPage(2)
                 .fetch();
         List<Movie> movies = upcomingMovies.getResults();
@@ -64,7 +66,7 @@ public class TmdbClientSamples {
     public void discoverSomeTvShows() {
         DiscoverTv discoverTv = tmdbClient.discover().tv()
                 .withGenres(Arrays.asList(TvGenre.CRIME, TvGenre.MYSTERY))
-                .withLanguage("en-US")
+                .withLanguage(Language.ENGLISH)
                 .withPage(2)
                 .fetch();
         List<TvSeries> tv = discoverTv.getResults();
@@ -74,7 +76,7 @@ public class TmdbClientSamples {
     @Test
     public void fetchTvShowsAiringToday() {
         TvAiringToday tvAiringToday = tmdbClient.tv().airingToday()
-                .withLanguage("en-US")
+                .withLanguage(Language.ENGLISH)
                 .withPage(2)
                 .fetch();
         List<TvSeries> tvSeries = tvAiringToday.getResults();
