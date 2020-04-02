@@ -1,10 +1,10 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- *  Enumerated values with ISO 3166-1 codes for all regions used throughout TMDb API.
+ *  Enum types with ISO 3166-1 codes for all regions used throughout TMDb API.
  */
 @AllArgsConstructor
 public enum Region {

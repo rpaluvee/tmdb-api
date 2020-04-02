@@ -1,7 +1,7 @@
 package com.cinemadice.tmdbapi.client.movies;
 
-import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.Language;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.url.movies.MovieDetailsUrl;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -47,12 +48,13 @@ public class TmdbMovieDetailsRequestTest {
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         MovieDetails expected = new MovieDetails();
-        URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/1?language=en");
+        URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/1?language=en&append_to_response=credits");
         when(tmdbHttpClient.fetch(expectedUrl, MovieDetails.class)).thenReturn(expected);
 
         // when
         MovieDetails actual = tmdbMovieDetailsRequest
                 .withLanguage(Language.ENGLISH)
+                .withAppendedResponse(Arrays.asList(AppendableMovieResponse.CREDITS))
                 .fetch();
 
         // then

@@ -1,6 +1,9 @@
 package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
+import com.cinemadice.tmdbapi.model.Cast;
+import com.cinemadice.tmdbapi.model.Credits;
+import com.cinemadice.tmdbapi.model.Crew;
 import com.cinemadice.tmdbapi.model.Genre;
 import com.cinemadice.tmdbapi.model.ImagesConfiguration;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
@@ -34,6 +37,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -251,35 +255,51 @@ public class TmdbHttpClientTest {
             Genre genre = new Genre();
             genre.setId(18);
             genre.setName("Drama");
-            List<Genre> genres = new ArrayList<>();
-            genres.add(genre);
 
             ProductionCompany productionCompany = new ProductionCompany();
             productionCompany.setId(508);
             productionCompany.setLogoPath("/7PzJdsLGlR7oW4J0J5Xcd0pHGRg.png");
             productionCompany.setName("Regency Enterprises");
             productionCompany.setOriginCountry("US");
-            List<ProductionCompany> productionCompanies = new ArrayList<>();
-            productionCompanies.add(productionCompany);
 
             ProductionCountry productionCountry = new ProductionCountry();
             productionCountry.setIso("US");
             productionCountry.setName("United States of America");
-            List<ProductionCountry> productionCountries = new ArrayList<>();
-            productionCountries.add(productionCountry);
 
             SpokenLanguage spokenLanguage = new SpokenLanguage();
             spokenLanguage.setIso("en");
             spokenLanguage.setName("English");
-            List<SpokenLanguage> spokenLanguages = new ArrayList<>();
-            spokenLanguages.add(spokenLanguage);
+
+            Cast cast = new Cast();
+            cast.setCastId(4);
+            cast.setCharacter("The Narrator");
+            cast.setCreditId("52fe4250c3a36847f80149f3");
+            cast.setGender(2);
+            cast.setId(819);
+            cast.setName("Edward Norton");
+            cast.setOrder(0);
+            cast.setProfilePath("/eIkFHNlfretLS1spAcIoihKUS62.jpg");
+
+            Crew crew = new Crew();
+            crew.setCreditId("56380f0cc3a3681b5c0200be");
+            crew.setDepartment("Writing");
+            crew.setGender(0);
+            crew.setId(7469);
+            crew.setJob("Screenplay");
+            crew.setName("Jim Uhls");
+            crew.setProfilePath(null);
+
+            Credits credits = new Credits();
+            credits.setId(550);
+            credits.setCast(Arrays.asList(cast));
+            credits.setCrew(Arrays.asList(crew));
 
             MovieDetails expected = new MovieDetails();
             expected.setAdult(false);
             expected.setBackdropPath("/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg");
             expected.setBelongsToCollection(null);
             expected.setBudget(63000000);
-            expected.setGenres(genres);
+            expected.setGenres(Arrays.asList(genre));
             expected.setHomepage("");
             expected.setId(550);
             expected.setImdbId("tt0137523");
@@ -288,18 +308,19 @@ public class TmdbHttpClientTest {
             expected.setOverview("A ticking-time-bomb...");
             expected.setPopularity(0.5f);
             expected.setPosterPath(null);
-            expected.setProductionCompanies(productionCompanies);
-            expected.setProductionCountries(productionCountries);
+            expected.setProductionCompanies(Arrays.asList(productionCompany));
+            expected.setProductionCountries(Arrays.asList(productionCountry));
             expected.setReleaseDate("1999-10-12");
             expected.setRevenue(100853753);
             expected.setRuntime(139);
-            expected.setSpokenLanguages(spokenLanguages);
+            expected.setSpokenLanguages(Arrays.asList(spokenLanguage));
             expected.setStatus("Released");
             expected.setTagline("How much can...");
             expected.setTitle("Fight Club");
             expected.setVideo(false);
             expected.setVoteAverage(7.8);
             expected.setVoteCount(3439);
+            expected.setCredits(credits);
 
             HttpUrl serverUrl = server.url(Endpoint.MOVIE_DETAILS.getUrl());
             MockResponse mockResponse = new MockResponse()

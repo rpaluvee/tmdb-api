@@ -1,4 +1,4 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.cinemadice.tmdbapi.client.tv;
 
-import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.Language;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.url.tv.TvDetailsUrl;
 import org.junit.jupiter.api.BeforeEach;

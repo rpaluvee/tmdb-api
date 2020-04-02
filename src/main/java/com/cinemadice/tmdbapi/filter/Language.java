@@ -1,10 +1,10 @@
-package com.cinemadice.tmdbapi;
+package com.cinemadice.tmdbapi.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- *  Enumerated values with ISO 639-1 codes for all languages used throughout TMDb API.
+ *  Enum types with ISO 639-1 codes for all languages used throughout TMDb API.
  */
 @AllArgsConstructor
 public enum Language {
@@ -197,4 +197,5 @@ public enum Language {
 
     @Getter
     private String isoCode;
+
 }

@@ -1,8 +1,8 @@
 package com.cinemadice.tmdbapi.client.movies;
 
-import com.cinemadice.tmdbapi.Language;
-import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.Language;
+import com.cinemadice.tmdbapi.filter.Region;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
 import com.cinemadice.tmdbapi.url.movies.UpcomingMoviesUrl;
 import org.junit.jupiter.api.BeforeEach;

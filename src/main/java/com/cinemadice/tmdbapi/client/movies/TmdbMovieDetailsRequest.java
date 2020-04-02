@@ -1,12 +1,15 @@
 package com.cinemadice.tmdbapi.client.movies;
 
-import com.cinemadice.tmdbapi.Language;
 import com.cinemadice.tmdbapi.client.AbstractTmdbRequest;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.Language;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.url.movies.MovieDetailsUrl;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class TmdbMovieDetailsRequest extends AbstractTmdbRequest<TmdbMovieDetailsRequest, MovieDetailsUrl> {
 
@@ -19,12 +22,10 @@ public class TmdbMovieDetailsRequest extends AbstractTmdbRequest<TmdbMovieDetail
         return this;
     }
 
-    /* TODO: Implement appending results (https://developers.themoviedb.org/3/getting-started/append-to-response)
-    public TmdbMovieDetailsRequest withAppendedResult(String appendedResult) {
-        tmdbUrl.addAppendToResponse(appendedResult);
+    public TmdbMovieDetailsRequest withAppendedResponse(List<AppendableMovieResponse> appendableMovieResponses) {
+        tmdbUrl.addAppendToResponse(constructAppendableMovieResponses(appendableMovieResponses));
         return this;
     }
-    */
 
     @Override
     public MovieDetails fetch() {
@@ -35,6 +36,13 @@ public class TmdbMovieDetailsRequest extends AbstractTmdbRequest<TmdbMovieDetail
     @Override
     protected TmdbMovieDetailsRequest thisInstance() {
         return this;
+    }
+
+    private String constructAppendableMovieResponses(List<AppendableMovieResponse> appendableMovieResponses) {
+        return appendableMovieResponses.stream()
+                .filter(Objects::nonNull)
+                .map(AppendableMovieResponse::getValue)
+                .collect(Collectors.joining(","));
     }
 
 }

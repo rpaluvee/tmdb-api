@@ -1,8 +1,8 @@
 package com.cinemadice.tmdbapi.client.discover;
 
-import com.cinemadice.tmdbapi.MovieGenre;
-import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.MovieGenre;
+import com.cinemadice.tmdbapi.filter.Region;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 
@@ -108,13 +108,6 @@ public class TmdbDiscoverMoviesRequest extends
         return this;
     }
 
-    private String constructMovieGenreIds(List<MovieGenre> movieGenres) {
-        return movieGenres.stream()
-                .filter(Objects::nonNull)
-                .map(MovieGenre::getId)
-                .collect(Collectors.joining(","));
-    }
-
     @Override
     public DiscoverMovies fetch() {
         URL url = tmdbUrl.build();
@@ -124,6 +117,13 @@ public class TmdbDiscoverMoviesRequest extends
     @Override
     protected TmdbDiscoverMoviesRequest thisInstance() {
         return this;
+    }
+
+    private String constructMovieGenreIds(List<MovieGenre> movieGenres) {
+        return movieGenres.stream()
+                .filter(Objects::nonNull)
+                .map(MovieGenre::getId)
+                .collect(Collectors.joining(","));
     }
 
 }

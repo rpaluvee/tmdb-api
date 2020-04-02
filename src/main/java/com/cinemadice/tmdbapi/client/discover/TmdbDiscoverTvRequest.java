@@ -1,7 +1,7 @@
 package com.cinemadice.tmdbapi.client.discover;
 
-import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.TvGenre;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.url.discover.DiscoverTvUrl;
 
@@ -71,13 +71,6 @@ public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDisco
         return this;
     }
 
-    private String constructTvGenreIds(List<TvGenre> movieGenres) {
-        return movieGenres.stream()
-                .filter(Objects::nonNull)
-                .map(TvGenre::getId)
-                .collect(Collectors.joining(","));
-    }
-
     @Override
     public DiscoverTv fetch() {
         URL url = tmdbUrl.build();
@@ -87,6 +80,13 @@ public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDisco
     @Override
     protected TmdbDiscoverTvRequest thisInstance() {
         return this;
+    }
+
+    private String constructTvGenreIds(List<TvGenre> movieGenres) {
+        return movieGenres.stream()
+                .filter(Objects::nonNull)
+                .map(TvGenre::getId)
+                .collect(Collectors.joining(","));
     }
 
 }

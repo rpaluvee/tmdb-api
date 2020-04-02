@@ -1,10 +1,11 @@
 package com.cinemadice.tmdbapi.samples;
 
-import com.cinemadice.tmdbapi.Language;
-import com.cinemadice.tmdbapi.MovieGenre;
-import com.cinemadice.tmdbapi.Region;
-import com.cinemadice.tmdbapi.TvGenre;
 import com.cinemadice.tmdbapi.client.TmdbClient;
+import com.cinemadice.tmdbapi.client.movies.AppendableMovieResponse;
+import com.cinemadice.tmdbapi.filter.Language;
+import com.cinemadice.tmdbapi.filter.MovieGenre;
+import com.cinemadice.tmdbapi.filter.Region;
+import com.cinemadice.tmdbapi.filter.TvGenre;
 import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
@@ -42,7 +43,7 @@ public class TmdbClientSamples {
                 .withPage(2)
                 .fetch();
         List<Movie> movies = discoverMovies.getResults();
-        movies.forEach(movie -> System.out.println(movie.getTitle() + " (year: " + movie.getReleaseDate() + ")"));
+        movies.forEach(movie -> System.out.println(movie.getTitle() + " (year: " + movie.getOriginalLanguage() + ")"));
     }
 
     @Test
@@ -58,7 +59,9 @@ public class TmdbClientSamples {
 
     @Test
     public void fetchAdditionalDetailsAboutAMovie() {
-        MovieDetails movieDetails = tmdbClient.movies().detailsOf(490132).fetch();
+        MovieDetails movieDetails = tmdbClient.movies().detailsOf(490132)
+                .withAppendedResponse(Arrays.asList(AppendableMovieResponse.CREDITS))
+                .fetch();
         System.out.println(movieDetails);
     }
 

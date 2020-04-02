@@ -1,9 +1,9 @@
 package com.cinemadice.tmdbapi.client.discover;
 
-import com.cinemadice.tmdbapi.Language;
-import com.cinemadice.tmdbapi.MovieGenre;
-import com.cinemadice.tmdbapi.Region;
 import com.cinemadice.tmdbapi.client.TmdbHttpClient;
+import com.cinemadice.tmdbapi.filter.Language;
+import com.cinemadice.tmdbapi.filter.MovieGenre;
+import com.cinemadice.tmdbapi.filter.Region;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.url.discover.DiscoverMoviesUrl;
 import org.junit.jupiter.api.BeforeEach;

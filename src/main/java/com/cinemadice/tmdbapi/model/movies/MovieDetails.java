@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.model.movies;
 
+import com.cinemadice.tmdbapi.model.Credits;
 import com.cinemadice.tmdbapi.model.Genre;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
 import com.google.gson.annotations.SerializedName;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 public class MovieDetails {
 
+    // General details
     private int id;
     private String title;
     @SerializedName("original_title")
@@ -31,6 +33,7 @@ public class MovieDetails {
     private boolean video;
     private boolean adult;
 
+    // Additional details
     @SerializedName("belongs_to_collection")
     private Object belongsToCollection;
     private int budget;
@@ -48,5 +51,8 @@ public class MovieDetails {
     private List<SpokenLanguage> spokenLanguages;
     private String status;
     private String tagline;
+
+    // Appendable details
+    private Credits credits;
 
 }
