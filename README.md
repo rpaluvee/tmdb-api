@@ -13,10 +13,11 @@ a TMDb API key. Steps to do so are described in the *Getting started* section of
 
 To use the library you have to initialize the TMDb API Client class
 `com.cinemadice.tmdbapi.client.TmdbClient` with the API Access Token:
-
-A simple example of discovering movies that match the given filters:  
 ```
 TmdbClient tmdbClient = new TmdbClient("<ACCESS_TOKEN>");
+```
+A simple example of discovering movies that match the given filters:  
+```
 List<Movie> movies = tmdbClient.discover().movies()
         .withGenres(Arrays.asList(MovieGenre.ACTION, MovieGenre.COMEDY))
         .withRegion(Region.UNITED_STATES_OF_AMERICA)
@@ -24,6 +25,14 @@ List<Movie> movies = tmdbClient.discover().movies()
         .withPrimaryReleaseYear(2018)
         .fetch()
         .getResults();
+```
+Fetching details (including images and credits) about a specific movie:  
+```
+MovieDetails movieDetails = tmdbClient.movies().detailsOf(<MOVIE_ID>)
+        .withAppendedResponse(Arrays.asList(
+                AppendableMovieResponse.CREDITS, 
+                AppendableMovieResponse.IMAGES))
+        .fetch();
 ```
 
 More examples of use can be found at [src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java](https://github.com/rpaluvee/tmdb-api/tree/master/src/test/java/com/cinemadice/tmdbapi/samples/TmdbClientSamples.java).
