@@ -48,13 +48,16 @@ public class TmdbMovieDetailsRequestTest {
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         MovieDetails expected = new MovieDetails();
-        URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/1?language=en&append_to_response=credits%2Cimages");
+        URL expectedUrl = new URL("https://api.themoviedb.org/3/movie/1?language=en&append_to_response=credits%2Cimages%2Cvideos");
         when(tmdbHttpClient.fetch(expectedUrl, MovieDetails.class)).thenReturn(expected);
 
         // when
         MovieDetails actual = tmdbMovieDetailsRequest
                 .withLanguage(Language.ENGLISH)
-                .withAppendedResponse(Arrays.asList(AppendableMovieResponse.CREDITS, AppendableMovieResponse.IMAGES))
+                .withAppendedResponse(Arrays.asList(
+                        AppendableMovieResponse.CREDITS,
+                        AppendableMovieResponse.IMAGES,
+                        AppendableMovieResponse.VIDEOS))
                 .fetch();
 
         // then

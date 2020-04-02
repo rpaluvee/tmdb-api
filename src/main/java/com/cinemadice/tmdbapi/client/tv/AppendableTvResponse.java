@@ -11,7 +11,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AppendableTvResponse {
     CREDITS("credits"),
-    IMAGES("images");
+    IMAGES("images"),
+    VIDEOS("videos");
 
     /* TODO: Support following types
     ACCOUNT_STATES("account_states"),
@@ -22,7 +23,6 @@ public enum AppendableTvResponse {
     EXTERNAL_IDS("external_ids"),
     KEYWORDS("keywords"),
     RELEASE_DATES("release_dates"),
-    VIDEOS("videos"),
     TRANSLATIONS("translations"),
     RECOMMENDATIONS("recommendations"),
     SIMILAR_TV_SHOWS("similar"),

@@ -26,12 +26,13 @@ List<Movie> movies = tmdbClient.discover().movies()
         .fetch()
         .getResults();
 ```
-Fetching details (including images and credits) about a specific movie:  
+Fetching details (including credits, images and videos) about a specific movie:  
 ```
 MovieDetails movieDetails = tmdbClient.movies().detailsOf(<MOVIE_ID>)
         .withAppendedResponse(Arrays.asList(
-                AppendableMovieResponse.CREDITS, 
-                AppendableMovieResponse.IMAGES))
+                AppendableMovieResponse.CREDITS,
+                AppendableMovieResponse.IMAGES,
+                AppendableMovieResponse.VIDEOS))
         .fetch();
 ```
 

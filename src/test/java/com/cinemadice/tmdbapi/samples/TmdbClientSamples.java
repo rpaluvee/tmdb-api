@@ -17,7 +17,6 @@ import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -62,7 +61,10 @@ public class TmdbClientSamples {
     @Test
     public void fetchAdditionalDetailsAboutAMovie() {
         MovieDetails movieDetails = tmdbClient.movies().detailsOf(490132)
-                .withAppendedResponse(Arrays.asList(AppendableMovieResponse.CREDITS, AppendableMovieResponse.IMAGES))
+                .withAppendedResponse(Arrays.asList(
+                        AppendableMovieResponse.CREDITS,
+                        AppendableMovieResponse.IMAGES,
+                        AppendableMovieResponse.VIDEOS))
                 .fetch();
         System.out.println(movieDetails);
     }

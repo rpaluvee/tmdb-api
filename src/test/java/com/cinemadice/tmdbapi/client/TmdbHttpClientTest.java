@@ -12,6 +12,8 @@ import com.cinemadice.tmdbapi.model.Poster;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
 import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
 import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
+import com.cinemadice.tmdbapi.model.Video;
+import com.cinemadice.tmdbapi.model.Videos;
 import com.cinemadice.tmdbapi.model.discover.DiscoverMovies;
 import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Dates;
@@ -320,6 +322,20 @@ public class TmdbHttpClientTest {
             images.setBackdrops(Arrays.asList(backdrop));
             images.setPosters(Arrays.asList(poster));
 
+            Video video = new Video();
+            video.setId("533ec654c3a36854480003eb");
+            video.setLanguageIso("en");
+            video.setRegionIso("US");
+            video.setKey("SUXWAEX2jlg");
+            video.setName("Trailer 1");
+            video.setSite("YouTube");
+            video.setSize(720);
+            video.setType("Trailer");
+
+            Videos videos = new Videos();
+            videos.setId(550);
+            videos.setResults(Arrays.asList(video));
+
             MovieDetails expected = new MovieDetails();
             expected.setAdult(false);
             expected.setBackdropPath("/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg");
@@ -348,6 +364,7 @@ public class TmdbHttpClientTest {
             expected.setVoteCount(3439);
             expected.setCredits(credits);
             expected.setImages(images);
+            expected.setVideos(videos);
 
             HttpUrl serverUrl = server.url(Endpoint.MOVIE_DETAILS.getUrl());
             MockResponse mockResponse = new MockResponse()
@@ -557,6 +574,20 @@ public class TmdbHttpClientTest {
             images.setBackdrops(Arrays.asList(backdrop));
             images.setPosters(Arrays.asList(poster));
 
+            Video video = new Video();
+            video.setId("533ec654c3a36854480003eb");
+            video.setLanguageIso("en");
+            video.setRegionIso("US");
+            video.setKey("SUXWAEX2jlg");
+            video.setName("Trailer 1");
+            video.setSite("YouTube");
+            video.setSize(720);
+            video.setType("Trailer");
+
+            Videos videos = new Videos();
+            videos.setId(550);
+            videos.setResults(Arrays.asList(video));
+
             TvDetails expected = new TvDetails();
             expected.setBackdropPath("/gX8SYlnL9ZznfZwEH4KJUePBFUM.jpg");
             expected.setCreatedBy(Arrays.asList(createdBy));
@@ -588,6 +619,7 @@ public class TmdbHttpClientTest {
             expected.setVoteCount(4682);
             expected.setCredits(credits);
             expected.setImages(images);
+            expected.setVideos(videos);
 
             HttpUrl serverUrl = server.url(Endpoint.TV_DETAILS.getUrl());
             MockResponse mockResponse = new MockResponse()
