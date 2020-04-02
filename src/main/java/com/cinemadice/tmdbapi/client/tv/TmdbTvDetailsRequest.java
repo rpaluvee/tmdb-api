@@ -7,6 +7,9 @@ import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.url.tv.TvDetailsUrl;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class TmdbTvDetailsRequest extends AbstractTmdbRequest<TmdbTvDetailsRequest, TvDetailsUrl> {
 
@@ -19,12 +22,10 @@ public class TmdbTvDetailsRequest extends AbstractTmdbRequest<TmdbTvDetailsReque
         return this;
     }
 
-    /* TODO: Implement appending results (https://developers.themoviedb.org/3/getting-started/append-to-response)
-    public TmdbTvDetailsRequest withAppendedResult(String appendedResult) {
-        tmdbUrl.addAppendToResponse(appendedResult);
+    public TmdbTvDetailsRequest withAppendedResponse(List<AppendableTvResponse> appendableTvResponses) {
+        tmdbUrl.addAppendToResponse(constructAppendableTvResponses(appendableTvResponses));
         return this;
     }
-    */
 
     @Override
     public TvDetails fetch() {
@@ -35,6 +36,13 @@ public class TmdbTvDetailsRequest extends AbstractTmdbRequest<TmdbTvDetailsReque
     @Override
     protected TmdbTvDetailsRequest thisInstance() {
         return this;
+    }
+
+    private String constructAppendableTvResponses(List<AppendableTvResponse> appendableTvResponses) {
+        return appendableTvResponses.stream()
+                .filter(Objects::nonNull)
+                .map(AppendableTvResponse::getValue)
+                .collect(Collectors.joining(","));
     }
 
 }

@@ -439,17 +439,10 @@ public class TmdbHttpClientTest {
             createdBy.setName("D. B. Weiss");
             createdBy.setGender(2);
             createdBy.setProfilePath("/caUAtilEe06OwOjoQY3B7BgpARi.jpg");
-            List<CreatedBy> createdByList = new ArrayList<>();
-            createdByList.add(createdBy);
-
-            List<Integer> episodeRunTime = new ArrayList<>();
-            episodeRunTime.add(60);
 
             Genre genre = new Genre();
             genre.setId(10759);
             genre.setName("Action & Adventure");
-            List<Genre> genres = new ArrayList<>();
-            genres.add(genre);
 
             List<String> languages = new ArrayList<>();
             languages.add("es");
@@ -474,19 +467,12 @@ public class TmdbHttpClientTest {
             network.setId(49);
             network.setLogoPath("/tuomPhY2UtuPTqqFnKMVHvSb724.png");
             network.setOriginCountry("US");
-            List<Network> networks = new ArrayList<>();
-            networks.add(network);
-
-            List<String> originCountry = new ArrayList<>();
-            originCountry.add("US");
 
             ProductionCompany productionCompany = new ProductionCompany();
             productionCompany.setId(76043);
             productionCompany.setLogoPath("/9RO2vbQ67otPrBLXCaC8UMp3Qat.png");
             productionCompany.setName("Revolution Sun Studios");
             productionCompany.setOriginCountry("US");
-            List<ProductionCompany> productionCompanies = new ArrayList<>();
-            productionCompanies.add(productionCompany);
 
             Season season = new Season();
             season.setAirDate("2010-12-05");
@@ -496,15 +482,37 @@ public class TmdbHttpClientTest {
             season.setOverview("");
             season.setPosterPath("/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg");
             season.setSeasonNumber(0);
-            List<Season> seasons = new ArrayList<>();
-            seasons.add(season);
+
+            Cast cast = new Cast();
+            cast.setCastId(4);
+            cast.setCharacter("The Narrator");
+            cast.setCreditId("52fe4250c3a36847f80149f3");
+            cast.setGender(2);
+            cast.setId(819);
+            cast.setName("Edward Norton");
+            cast.setOrder(0);
+            cast.setProfilePath("/eIkFHNlfretLS1spAcIoihKUS62.jpg");
+
+            Crew crew = new Crew();
+            crew.setCreditId("56380f0cc3a3681b5c0200be");
+            crew.setDepartment("Writing");
+            crew.setGender(0);
+            crew.setId(7469);
+            crew.setJob("Screenplay");
+            crew.setName("Jim Uhls");
+            crew.setProfilePath(null);
+
+            Credits credits = new Credits();
+            credits.setId(550);
+            credits.setCast(Arrays.asList(cast));
+            credits.setCrew(Arrays.asList(crew));
 
             TvDetails expected = new TvDetails();
             expected.setBackdropPath("/gX8SYlnL9ZznfZwEH4KJUePBFUM.jpg");
-            expected.setCreatedBy(createdByList);
-            expected.setEpisodeRunTime(episodeRunTime);
+            expected.setCreatedBy(Arrays.asList(createdBy));
+            expected.setEpisodeRunTime(Arrays.asList(60));
             expected.setFirstAirDate("2011-04-17");
-            expected.setGenres(genres);
+            expected.setGenres(Arrays.asList(genre));
             expected.setHomepage("http://www.hbo.com/game-of-thrones");
             expected.setId(1399);
             expected.setInProduction(true);
@@ -513,21 +521,22 @@ public class TmdbHttpClientTest {
             expected.setLastEpisodeToAir(lastEpisodeToAir);
             expected.setName("Game of Thrones");
             expected.setNextEpisodeToAir(null);
-            expected.setNetworks(networks);
+            expected.setNetworks(Arrays.asList(network));
             expected.setNumberOfEpisodes(67);
             expected.setNumberOfSeasons(7);
-            expected.setOriginCountry(originCountry);
+            expected.setOriginCountry(Arrays.asList("US"));
             expected.setOriginalLanguage("en");
             expected.setOriginalName("Game of Thrones");
             expected.setOverview("Seven noble families...");
             expected.setPopularity(53.516f);
             expected.setPosterPath("/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg");
-            expected.setProductionCompanies(productionCompanies);
-            expected.setSeasons(seasons);
+            expected.setProductionCompanies(Arrays.asList(productionCompany));
+            expected.setSeasons(Arrays.asList(season));
             expected.setStatus("Returning Series");
             expected.setType("Scripted");
             expected.setVoteAverage(8.2);
             expected.setVoteCount(4682);
+            expected.setCredits(credits);
 
             HttpUrl serverUrl = server.url(Endpoint.TV_DETAILS.getUrl());
             MockResponse mockResponse = new MockResponse()

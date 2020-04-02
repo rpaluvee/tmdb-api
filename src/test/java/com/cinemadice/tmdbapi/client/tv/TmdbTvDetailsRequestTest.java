@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -47,12 +48,13 @@ public class TmdbTvDetailsRequestTest {
     public void shouldFetchGivenAllParameters() throws MalformedURLException {
         // given
         TvDetails expected = new TvDetails();
-        URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/1?language=en");
+        URL expectedUrl = new URL("https://api.themoviedb.org/3/tv/1?language=en&append_to_response=credits");
         when(tmdbHttpClient.fetch(expectedUrl, TvDetails.class)).thenReturn(expected);
 
         // when
         TvDetails actual = tmdbTvDetailsRequest
                 .withLanguage(Language.ENGLISH)
+                .withAppendedResponse(Arrays.asList(AppendableTvResponse.CREDITS))
                 .fetch();
 
         // then

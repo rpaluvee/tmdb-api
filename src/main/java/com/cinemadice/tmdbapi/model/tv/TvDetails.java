@@ -1,5 +1,6 @@
 package com.cinemadice.tmdbapi.model.tv;
 
+import com.cinemadice.tmdbapi.model.Credits;
 import com.cinemadice.tmdbapi.model.Genre;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
 import com.google.gson.annotations.SerializedName;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 public class TvDetails {
 
+    // General details
     private int id;
     private String name;
     @SerializedName("original_name")
@@ -31,6 +33,7 @@ public class TvDetails {
     @SerializedName("origin_country")
     private List<String> originCountry;
 
+    // Additional details
     @SerializedName("created_by")
     private List<CreatedBy> createdBy;
     @SerializedName("episode_run_time")
@@ -56,5 +59,8 @@ public class TvDetails {
     private List<Season> seasons;
     private String status;
     private String type;
+
+    // Appendable details
+    private Credits credits;
 
 }

@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.samples;
 
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.client.movies.AppendableMovieResponse;
+import com.cinemadice.tmdbapi.client.tv.AppendableTvResponse;
 import com.cinemadice.tmdbapi.filter.Language;
 import com.cinemadice.tmdbapi.filter.MovieGenre;
 import com.cinemadice.tmdbapi.filter.Region;
@@ -89,7 +90,9 @@ public class TmdbClientSamples {
 
     @Test
     public void fetchAdditionalDetailsAboutATvShow() {
-        TvDetails tvDetails = tmdbClient.tv().detailsOf(1399).fetch();
+        TvDetails tvDetails = tmdbClient.tv().detailsOf(1399)
+                .withAppendedResponse(Arrays.asList(AppendableTvResponse.CREDITS))
+                .fetch();
         System.out.println(tvDetails);
     }
 

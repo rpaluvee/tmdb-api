@@ -83,5 +83,31 @@
   "status": "Returning Series",
   "type": "Scripted",
   "vote_average": 8.2,
-  "vote_count": 4682
+  "vote_count": 4682,
+  "credits": {
+    "id": 550,
+    "cast": [
+      {
+        "cast_id": 4,
+        "character": "The Narrator",
+        "credit_id": "52fe4250c3a36847f80149f3",
+        "gender": 2,
+        "id": 819,
+        "name": "Edward Norton",
+        "order": 0,
+        "profile_path": "/eIkFHNlfretLS1spAcIoihKUS62.jpg"
+      }
+    ],
+    "crew": [
+      {
+        "credit_id": "56380f0cc3a3681b5c0200be",
+        "department": "Writing",
+        "gender": 0,
+        "id": 7469,
+        "job": "Screenplay",
+        "name": "Jim Uhls",
+        "profile_path": null
+      }
+    ]
+  }
 }
