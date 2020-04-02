@@ -22,7 +22,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-@Disabled
 public class TmdbClientSamples {
 
     private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2JiNWE1OWI4MmM2NmI5YTJjZjRj" +
@@ -93,7 +92,7 @@ public class TmdbClientSamples {
     @Test
     public void fetchAdditionalDetailsAboutATvShow() {
         TvDetails tvDetails = tmdbClient.tv().detailsOf(1399)
-                .withAppendedResponse(Arrays.asList(AppendableTvResponse.CREDITS))
+                .withAppendedResponse(Arrays.asList(AppendableTvResponse.CREDITS, AppendableTvResponse.IMAGES))
                 .fetch();
         System.out.println(tvDetails);
     }
