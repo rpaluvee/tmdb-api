@@ -17,16 +17,16 @@ import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Disabled
 public class TmdbClientSamples {
 
-    private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2JiNWE1OWI4MmM2NmI5YTJjZjRj" +
-            "N2U3MTQ0MmZkYiIsInN1YiI6IjVkZjJiZjk3MmNkZTk4MDAxNjMwMmZhZCIsInNjb3BlcyI6WyJhc" +
-            "GlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.txGfDomDajnMlr_YlcpJoztrSlDAAlA2VAXizQGJy5A";
+    private static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
 
     private static TmdbClient tmdbClient;
 
