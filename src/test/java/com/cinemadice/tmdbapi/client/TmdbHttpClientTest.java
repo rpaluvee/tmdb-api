@@ -1,11 +1,14 @@
 package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.exception.FailedTmdbRequestException;
+import com.cinemadice.tmdbapi.model.Backdrop;
 import com.cinemadice.tmdbapi.model.Cast;
 import com.cinemadice.tmdbapi.model.Credits;
 import com.cinemadice.tmdbapi.model.Crew;
 import com.cinemadice.tmdbapi.model.Genre;
+import com.cinemadice.tmdbapi.model.Images;
 import com.cinemadice.tmdbapi.model.ImagesConfiguration;
+import com.cinemadice.tmdbapi.model.Poster;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
 import com.cinemadice.tmdbapi.model.TmdbApiConfiguration;
 import com.cinemadice.tmdbapi.model.TmdbErrorResponse;
@@ -294,6 +297,29 @@ public class TmdbHttpClientTest {
             credits.setCast(Arrays.asList(cast));
             credits.setCrew(Arrays.asList(crew));
 
+            Backdrop backdrop = new Backdrop();
+            backdrop.setAspectRatio(1.77777777777778);
+            backdrop.setFilePath("/mUkuc2wyV9dHLG0D0Loaw5pO2s8.jpg");
+            backdrop.setHeight(1080);
+            backdrop.setIso(null);
+            backdrop.setVoteAverage(5.6265664160401);
+            backdrop.setVoteCount(13);
+            backdrop.setWidth(1920);
+
+            Poster poster = new Poster();
+            poster.setAspectRatio(0.666666666666667);
+            poster.setFilePath("/hDd5Zd9VMOqBeHa2agbnHZ98WWr.jpg");
+            poster.setHeight(3000);
+            poster.setIso("en");
+            poster.setVoteAverage(5.57744937055282);
+            poster.setVoteCount(24);
+            poster.setWidth(2000);
+
+            Images images = new Images();
+            images.setId(1399);
+            images.setBackdrops(Arrays.asList(backdrop));
+            images.setPosters(Arrays.asList(poster));
+
             MovieDetails expected = new MovieDetails();
             expected.setAdult(false);
             expected.setBackdropPath("/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg");
@@ -321,6 +347,7 @@ public class TmdbHttpClientTest {
             expected.setVoteAverage(7.8);
             expected.setVoteCount(3439);
             expected.setCredits(credits);
+            expected.setImages(images);
 
             HttpUrl serverUrl = server.url(Endpoint.MOVIE_DETAILS.getUrl());
             MockResponse mockResponse = new MockResponse()

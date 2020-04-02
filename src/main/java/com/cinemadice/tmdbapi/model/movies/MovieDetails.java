@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.model.movies;
 
 import com.cinemadice.tmdbapi.model.Credits;
 import com.cinemadice.tmdbapi.model.Genre;
+import com.cinemadice.tmdbapi.model.Images;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -54,5 +55,6 @@ public class MovieDetails {
 
     // Appendable details
     private Credits credits;
+    private Images images;
 
 }

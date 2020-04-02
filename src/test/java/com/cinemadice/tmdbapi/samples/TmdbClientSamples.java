@@ -25,7 +25,9 @@ import java.util.List;
 @Disabled
 public class TmdbClientSamples {
 
-    private static final String ACCESS_TOKEN = "<ACCESS_TOKEN>";
+    private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2JiNWE1OWI4MmM2NmI5YTJjZjRj" +
+            "N2U3MTQ0MmZkYiIsInN1YiI6IjVkZjJiZjk3MmNkZTk4MDAxNjMwMmZhZCIsInNjb3BlcyI6WyJhc" +
+            "GlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.txGfDomDajnMlr_YlcpJoztrSlDAAlA2VAXizQGJy5A";
 
     private static TmdbClient tmdbClient;
 
@@ -61,7 +63,7 @@ public class TmdbClientSamples {
     @Test
     public void fetchAdditionalDetailsAboutAMovie() {
         MovieDetails movieDetails = tmdbClient.movies().detailsOf(490132)
-                .withAppendedResponse(Arrays.asList(AppendableMovieResponse.CREDITS))
+                .withAppendedResponse(Arrays.asList(AppendableMovieResponse.CREDITS, AppendableMovieResponse.IMAGES))
                 .fetch();
         System.out.println(movieDetails);
     }

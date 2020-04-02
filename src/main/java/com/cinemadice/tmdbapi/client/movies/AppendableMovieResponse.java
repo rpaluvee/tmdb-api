@@ -10,7 +10,23 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 public enum AppendableMovieResponse {
-    CREDITS("credits");
+    CREDITS("credits"),
+    IMAGES("images");
+
+    /* TODO: Support following types
+    ACCOUNT_STATES("account_states"),
+    ALTERNATIVE_TITLES("alternative_titles"),
+    CHANGES("changes"),
+    EXTERNAL_IDS("external_ids"),
+    KEYWORDS("keywords"),
+    RELEASE_DATES("release_dates"),
+    VIDEOS("videos"),
+    TRANSLATIONS("translations"),
+    RECOMMENDATIONS("recommendations"),
+    SIMILAR_MOVIES("similar"),
+    REVIEWS("reviews"),
+    LISTS("lists"),
+     */
 
     @Getter
     private String value;
