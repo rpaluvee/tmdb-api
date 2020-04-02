@@ -22,7 +22,7 @@ public class LastEpisodeToAir {
     @SerializedName("still_path")
     private String stillPath;
     @SerializedName("vote_average")
-    protected float voteAverage;
+    protected double voteAverage;
     @SerializedName("vote_count")
     protected int voteCount;
 

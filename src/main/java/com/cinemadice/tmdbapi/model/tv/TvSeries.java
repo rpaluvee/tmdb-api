@@ -16,7 +16,7 @@ public class TvSeries {
     private int voteCount;
     @SerializedName("vote_average")
     private double voteAverage;
-    private float popularity;
+    private double popularity;
     @SerializedName("original_language")
     private String originalLanguage;
     @SerializedName("backdrop_path")

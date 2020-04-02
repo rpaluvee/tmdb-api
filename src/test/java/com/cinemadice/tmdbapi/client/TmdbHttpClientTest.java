@@ -153,7 +153,7 @@ public class TmdbHttpClientTest {
             firstMovie.setOriginalLanguage("en");
             firstMovie.setTitle("Fly Away Home");
             firstMovie.setBackdropPath(null);
-            firstMovie.setPopularity(1.022039f);
+            firstMovie.setPopularity(1.022039);
             firstMovie.setVoteCount(13);
             firstMovie.setVideo(false);
             firstMovie.setVoteAverage(6.69);
@@ -173,7 +173,7 @@ public class TmdbHttpClientTest {
             secondMovie.setOriginalLanguage("en");
             secondMovie.setTitle("Little Women");
             secondMovie.setBackdropPath(null);
-            secondMovie.setPopularity(1.051359f);
+            secondMovie.setPopularity(1.051359);
             secondMovie.setVoteCount(50);
             secondMovie.setVideo(false);
             secondMovie.setVoteAverage(6.65);
@@ -223,7 +223,7 @@ public class TmdbHttpClientTest {
             movie.setOriginalLanguage("en");
             movie.setTitle("The Light Between Oceans");
             movie.setBackdropPath("/2Ah63TIvVmZM3hzUwR5hXFg2LEk.jpg");
-            movie.setPopularity(4.546151f);
+            movie.setPopularity(4.546151);
             movie.setVoteCount(11);
             movie.setVideo(false);
             movie.setVoteAverage(4.41);
@@ -332,7 +332,7 @@ public class TmdbHttpClientTest {
             expected.setOriginalLanguage("en");
             expected.setOriginalTitle("Fight Club");
             expected.setOverview("A ticking-time-bomb...");
-            expected.setPopularity(0.5f);
+            expected.setPopularity(0.5);
             expected.setPosterPath(null);
             expected.setProductionCompanies(Arrays.asList(productionCompany));
             expected.setProductionCountries(Arrays.asList(productionCountry));
@@ -374,7 +374,7 @@ public class TmdbHttpClientTest {
 
             TvSeries tvSeries = new TvSeries();
             tvSeries.setPosterPath("/dDfjzRicTeVaiysRTwx56aM8bC3.jpg");
-            tvSeries.setPopularity(5.4f);
+            tvSeries.setPopularity(5.4);
             tvSeries.setId(61889);
             tvSeries.setBackdropPath(null);
             tvSeries.setVoteAverage(7.74);
@@ -421,7 +421,7 @@ public class TmdbHttpClientTest {
 
             TvSeries tvSeries = new TvSeries();
             tvSeries.setPosterPath("/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg");
-            tvSeries.setPopularity(11.520271f);
+            tvSeries.setPopularity(11.520271);
             tvSeries.setId(67419);
             tvSeries.setBackdropPath("/b0BckgEovxYLBbIk5xXyWYQpmlT.jpg");
             tvSeries.setVoteAverage(1.39);
@@ -486,7 +486,7 @@ public class TmdbHttpClientTest {
             lastEpisodeToAir.setSeasonNumber(7);
             lastEpisodeToAir.setShowId(1399);
             lastEpisodeToAir.setStillPath("/jLe9VcbGRDUJeuM8IwB7VX4GDRg.jpg");
-            lastEpisodeToAir.setVoteAverage(9.145f);
+            lastEpisodeToAir.setVoteAverage(9.145);
             lastEpisodeToAir.setVoteCount(31);
 
             Network network = new Network();
@@ -578,7 +578,7 @@ public class TmdbHttpClientTest {
             expected.setOriginalLanguage("en");
             expected.setOriginalName("Game of Thrones");
             expected.setOverview("Seven noble families...");
-            expected.setPopularity(53.516f);
+            expected.setPopularity(53.516);
             expected.setPosterPath("/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg");
             expected.setProductionCompanies(Arrays.asList(productionCompany));
             expected.setSeasons(Arrays.asList(season));
