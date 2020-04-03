@@ -86,7 +86,7 @@ timezone, keywords, language, genres and many more.
 
 #### People Features
 
-* Get details about people (actors, directors, writers, etc.)
+* Get details about people (actors, directors, writers, etc.)  
 `tmdbClient.people().detailsOf(<PERSON_ID>)...`
 
 ## Build
