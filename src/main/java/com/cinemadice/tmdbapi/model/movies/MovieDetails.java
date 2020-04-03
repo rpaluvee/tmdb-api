@@ -1,10 +1,10 @@
 package com.cinemadice.tmdbapi.model.movies;
 
-import com.cinemadice.tmdbapi.model.Credits;
 import com.cinemadice.tmdbapi.model.Genre;
-import com.cinemadice.tmdbapi.model.Images;
 import com.cinemadice.tmdbapi.model.ProductionCompany;
-import com.cinemadice.tmdbapi.model.Videos;
+import com.cinemadice.tmdbapi.model.credits.Credits;
+import com.cinemadice.tmdbapi.model.media.Images;
+import com.cinemadice.tmdbapi.model.media.Videos;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 

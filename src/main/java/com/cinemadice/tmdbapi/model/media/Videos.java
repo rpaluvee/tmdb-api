@@ -1,4 +1,4 @@
-package com.cinemadice.tmdbapi.model;
+package com.cinemadice.tmdbapi.model.media;
 
 import lombok.Data;
 

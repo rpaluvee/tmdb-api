@@ -1,20 +1,18 @@
-package com.cinemadice.tmdbapi.model;
+package com.cinemadice.tmdbapi.model.credits;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class Cast {
+public class Crew {
 
     private int id;
-    @SerializedName("cast_id")
-    private int castId;
-    private String character;
     @SerializedName("credit_id")
     private String creditId;
+    private String department;
     private Integer gender;
+    private String job;
     private String name;
-    private int order;
     @SerializedName("profile_path")
     private String profilePath;
 
