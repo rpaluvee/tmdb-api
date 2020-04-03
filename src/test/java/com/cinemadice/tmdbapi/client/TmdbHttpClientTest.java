@@ -22,6 +22,9 @@ import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.model.movies.ProductionCountry;
 import com.cinemadice.tmdbapi.model.movies.SpokenLanguage;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
+import com.cinemadice.tmdbapi.model.people.PersonDetails;
+import com.cinemadice.tmdbapi.model.people.PersonImages;
+import com.cinemadice.tmdbapi.model.people.Profile;
 import com.cinemadice.tmdbapi.model.tv.CreatedBy;
 import com.cinemadice.tmdbapi.model.tv.LastEpisodeToAir;
 import com.cinemadice.tmdbapi.model.tv.Network;
@@ -630,6 +633,53 @@ public class TmdbHttpClientTest {
 
             // when
             TvDetails actual = tmdbHttpClient.fetch(serverUrl.url(), TvDetails.class);
+
+            // then
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void shouldFetchPersonDetails() {
+            // given
+            Profile profile = new Profile();
+            profile.setAspectRatio(0.666666666666667);
+            profile.setFilePath("/rLSUjr725ez1cK7SKVxC9udO03Y.jpg");
+            profile.setHeight(819);
+            profile.setIso(null);
+            profile.setVoteAverage(5.3125);
+            profile.setVoteCount(1);
+            profile.setWidth(546);
+
+            PersonImages personImages = new PersonImages();
+            personImages.setId(66633);
+            personImages.setProfiles(Arrays.asList(profile));
+
+            PersonDetails expected = new PersonDetails();
+            expected.setBirthday("1963-12-18");
+            expected.setKnownForDepartment("Acting");
+            expected.setDeathday(null);
+            expected.setId(287);
+            expected.setName("Brad Pitt");
+            expected.setAlsoKnownAs(Arrays.asList("Бред Питт", "Buratto Pitto"));
+            expected.setGender(2);
+            expected.setBiography("William Bradley...");
+            expected.setPopularity(10.647);
+            expected.setPlaceOfBirth("Shawnee, Oklahoma, USA");
+            expected.setProfilePath("/kU3B75TyRiCgE270EyZnHjfivoq.jpg");
+            expected.setAdult(false);
+            expected.setImdbId("nm0000093");
+            expected.setHomepage(null);
+            expected.setImages(personImages);
+
+            HttpUrl serverUrl = server.url(Endpoint.PERSON_DETAILS.getUrl());
+            MockResponse mockResponse = new MockResponse()
+                    .setHeaders(headers)
+                    .setResponseCode(HttpURLConnection.HTTP_OK)
+                    .setBody(TestResourceFileReader.readFileContents("person_details_response.json"));
+            server.enqueue(mockResponse);
+
+            // when
+            PersonDetails actual = tmdbHttpClient.fetch(serverUrl.url(), PersonDetails.class);
 
             // then
             assertEquals(expected, actual);

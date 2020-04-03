@@ -51,9 +51,9 @@ Include the library as a dependency to your project with Maven
 ## Scope
 
 The purpose of this library is to provide its user with the ability to easily 
-search for movies and TV shows and receive details about them. Currently this 
-library supports only a subset of methods defined in TMDb API. To view all the 
-methods available, you should head over to 
+use the features provided by the TMDb Web API in Java. All of the supported 
+features are described under the Features section. 
+To view all the features available in the TMDb API, you should head over to the
 [TMDb API overview](https://www.themoviedb.org/documentation/api)
 
 ## Features
@@ -83,6 +83,11 @@ timezone, keywords, language, genres and many more.
 
 * Get additional details  
 `tmdbClient.tv().detailsOf(<TV_ID>)...`
+
+#### People Features
+
+* Get details about people (actors, directors, writers, etc.)
+`tmdbClient.people().detailsOf(<PERSON_ID>)...`
 
 ## Build
 

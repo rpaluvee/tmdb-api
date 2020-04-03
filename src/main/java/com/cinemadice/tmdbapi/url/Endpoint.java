@@ -13,6 +13,7 @@ public enum Endpoint {
     TV_AIRING_TODAY("/tv/airing_today"),
     TV_DETAILS("/tv/" + EndpointPlaceholder.TV_ID.getValue()),
 
+    PERSON_DETAILS("/person/" + EndpointPlaceholder.PERSON_ID.getValue()),
     CONFIGURATION("/configuration");
 
     @Getter

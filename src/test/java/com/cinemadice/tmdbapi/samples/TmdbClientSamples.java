@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.samples;
 
 import com.cinemadice.tmdbapi.client.TmdbClient;
 import com.cinemadice.tmdbapi.client.movies.AppendableMovieResponse;
+import com.cinemadice.tmdbapi.client.people.AppendablePersonResponse;
 import com.cinemadice.tmdbapi.client.tv.AppendableTvResponse;
 import com.cinemadice.tmdbapi.filter.Language;
 import com.cinemadice.tmdbapi.filter.MovieGenre;
@@ -13,6 +14,7 @@ import com.cinemadice.tmdbapi.model.discover.DiscoverTv;
 import com.cinemadice.tmdbapi.model.movies.Movie;
 import com.cinemadice.tmdbapi.model.movies.MovieDetails;
 import com.cinemadice.tmdbapi.model.movies.UpcomingMovies;
+import com.cinemadice.tmdbapi.model.people.PersonDetails;
 import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
@@ -97,6 +99,14 @@ public class TmdbClientSamples {
                 .withAppendedResponse(Arrays.asList(AppendableTvResponse.CREDITS, AppendableTvResponse.IMAGES))
                 .fetch();
         System.out.println(tvDetails);
+    }
+
+    @Test
+    public void fetchDetailsAboutAPerson() {
+        PersonDetails personDetails = tmdbClient.people().detailsOf(287)
+                .withAppendedResponse(Arrays.asList(AppendablePersonResponse.IMAGES))
+                .fetch();
+        System.out.println(personDetails);
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.cinemadice.tmdbapi.client;
 
 import com.cinemadice.tmdbapi.client.discover.TmdbDiscoverClient;
 import com.cinemadice.tmdbapi.client.movies.TmdbMoviesClient;
+import com.cinemadice.tmdbapi.client.people.TmdbPeopleClient;
 import com.cinemadice.tmdbapi.client.tv.TmdbTvClient;
 import com.cinemadice.tmdbapi.url.ConfigurationUrl;
 
@@ -11,6 +12,7 @@ public class TmdbClient {
     private TmdbDiscoverClient tmdbDiscoverClient;
     private TmdbMoviesClient tmdbMoviesClient;
     private TmdbTvClient tmdbTvClient;
+    private TmdbPeopleClient tmdbPeopleClient;
 
     public TmdbClient(String accessToken) {
         if (accessToken == null || accessToken.isEmpty()) {
@@ -38,6 +40,13 @@ public class TmdbClient {
             this.tmdbTvClient = new TmdbTvClient(tmdbHttpClient);
         }
         return tmdbTvClient;
+    }
+
+    public TmdbPeopleClient people() {
+        if (tmdbPeopleClient == null) {
+            this.tmdbPeopleClient = new TmdbPeopleClient(tmdbHttpClient);
+        }
+        return tmdbPeopleClient;
     }
 
     public TmdbApiConfigurationRequest configuration() {
