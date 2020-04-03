@@ -51,8 +51,8 @@ Include the library as a dependency to your project with Maven
 ## Scope
 
 The purpose of this library is to provide its user with the ability to easily 
-use the features provided by the TMDb Web API in Java. All of the supported 
-features are described under the Features section. 
+use the features provided by the TMDb API. All of the supported features are 
+described under the Features section.
 To view all the features available in the TMDb API, you should head over to the
 [TMDb API overview](https://www.themoviedb.org/documentation/api)
 
