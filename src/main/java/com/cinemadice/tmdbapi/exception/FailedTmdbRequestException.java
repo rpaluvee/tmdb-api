@@ -14,9 +14,10 @@ public class FailedTmdbRequestException extends RuntimeException {
         super(message, cause);
     }
 
-    public FailedTmdbRequestException(int responseStatusCode,
-                                      String responseStatusMessage,
-                                      TmdbErrorResponse tmdbErrorResponse) {
+    public FailedTmdbRequestException(
+            int responseStatusCode,
+            String responseStatusMessage,
+            TmdbErrorResponse tmdbErrorResponse) {
         super(responseStatusMessage);
         this.responseStatusCode = responseStatusCode;
         this.responseStatusMessage = responseStatusMessage;
