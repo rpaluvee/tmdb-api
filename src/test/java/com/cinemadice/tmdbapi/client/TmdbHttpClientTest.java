@@ -660,7 +660,7 @@ public class TmdbHttpClientTest {
             expected.setDeathday(null);
             expected.setId(287);
             expected.setName("Brad Pitt");
-            expected.setAlsoKnownAs(Arrays.asList("Бред Питт", "Buratto Pitto"));
+            expected.setAlsoKnownAs(Arrays.asList("Bred", "Buratto Pitto"));
             expected.setGender(2);
             expected.setBiography("William Bradley...");
             expected.setPopularity(10.647);
