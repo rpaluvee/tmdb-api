@@ -19,6 +19,7 @@ import com.cinemadice.tmdbapi.model.tv.TvAiringToday;
 import com.cinemadice.tmdbapi.model.tv.TvDetails;
 import com.cinemadice.tmdbapi.model.tv.TvSeries;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
