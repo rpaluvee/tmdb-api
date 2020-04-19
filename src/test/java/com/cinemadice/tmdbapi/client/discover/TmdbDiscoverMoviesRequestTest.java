@@ -101,8 +101,8 @@ class TmdbDiscoverMoviesRequestTest {
                 + "with_runtime.gte=1&"
                 + "with_runtime.lte=1&"
                 + "sort_by=test&"
-                + "vote_average.gte=1&"
-                + "vote_average.lte=1&"
+                + "vote_average.gte=1.0&"
+                + "vote_average.lte=1.5&"
                 + "vote_count.gte=1&"
                 + "vote_count.lte=1&"
                 + "language=en");
@@ -141,7 +141,7 @@ class TmdbDiscoverMoviesRequestTest {
                 .withRuntimeLessThanOrEqual(1)
                 .withSort("test")
                 .withVoteAverageGreaterThanOrEqual(1)
-                .withVoteAverageLessThanOrEqual(1)
+                .withVoteAverageLessThanOrEqual(1.5)
                 .withVoteCountGreaterThanOrEqual(1)
                 .withVoteCountLessThanOrEqual(1)
                 .withLanguage(Language.ENGLISH)

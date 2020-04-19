@@ -26,11 +26,11 @@ public abstract class AbstractDiscoverUrl extends AbstractTmdbUrl {
         tmdbParameters.put(TmdbParameter.VOTE_COUNT_GTE, String.valueOf(voteCount));
     }
 
-    public void addVoteAverageLessThanOrEqual(int voteAverage) {
+    public void addVoteAverageLessThanOrEqual(double voteAverage) {
         tmdbParameters.put(TmdbParameter.VOTE_AVERAGE_LTE, String.valueOf(voteAverage));
     }
 
-    public void addVoteAverageGreaterThanOrEqual(int voteAverage) {
+    public void addVoteAverageGreaterThanOrEqual(double voteAverage) {
         tmdbParameters.put(TmdbParameter.VOTE_AVERAGE_GTE, String.valueOf(voteAverage));
     }
 

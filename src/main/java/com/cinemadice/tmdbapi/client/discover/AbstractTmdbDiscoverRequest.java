@@ -36,12 +36,12 @@ abstract class AbstractTmdbDiscoverRequest<T, U extends AbstractDiscoverUrl> ext
         return thisInstance();
     }
 
-    public T withVoteAverageLessThanOrEqual(int voteAverage) {
+    public T withVoteAverageLessThanOrEqual(double voteAverage) {
         tmdbUrl.addVoteAverageLessThanOrEqual(voteAverage);
         return thisInstance();
     }
 
-    public T withVoteAverageGreaterThanOrEqual(int voteAverage) {
+    public T withVoteAverageGreaterThanOrEqual(double voteAverage) {
         tmdbUrl.addVoteAverageGreaterThanOrEqual(voteAverage);
         return thisInstance();
     }
