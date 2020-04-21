@@ -78,6 +78,7 @@ class TmdbDiscoverMoviesRequestTest {
                 + "include_adult=true&"
                 + "include_video=true&"
                 + "region=US&"
+                + "year=2020&"
                 + "primary_release_year=2020&"
                 + "with_cast=test&"
                 + "certification=test&"
@@ -117,6 +118,7 @@ class TmdbDiscoverMoviesRequestTest {
                 .includeAdult(true)
                 .includeVideo(true)
                 .withRegion(Region.UNITED_STATES_OF_AMERICA)
+                .withYear(2020)
                 .withPrimaryReleaseYear(2020)
                 .withCast("test")
                 .withCertification("test")

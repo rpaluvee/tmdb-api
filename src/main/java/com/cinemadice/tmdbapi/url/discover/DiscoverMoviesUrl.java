@@ -37,6 +37,10 @@ public class DiscoverMoviesUrl extends AbstractDiscoverUrl {
         tmdbParameters.put(TmdbParameter.INCLUDE_VIDEO, String.valueOf(isVideo));
     }
 
+    public void addYear(int year) {
+        tmdbParameters.put(TmdbParameter.YEAR, String.valueOf(year));
+    }
+
     public void addPrimaryReleaseYear(int year) {
         tmdbParameters.put(TmdbParameter.PRIMARY_RELEASE_YEAR, String.valueOf(year));
     }

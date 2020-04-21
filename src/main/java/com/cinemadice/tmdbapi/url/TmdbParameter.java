@@ -30,6 +30,7 @@ public enum TmdbParameter {
     CERTIFICATION_LTE("certification.lte"),
     INCLUDE_ADULT("include_adult"),
     INCLUDE_VIDEO("include_video"),
+    YEAR("year"),
     PRIMARY_RELEASE_YEAR("primary_release_year"),
     PRIMARY_RELEASE_DATE_GTE("primary_release_date.gte"),
     PRIMARY_RELEASE_DATE_LTE("primary_release_date.lte"),

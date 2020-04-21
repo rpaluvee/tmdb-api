@@ -53,6 +53,11 @@ public class TmdbDiscoverMoviesRequest extends
         return this;
     }
 
+    public TmdbDiscoverMoviesRequest withYear(int year) {
+        tmdbUrl.addYear(year);
+        return this;
+    }
+
     public TmdbDiscoverMoviesRequest withPrimaryReleaseYear(int year) {
         tmdbUrl.addPrimaryReleaseYear(year);
         return this;
