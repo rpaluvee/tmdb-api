@@ -196,6 +196,6 @@ public enum Language {
     BELARUSIAN("be");
 
     @Getter
-    private String isoCode;
+    private final String isoCode;
 
 }

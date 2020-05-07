@@ -17,6 +17,6 @@ public enum Endpoint {
     CONFIGURATION("/configuration");
 
     @Getter
-    private String url;
+    private final String url;
 
 }

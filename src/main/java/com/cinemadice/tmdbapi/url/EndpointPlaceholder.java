@@ -10,6 +10,6 @@ public enum EndpointPlaceholder {
     PERSON_ID("{person_id}");
 
     @Getter
-    private String value;
+    private final String value;
 
 }

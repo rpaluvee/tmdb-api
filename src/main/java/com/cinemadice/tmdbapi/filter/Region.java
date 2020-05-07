@@ -257,6 +257,6 @@ public enum Region {
     SOUTH_SUDAN("SS");
 
     @Getter
-    private String isoCode;
+    private final String isoCode;
 
 }

@@ -29,6 +29,6 @@ public enum AppendableMovieResponse {
      */
 
     @Getter
-    private String value;
+    private final String value;
 
 }

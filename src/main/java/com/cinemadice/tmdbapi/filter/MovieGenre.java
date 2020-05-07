@@ -26,6 +26,6 @@ public enum MovieGenre {
     WESTERN(37);
 
     @Getter
-    private int id;
+    private final int id;
 
 }

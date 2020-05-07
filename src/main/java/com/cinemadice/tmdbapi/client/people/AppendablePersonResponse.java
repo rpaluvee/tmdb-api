@@ -23,6 +23,6 @@ public enum AppendablePersonResponse {
      */
 
     @Getter
-    private String value;
+    private final String value;
 
 }

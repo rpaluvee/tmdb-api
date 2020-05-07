@@ -32,6 +32,6 @@ public enum AppendableTvResponse {
      */
 
     @Getter
-    private String value;
+    private final String value;
 
 }
