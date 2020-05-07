@@ -38,7 +38,7 @@ public class MovieDetails {
     // Additional details
     @SerializedName("belongs_to_collection")
     private Object belongsToCollection;
-    private int budget;
+    private long budget;
     private List<Genre> genres;
     private String homepage;
     @SerializedName("imdb_id")
@@ -47,7 +47,7 @@ public class MovieDetails {
     private List<ProductionCompany> productionCompanies;
     @SerializedName("production_countries")
     private List<ProductionCountry> productionCountries;
-    private int revenue;
+    private long revenue;
     private int runtime;
     @SerializedName("spoken_languages")
     private List<SpokenLanguage> spokenLanguages;
