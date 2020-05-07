@@ -127,7 +127,7 @@ public class TmdbDiscoverMoviesRequest extends
     private String constructMovieGenreIds(List<MovieGenre> movieGenres) {
         return movieGenres.stream()
                 .filter(Objects::nonNull)
-                .map(MovieGenre::getId)
+                .map(movieGenre -> String.valueOf(movieGenre.getId()))
                 .collect(Collectors.joining(","));
     }
 

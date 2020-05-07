@@ -85,7 +85,7 @@ public class TmdbDiscoverTvRequest extends AbstractTmdbDiscoverRequest<TmdbDisco
     private String constructTvGenreIds(List<TvGenre> movieGenres) {
         return movieGenres.stream()
                 .filter(Objects::nonNull)
-                .map(TvGenre::getId)
+                .map(tvGenre -> String.valueOf(tvGenre.getId()))
                 .collect(Collectors.joining(","));
     }
 
